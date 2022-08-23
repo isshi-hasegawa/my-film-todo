@@ -22,7 +22,6 @@ jobs:
       - name: Check diff
         run: git diff --exit-code
 
-jobs:
   test:
     runs-on: ubuntu-latest
     steps:
