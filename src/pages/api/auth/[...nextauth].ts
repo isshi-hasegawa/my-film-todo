@@ -10,7 +10,7 @@ export default NextAuth({
         url: "https://accounts.google.com/o/oauth2/auth?response_type=code",
         params: {
           scope:
-            "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/tasks",
+            "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/tasks",
         },
       },
     }),
