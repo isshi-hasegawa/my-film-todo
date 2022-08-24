@@ -6,6 +6,9 @@ const nextConfig = {
     dirs: ['src/components/', 'src/lib/', 'src/pages/'],
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
 };
 
 module.exports = nextConfig;
