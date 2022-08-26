@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
     "test": "jest --watch",
+    "test:ci": "jest --ci",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "prepare": "simple-git-hooks > /dev/null"
