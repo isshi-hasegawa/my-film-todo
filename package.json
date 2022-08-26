@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
-    "test": "jest",
+    "test": "jest --watch",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "prepare": "simple-git-hooks > /dev/null"
@@ -50,6 +50,7 @@
     "eslint-config-next": "12.2.5",
     "eslint-config-prettier": "^8.5.0",
     "jest": "^28.1.3",
+    "jest-environment-jsdom": "^29.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "simple-git-hooks": "^2.8.0",
