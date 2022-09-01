@@ -1,20 +1,11 @@
 import type { NextPage } from "next";
 import { signOut, useSession } from "next-auth/react";
-import {
-  Button,
-  Grid,
-  Heading,
-  Spinner,
-  Toast,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, Grid, Heading, Spinner } from "@chakra-ui/react";
 import SignIn from "./auth/signin";
 import Image from "next/image";
-import { useEffect } from "react";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
-  const toast = useToast();
 
   if (status === "loading") return <Spinner size="xl" />;
 
