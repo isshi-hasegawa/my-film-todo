@@ -18,6 +18,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { signOut, useSession } from "next-auth/react";
 import { getTaskLists } from "src/api/taskListsApi";
+import { TaskList } from "src/types/taskLists";
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -34,21 +35,25 @@ const NavLink = ({ children }: { children: ReactNode }) => (
   </Link>
 );
 
-export default function Header() {
+type Props = {
+  setSelectedTaskListId: (id: string) => void;
+};
+
+export default function Header({ setSelectedTaskListId }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const token = session?.accessToken as string;
-  const [taskListTitles, setTaskListTitles] = useState<Array<string>>([]);
+  const [taskLists, setTaskLists] = useState<Array<TaskList>>([]);
 
   useEffect(() => {
-    const getTaskListTitles = async () => {
+    const fetchTaskLists = async () => {
       await getTaskLists(undefined, token).then((taskLists) => {
-        const titles = taskLists.map((taskList) => taskList.title);
-        setTaskListTitles(titles);
+        setTaskLists(taskLists);
+        setSelectedTaskListId(taskLists[0].id);
       });
     };
-    getTaskListTitles();
-  }, [token]);
+    fetchTaskLists();
+  }, [setSelectedTaskListId, token]);
 
   return (
     <>
@@ -68,8 +73,8 @@ export default function Header() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {taskListTitles.map((title) => (
-                <NavLink key={title}>{title}</NavLink>
+              {taskLists.map((taskList) => (
+                <NavLink key={taskList.id}>{taskList.title}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -94,8 +99,8 @@ export default function Header() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {taskListTitles.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {taskLists.map((taskList) => (
+                <NavLink key={taskList.id}>{taskList.title}</NavLink>
               ))}
             </Stack>
           </Box>
