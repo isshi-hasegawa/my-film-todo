@@ -10,7 +10,7 @@ export const getTasks = async (
   token: string
 ): Promise<Task[]> => {
   const response = await api.get<TasksResponse>(
-    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks?showCompleted=true&showHidden=true`,
+    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks?maxResults=100`,
     {
       params: {
         ...params,
