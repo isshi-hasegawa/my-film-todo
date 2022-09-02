@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -17,8 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { signOut, useSession } from "next-auth/react";
-
-const Links = ["Dashboard", "Projects", "Team"];
+import { getTaskLists } from "src/api/taskListsApi";
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link
@@ -38,6 +37,18 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
+  const token = session?.accessToken as string;
+  const [taskListTitles, setTaskListTitles] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    const getTaskListTitles = async () => {
+      await getTaskLists(undefined, token).then((taskLists) => {
+        const titles = taskLists.map((taskList) => taskList.title);
+        setTaskListTitles(titles);
+      });
+    };
+    getTaskListTitles();
+  }, [token]);
 
   return (
     <>
@@ -57,8 +68,8 @@ export default function Header() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {taskListTitles.map((title) => (
+                <NavLink key={title}>{title}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -83,7 +94,7 @@ export default function Header() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
+              {taskListTitles.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
             </Stack>
