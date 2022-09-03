@@ -3,6 +3,7 @@ import {
   IconButton,
   Spacer,
   StackDivider,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
@@ -35,14 +36,41 @@ const buttonProps = {
 const todos = [{ id: 1 }, { id: 2 }];
 
 export const Tasks = ({ selectedTaskListId }: Props) => {
+  const { data: session } = useSession();
+  const token = session?.accessToken as string;
+  const [tasks, setTasks] = useState<Task[]>([]);
+  // const [nextPageToken, setNextPageToken] = useState<string>("");
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await getTasks(
+        { taskListId: selectedTaskListId },
+        token
+      );
+      const uncompletedTasks = response.items
+        .filter((task) => task.status === "needsAction")
+        .filter((task) => task.parent === undefined)
+        .sort((a, b) => parseInt(a.position) - parseInt(b.position));
+      setTasks(uncompletedTasks);
+      // if (response.nextPageToken) {
+      //   setNextPageToken(response.nextPageToken);
+      // }
+    };
+    fetchTasks();
+  }, [selectedTaskListId, token]);
+
   return (
     <VStack {...vStackProps}>
-      {todos.map((todo) => (
-        <HStack key={todo.id}>
+      {tasks.map((task) => (
+        <HStack key={task.id}>
+          <Text>{task.title}</Text>
           <Spacer />
           <IconButton {...buttonProps} />
         </HStack>
       ))}
+      {/* <HStack>
+        <Text>さらに読み込む</Text>
+      </HStack> */}
     </VStack>
   );
 };
