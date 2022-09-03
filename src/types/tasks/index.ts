@@ -6,9 +6,9 @@ export type Task = {
   updated?: string;
   selfLink?: string;
   parent?: string;
-  position?: string;
+  position: string;
   notes?: string;
-  status?: "needsAction" | "completed";
+  status: "needsAction" | "completed";
   due?: string;
   completed?: string;
   deleted?: boolean;
