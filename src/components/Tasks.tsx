@@ -1,14 +1,13 @@
 import {
   HStack,
   IconButton,
-  Spacer,
   StackDivider,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
+import { BsCircle } from "react-icons/bs";
 import { getTasks } from "src/api/tasksApi";
 import { Task } from "src/types/tasks";
 
@@ -28,9 +27,9 @@ const vStackProps = {
 };
 
 const buttonProps = {
-  icon: <FaTrash />,
+  icon: <BsCircle />,
   isRound: true,
-  "aria-label": "delete",
+  "aria-label": "check",
 };
 
 const todos = [{ id: 1 }, { id: 2 }];
@@ -63,9 +62,8 @@ export const Tasks = ({ selectedTaskListId }: Props) => {
     <VStack {...vStackProps}>
       {tasks.map((task) => (
         <HStack key={task.id}>
-          <Text>{task.title}</Text>
-          <Spacer />
           <IconButton {...buttonProps} />
+          <Text>{task.title}</Text>
         </HStack>
       ))}
       {/* <HStack>
