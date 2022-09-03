@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { BsCircle } from "react-icons/bs";
+import { BiCircle } from "react-icons/bi";
 import { getTasks } from "src/api/tasksApi";
 import { Task } from "src/types/tasks";
 
@@ -27,7 +27,7 @@ const vStackProps = {
 };
 
 const buttonProps = {
-  icon: <BsCircle />,
+  icon: <BiCircle />,
   isRound: true,
   "aria-label": "check",
 };
