@@ -1,4 +1,10 @@
-import { ReactNode, useEffect, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import {
   Box,
   Flex,
@@ -20,7 +26,15 @@ import { signOut, useSession } from "next-auth/react";
 import { getTaskLists } from "src/api/taskListsApi";
 import { TaskList } from "src/types/taskLists";
 
-const NavLink = ({ children }: { children: ReactNode }) => (
+const NavLink = ({
+  children,
+  setSelectedTaskListId,
+  taskListId,
+}: {
+  children: ReactNode;
+  setSelectedTaskListId: (id: string) => void;
+  taskListId: string;
+}) => (
   <Link
     px={2}
     py={1}
@@ -29,7 +43,9 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
+    onClick={() => {
+      setSelectedTaskListId(taskListId);
+    }}
   >
     {children}
   </Link>
@@ -79,7 +95,13 @@ export default function Header({ setSelectedTaskListId }: Props) {
               display={{ base: "none", md: "flex" }}
             >
               {taskLists.map((taskList) => (
-                <NavLink key={taskList.id}>{taskList.title}</NavLink>
+                <NavLink
+                  key={taskList.id}
+                  setSelectedTaskListId={setSelectedTaskListId}
+                  taskListId={taskList.id}
+                >
+                  {taskList.title}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
@@ -105,7 +127,13 @@ export default function Header({ setSelectedTaskListId }: Props) {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {taskLists.map((taskList) => (
-                <NavLink key={taskList.id}>{taskList.title}</NavLink>
+                <NavLink
+                  key={taskList.id}
+                  setSelectedTaskListId={setSelectedTaskListId}
+                  taskListId={taskList.id}
+                >
+                  {taskList.title}
+                </NavLink>
               ))}
             </Stack>
           </Box>
