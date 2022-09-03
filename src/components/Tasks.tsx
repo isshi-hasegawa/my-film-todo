@@ -32,8 +32,6 @@ const buttonProps = {
   "aria-label": "check",
 };
 
-const todos = [{ id: 1 }, { id: 2 }];
-
 export const Tasks = ({ selectedTaskListId }: Props) => {
   const { data: session } = useSession();
   const token = session?.accessToken as string;
