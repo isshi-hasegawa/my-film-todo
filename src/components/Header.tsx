@@ -24,10 +24,12 @@ const NavLink = ({
   children,
   setSelectedTaskListId,
   taskListId,
+  setIsShowSearchMovies,
 }: {
   children: ReactNode;
   setSelectedTaskListId: (id: string) => void;
   taskListId: string;
+  setIsShowSearchMovies: (boolean: boolean) => void;
 }) => (
   <Link
     px={2}
@@ -39,6 +41,7 @@ const NavLink = ({
     }}
     onClick={() => {
       setSelectedTaskListId(taskListId);
+      setIsShowSearchMovies(false);
     }}
   >
     {children}
@@ -47,9 +50,13 @@ const NavLink = ({
 
 type Props = {
   setSelectedTaskListId: (id: string) => void;
+  setIsShowSearchMovies: (boolean: boolean) => void;
 };
 
-export default function Header({ setSelectedTaskListId }: Props) {
+export default function Header({
+  setSelectedTaskListId,
+  setIsShowSearchMovies,
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const token = session?.accessToken as string;
@@ -93,6 +100,7 @@ export default function Header({ setSelectedTaskListId }: Props) {
                   key={taskList.id}
                   setSelectedTaskListId={setSelectedTaskListId}
                   taskListId={taskList.id}
+                  setIsShowSearchMovies={setIsShowSearchMovies}
                 >
                   {taskList.title}
                 </NavLink>
@@ -125,6 +133,7 @@ export default function Header({ setSelectedTaskListId }: Props) {
                   key={taskList.id}
                   setSelectedTaskListId={setSelectedTaskListId}
                   taskListId={taskList.id}
+                  setIsShowSearchMovies={setIsShowSearchMovies}
                 >
                   {taskList.title}
                 </NavLink>
