@@ -43,7 +43,7 @@ export default function Header({ setSelectedTaskListId }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const token = session?.accessToken as string;
-  const [taskLists, setTaskLists] = useState<Array<TaskList>>([]);
+  const [taskLists, setTaskLists] = useState<TaskList[]>([]);
 
   useEffect(() => {
     const fetchTaskLists = async () => {
