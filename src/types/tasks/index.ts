@@ -25,6 +25,11 @@ type Link = {
 export type TasksResponse = {
   kind: string;
   etag: string;
-  nextPageToken: string;
+  nextPageToken?: string;
   items: Task[];
+};
+
+export type GetTasksResponse = {
+  items: Task[];
+  nextPageToken?: string;
 };
