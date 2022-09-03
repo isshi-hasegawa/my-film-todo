@@ -3,9 +3,12 @@ import { useSession } from "next-auth/react";
 import { Grid, Heading, Spinner } from "@chakra-ui/react";
 import SignIn from "./auth/signin";
 import Header from "src/components/Header";
+import { Tasks } from "src/components/Tasks";
+import { useState } from "react";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
+  const [selectedTaskListId, setSelectedTaskListId] = useState<string>("");
 
   if (status === "loading")
     return (
@@ -36,7 +39,16 @@ const Home: NextPage = () => {
       )}
       {session && (
         <>
-          <Header />
+          <Header setSelectedTaskListId={setSelectedTaskListId} />
+          <Grid
+            sx={{
+              placeItems: "center",
+              px: "5rem",
+            }}
+            paddingTop="64px"
+          >
+            <Tasks selectedTaskListId={selectedTaskListId} />
+          </Grid>
         </>
       )}
     </>
