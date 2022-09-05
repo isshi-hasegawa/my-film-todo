@@ -22,6 +22,8 @@ export async function getMovieImages(id: number): Promise<MovieImagesResponse> {
   return await moviedb.movieImages({ id });
 }
 
-export async function searchMovie(name: string): Promise<MovieResultsResponse> {
-  return await moviedb.searchMovie({ query: name });
-}
+export const searchMovie = async (
+  name: string
+): Promise<MovieResultsResponse> => {
+  return await moviedb.searchMovie({ query: name, language: "ja-JP" });
+};
