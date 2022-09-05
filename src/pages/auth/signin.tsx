@@ -1,4 +1,4 @@
-import { Box, Button, VStack, Spinner, useToast } from "@chakra-ui/react";
+import { Box, Button, VStack } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { BsGoogle } from "react-icons/bs";
 
