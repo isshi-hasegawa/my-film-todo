@@ -53,10 +53,7 @@ type Props = {
   setIsShowSearchMovies: (boolean: boolean) => void;
 };
 
-export default function Header({
-  setSelectedTaskListId,
-  setIsShowSearchMovies,
-}: Props) {
+const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession();
   const token = session?.accessToken as string;
@@ -144,4 +141,6 @@ export default function Header({
       </Box>
     </>
   );
-}
+};
+
+export default Header;

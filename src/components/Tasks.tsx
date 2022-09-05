@@ -32,7 +32,7 @@ const buttonProps = {
   "aria-label": "check",
 };
 
-export const Tasks = ({ selectedTaskListId }: Props) => {
+const Tasks = ({ selectedTaskListId }: Props) => {
   const { data: session } = useSession();
   const token = session?.accessToken as string;
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -70,3 +70,5 @@ export const Tasks = ({ selectedTaskListId }: Props) => {
     </VStack>
   );
 };
+
+export default Tasks;

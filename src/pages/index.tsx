@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { Button, Grid, Heading, Spacer, Spinner } from "@chakra-ui/react";
 import SignIn from "./auth/signin";
 import Header from "src/components/Header";
-import { Tasks } from "src/components/Tasks";
+import Tasks from "src/components/Tasks";
 import { useState } from "react";
 import Search from "src/components/Search";
 
