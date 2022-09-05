@@ -6,7 +6,7 @@ import {
   WatchProviderResponse,
 } from "moviedb-promise/dist/request-types";
 
-const moviedb = new MovieDb(process.env.TMDB_API_KEY as string);
+const moviedb = new MovieDb(process.env.NEXT_PUBLIC_TMDB_API_KEY as string);
 
 export async function getMovieData(id: number): Promise<MovieResponse> {
   return await moviedb.movieInfo({ id });
