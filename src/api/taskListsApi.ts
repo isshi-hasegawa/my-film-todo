@@ -1,17 +1,17 @@
-import { api } from "src/utils/api";
-import type { TaskList, TaskListsResponse } from "src/types/taskLists";
+import { api } from 'src/utils/api'
+import type { TaskList, TaskListsResponse } from 'src/types/taskLists'
 
 type GetTaskListsParams = {
-  maxResults?: number;
-  pageToken?: string;
-};
+  maxResults?: number
+  pageToken?: string
+}
 
 export const getTaskLists = async (
   params?: GetTaskListsParams,
   token?: string
 ): Promise<TaskList[]> => {
   const response = await api.get<TaskListsResponse>(
-    "https://tasks.googleapis.com/tasks/v1/users/@me/lists",
+    'https://tasks.googleapis.com/tasks/v1/users/@me/lists',
     {
       params: {
         ...params,
@@ -20,6 +20,6 @@ export const getTaskLists = async (
         Authorization: `Bearer ${token}`,
       },
     }
-  );
-  return response.data.items;
-};
+  )
+  return response.data.items
+}
