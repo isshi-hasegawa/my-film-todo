@@ -5,6 +5,10 @@ import {
   WatchProviderResponse,
 } from 'moviedb-promise/dist/request-types'
 
+export type appendedMovieResponse = {
+  'watch/providers'?: WatchProviderResponse
+} & Partial<MovieResponse>
+
 export type WatchProvider = {
   display_priority?: number
   logo_path?: string
@@ -17,8 +21,8 @@ const moviedb = new MovieDb(process.env.NEXT_PUBLIC_TMDB_API_KEY as string)
 export const getMovieData = async (
   id: number,
   append_to_response?: string
-): Promise<MovieResponse> => {
-  return await moviedb.movieInfo({ id, append_to_response })
+): Promise<appendedMovieResponse> => {
+  return await moviedb.movieInfo({ id, language: 'ja-JP', append_to_response })
 }
 
 export const searchMovie = async (
