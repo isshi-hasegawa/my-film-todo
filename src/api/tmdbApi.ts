@@ -1,6 +1,5 @@
 import { MovieDb } from 'moviedb-promise'
 import {
-  MovieImagesResponse,
   MovieResponse,
   MovieResultsResponse,
   WatchProviderResponse,
@@ -15,12 +14,8 @@ export type WatchProvider = {
 
 const moviedb = new MovieDb(process.env.NEXT_PUBLIC_TMDB_API_KEY as string)
 
-export async function getMovieData(id: number): Promise<MovieResponse> {
+export const getMovieData = async (id: number): Promise<MovieResponse> => {
   return await moviedb.movieInfo({ id })
-}
-
-export async function getMovieImages(id: number): Promise<MovieImagesResponse> {
-  return await moviedb.movieImages({ id })
 }
 
 export const searchMovie = async (
