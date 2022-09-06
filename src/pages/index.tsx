@@ -32,7 +32,7 @@ const Home: NextPage = () => {
           sx={{
             h: "100vh",
             placeItems: "center",
-            px: "10rem",
+            px: "5rem",
           }}
         >
           <Heading>ログインしてください</Heading>
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
           <Grid
             sx={{
               placeItems: "center",
-              px: "10rem",
+              px: "5rem",
             }}
             paddingTop="72px"
           >
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
           <Grid
             sx={{
               placeItems: "center",
-              px: "10rem",
+              px: "5rem",
             }}
             paddingTop="72px"
           >
