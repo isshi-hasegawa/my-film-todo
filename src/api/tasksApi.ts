@@ -1,14 +1,14 @@
-import { api } from "src/utils/api";
-import type { TasksResponse, GetTasksResponse } from "src/types/tasks";
+import { api } from 'src/utils/api'
+import type { TasksResponse, GetTasksResponse } from 'src/types/tasks'
 
 export type GetTasksParams = {
-  taskListId: string;
-};
+  taskListId: string
+}
 
 export type GetTasksNextPageParams = {
-  taskListId: string;
-  nextPageToken?: string;
-};
+  taskListId: string
+  nextPageToken?: string
+}
 
 export const getTasks = async (
   params: GetTasksParams,
@@ -24,12 +24,12 @@ export const getTasks = async (
         Authorization: `Bearer ${token}`,
       },
     }
-  );
+  )
   return {
     items: response.data.items,
     nextPageToken: response.data.nextPageToken,
-  };
-};
+  }
+}
 
 // export const getTasksNextPage = async (
 //   params: GetTasksNextPageParams,
