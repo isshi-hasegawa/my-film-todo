@@ -10,9 +10,15 @@ import {
 } from '@chakra-ui/react'
 import { MovieResult } from 'moviedb-promise/dist/request-types'
 import { useEffect, useState } from 'react'
-import { searchMovie } from 'src/api/tmdbApi'
+import { getMovieData, searchMovie } from 'src/api/tmdbApi'
 import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
+import { CreateTaskParam, createTask } from 'src/api/tasksApi'
+import { useSession } from 'next-auth/react'
+
+type Props = {
+  selectedTaskListId: string
+}
 
 const vStackProps = {
   p: '4',
@@ -31,7 +37,9 @@ const buttonProps = {
   'aria-label': 'check',
 }
 
-const Search = () => {
+const Search = ({ selectedTaskListId }: Props) => {
+  const { data: session } = useSession()
+  const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
   const [searchResults, setSearchResults] = useState<MovieResult[]>([])
 
@@ -45,6 +53,35 @@ const Search = () => {
     fetchSearchResults()
   }, [keyword])
 
+  const createMovieTask = (id: number) => {
+    const fetchMovieData = async () => {
+      const response = await getMovieData(id, 'watch/providers')
+
+      let notes: string = ''
+
+      response['watch/providers']?.results?.JP?.flatrate?.map((provider) => {
+        if (provider.provider_name === 'Netflix')
+          notes = notes.concat('Netflix', ' ')
+        if (provider.provider_name === 'Amazon Prime Video')
+          notes = notes.concat('Amazon Prime Video', ' ')
+        if (provider.provider_name === 'Disney Plus')
+          notes = notes.concat('Disney+', ' ')
+      })
+
+      notes = notes.concat(`${response.runtime}分`)
+
+      const params: CreateTaskParam = {
+        taskListId: selectedTaskListId,
+        title: response.title,
+        notes,
+      } as const
+
+      await createTask(params, token)
+    }
+
+    fetchMovieData()
+  }
+
   return (
     <>
       <Input
@@ -57,7 +94,7 @@ const Search = () => {
       {keyword && searchResults.length > 0 && (
         <VStack {...vStackProps} backgroundColor="gray.100">
           {searchResults.map((result) => (
-            <HStack key={result.id}>
+            <HStack key={result.id} onClick={() => createMovieTask(result.id!)}>
               <IconButton {...buttonProps} />
               {result.poster_path && (
                 <Image
