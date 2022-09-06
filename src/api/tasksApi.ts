@@ -52,7 +52,7 @@ export const getTasks = async (
 //   return response;
 // };
 
-const createTask = async (
+export const createTask = async (
   params: CreateTaskParam,
   token: string
 ): Promise<Task> => {
