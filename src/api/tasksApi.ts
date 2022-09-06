@@ -1,14 +1,16 @@
 import { api } from 'src/utils/api'
-import type { TasksResponse, GetTasksResponse } from 'src/types/tasks'
+import type { Task, TasksResponse, GetTasksResponse } from 'src/types/tasks'
 
-export type GetTasksParams = {
+type GetTasksParams = {
   taskListId: string
 }
 
-export type GetTasksNextPageParams = {
+type GetTasksNextPageParams = {
   taskListId: string
   nextPageToken?: string
 }
+
+export type CreateTaskParam = { taskListId: string } & Partial<Task>
 
 export const getTasks = async (
   params: GetTasksParams,
@@ -49,3 +51,23 @@ export const getTasks = async (
 
 //   return response;
 // };
+
+export const createTask = async (
+  params: CreateTaskParam,
+  token: string
+): Promise<Task> => {
+  const response = await api.post<Task>(
+    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks`,
+    {
+      title: params.title,
+      notes: params.notes,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    }
+  )
+  return response.data
+}

@@ -72,7 +72,7 @@ const Home: NextPage = () => {
             }}
             paddingTop="72px"
           >
-            <Search />
+            <Search selectedTaskListId={selectedTaskListId} />
           </Grid>
         </>
       )}
