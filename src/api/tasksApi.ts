@@ -60,6 +60,7 @@ export const createTask = async (
     `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks`,
     {
       title: params.title,
+      notes: params.notes,
     },
     {
       headers: {
