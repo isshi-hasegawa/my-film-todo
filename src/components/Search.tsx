@@ -1,6 +1,7 @@
 import {
   HStack,
   IconButton,
+  Image,
   Input,
   StackDivider,
   Text,
@@ -10,7 +11,6 @@ import { MovieResult } from "moviedb-promise/dist/request-types";
 import { useEffect, useState } from "react";
 import { searchMovie } from "src/api/tmdbApi";
 import { FiPlusCircle } from "react-icons/fi";
-import Image from "next/image";
 
 const vStackProps = {
   p: "4",
@@ -49,14 +49,22 @@ const Search = () => {
         id="field"
         color="secondary"
         variant="flushed"
-        placeholder="映画のタイトルを入力してください"
+        placeholder="タイトルを入力してください"
         onChange={(e) => setKeyword(e.target.value)}
       />
-      {keyword.length > 0 && searchResults.length > 0 && (
+      {keyword && searchResults.length > 0 && (
         <VStack {...vStackProps}>
           {searchResults.map((result) => (
             <HStack key={result.id}>
               <IconButton {...buttonProps} />
+              {result.poster_path && (
+                <Image
+                  src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
+                  alt="poster"
+                  width="150px"
+                  height="210px"
+                />
+              )}
               <Text>{result.title}</Text>
             </HStack>
           ))}
