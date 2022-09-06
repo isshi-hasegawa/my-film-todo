@@ -14,8 +14,11 @@ export type WatchProvider = {
 
 const moviedb = new MovieDb(process.env.NEXT_PUBLIC_TMDB_API_KEY as string)
 
-export const getMovieData = async (id: number): Promise<MovieResponse> => {
-  return await moviedb.movieInfo({ id })
+export const getMovieData = async (
+  id: number,
+  append_to_response?: string
+): Promise<MovieResponse> => {
+  return await moviedb.movieInfo({ id, append_to_response })
 }
 
 export const searchMovie = async (
