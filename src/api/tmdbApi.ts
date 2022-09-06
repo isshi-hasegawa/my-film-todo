@@ -25,5 +25,9 @@ export async function getMovieImages(id: number): Promise<MovieImagesResponse> {
 export const searchMovie = async (
   name: string
 ): Promise<MovieResultsResponse> => {
-  return await moviedb.searchMovie({ query: name, language: "ja-JP" });
+  return await moviedb.searchMovie({
+    query: name,
+    include_adult: false,
+    language: "ja-JP",
+  });
 };
