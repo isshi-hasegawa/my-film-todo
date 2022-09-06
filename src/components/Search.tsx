@@ -3,6 +3,7 @@ import {
   IconButton,
   Image,
   Input,
+  Stack,
   StackDivider,
   Text,
   VStack,
@@ -65,7 +66,12 @@ const Search = () => {
                   height="210px"
                 />
               )}
-              <Text>{result.title}</Text>
+              <Stack>
+                <Text>{result.title}</Text>
+                <Text fontSize="sm" color="darkgray">
+                  {result.release_date?.substring(0, 4)}
+                </Text>
+              </Stack>
             </HStack>
           ))}
         </VStack>
