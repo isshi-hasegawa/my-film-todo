@@ -12,6 +12,7 @@ import { MovieResult } from "moviedb-promise/dist/request-types";
 import { useEffect, useState } from "react";
 import { searchMovie } from "src/api/tmdbApi";
 import { FiPlusCircle } from "react-icons/fi";
+import WatchProviders from "src/components/WatchProviders";
 
 const vStackProps = {
   p: "4",
@@ -71,6 +72,7 @@ const Search = () => {
                 <Text fontSize="sm" color="darkgray">
                   {result.release_date?.substring(0, 4)}
                 </Text>
+                <WatchProviders id={result.id!} />
               </Stack>
             </HStack>
           ))}
