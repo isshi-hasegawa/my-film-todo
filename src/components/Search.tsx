@@ -18,7 +18,7 @@ const vStackProps = {
   p: "4",
   w: "100%",
   maxW: { base: "90vw", sm: "80vw", lg: "50vw", xl: "40vw" },
-  borderColor: "gray.100",
+  borderColor: "gray.200",
   borderWidth: "2px",
   borderRadius: "lg",
   alignItems: "stretch",
@@ -55,7 +55,7 @@ const Search = () => {
         onChange={(e) => setKeyword(e.target.value)}
       />
       {keyword && searchResults.length > 0 && (
-        <VStack {...vStackProps}>
+        <VStack {...vStackProps} backgroundColor="gray.100">
           {searchResults.map((result) => (
             <HStack key={result.id}>
               <IconButton {...buttonProps} />
@@ -69,7 +69,7 @@ const Search = () => {
               )}
               <Stack>
                 <Text>{result.title}</Text>
-                <Text fontSize="sm" color="darkgray">
+                <Text fontSize="sm" color="gray.600">
                   {result.release_date?.substring(0, 4)}
                 </Text>
                 <WatchProviders id={result.id!} />
