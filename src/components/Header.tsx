@@ -71,12 +71,7 @@ const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
 
   return (
     <>
-      <Box
-        bg={useColorModeValue('gray.100', 'gray.900')}
-        px={4}
-        position="fixed"
-        w="100%"
-      >
+      <Box bgColor="gray.100" px={4} position="fixed" w="100%">
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}

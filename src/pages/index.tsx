@@ -52,7 +52,7 @@ const Home: NextPage = () => {
             }}
             paddingTop="72px"
           >
-            <Button onClick={() => setIsShowSearchMovies(true)}>
+            <Button my={4} onClick={() => setIsShowSearchMovies(true)}>
               タスクを登録する
             </Button>
             <Tasks selectedTaskListId={selectedTaskListId} />
