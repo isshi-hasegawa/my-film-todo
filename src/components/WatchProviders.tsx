@@ -1,6 +1,7 @@
 import { HStack, Image } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { getWatchProviders, WatchProvider } from 'src/api/tmdbApi'
+import { getWatchProviders } from 'src/api/tmdbApi'
+import { WatchProvider } from 'src/types/tmdb'
 
 type Props = {
   id: number

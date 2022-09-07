@@ -1,20 +1,9 @@
 import { MovieDb } from 'moviedb-promise'
 import {
-  MovieResponse,
   MovieResultsResponse,
   WatchProviderResponse,
 } from 'moviedb-promise/dist/request-types'
-
-export type appendedMovieResponse = {
-  'watch/providers'?: WatchProviderResponse
-} & Partial<MovieResponse>
-
-export type WatchProvider = {
-  display_priority?: number
-  logo_path?: string
-  provider_id?: number
-  provider_name?: string
-}
+import { appendedMovieResponse } from 'src/types/tmdb'
 
 const moviedb = new MovieDb(process.env.NEXT_PUBLIC_TMDB_API_KEY as string)
 

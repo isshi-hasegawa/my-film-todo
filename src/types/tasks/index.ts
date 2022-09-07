@@ -33,3 +33,9 @@ export type GetTasksResponse = {
   items: Task[]
   nextPageToken?: string
 }
+
+export type GetTasksParams = {
+  taskListId: string
+}
+
+export type CreateTaskParam = { taskListId: string } & Partial<Task>

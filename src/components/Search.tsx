@@ -13,8 +13,9 @@ import { useEffect, useState } from 'react'
 import { getMovieData, searchMovie } from 'src/api/tmdbApi'
 import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
-import { CreateTaskParam, createTask } from 'src/api/tasksApi'
+import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
+import { CreateTaskParam } from 'src/types/tasks'
 
 type Props = {
   selectedTaskListId: string

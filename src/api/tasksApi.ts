@@ -1,16 +1,16 @@
 import { api } from 'src/utils/api'
-import type { Task, TasksResponse, GetTasksResponse } from 'src/types/tasks'
+import type {
+  Task,
+  TasksResponse,
+  GetTasksResponse,
+  GetTasksParams,
+  CreateTaskParam,
+} from 'src/types/tasks'
 
-type GetTasksParams = {
-  taskListId: string
-}
-
-type GetTasksNextPageParams = {
-  taskListId: string
-  nextPageToken?: string
-}
-
-export type CreateTaskParam = { taskListId: string } & Partial<Task>
+// type GetTasksNextPageParams = {
+//   taskListId: string
+//   nextPageToken?: string
+// }
 
 export const getTasks = async (
   params: GetTasksParams,
