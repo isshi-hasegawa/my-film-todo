@@ -8,6 +8,11 @@ export type GetTasksParams = {
 
 export type CreateTaskParam = { taskListId: string } & Partial<Task>
 
+export type DeleteTaskParams = {
+  taskListId: string
+  taskId: string
+}
+
 export const getTasks = async (
   params: GetTasksParams,
   token: string
@@ -48,4 +53,18 @@ export const createTask = async (
     }
   )
   return response.data
+}
+export const deleteTask = async (
+  params: DeleteTaskParams,
+  token: string
+): Promise<void> => {
+  await api.delete<Task>(
+    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks/${params.taskId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    }
+  )
 }

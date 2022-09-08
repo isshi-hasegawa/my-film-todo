@@ -1,10 +1,16 @@
-import { HStack, StackDivider, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  HStack,
+  Spacer,
+  StackDivider,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { FaRegCheckCircle, FaRegCircle } from 'react-icons/fa'
-import { getTasks } from 'src/api/tasksApi'
+import { FaRegCircle, FaTrash } from 'react-icons/fa'
+import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
-import { IconButton } from '@chakra-ui/react'
 
 type Props = {
   selectedTaskListId: string
@@ -65,12 +71,30 @@ const Tasks = ({ selectedTaskListId }: Props) => {
     fetchTasks()
   }, [selectedTaskListId, tasks, token])
 
+  const deleteTaskHundler = (taskId: string) => {
+    ;(async () => {
+      await deleteTask(
+        {
+          taskListId: selectedTaskListId,
+          taskId,
+        },
+        token
+      )
+    })()
+  }
+
   return (
     <VStack {...vStackProps}>
       {tasks.map((task) => (
         <HStack key={task.id}>
           <FaRegCircle />
           <Text>{task.title}</Text>
+          <Spacer />
+          <FaTrash
+            onClick={() => {
+              deleteTaskHundler(task.id)
+            }}
+          />
         </HStack>
       ))}
     </VStack>
