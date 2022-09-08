@@ -2,6 +2,7 @@ import {
   HStack,
   IconButton,
   Spacer,
+  Stack,
   StackDivider,
   Text,
   VStack,
@@ -91,9 +92,16 @@ const Tasks = ({ taskListId }: Props) => {
             icon={<FaRegCircle />}
             aria-label="Check Button"
           />
-          <Text>{task.title}</Text>
+          <Stack>
+            <Text>{task.title}</Text>
+            <Text fontSize="sm" color="gray.600">
+              {task.notes}
+            </Text>
+          </Stack>
           <Spacer />
           <IconButton
+            variant="outline"
+            colorScheme="red"
             bgColor="white"
             icon={
               <FaTrash
