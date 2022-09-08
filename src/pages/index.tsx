@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
-import { Button, Grid, Heading, Spacer, Spinner } from '@chakra-ui/react'
+import { Button, Grid, Heading, Spinner } from '@chakra-ui/react'
 import SignIn from './auth/signin'
 import Header from 'src/components/Header'
 import Tasks from 'src/components/Tasks'
@@ -9,7 +9,7 @@ import Search from 'src/components/Search'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
-  const [selectedTaskListId, setSelectedTaskListId] = useState<string>('')
+  const [taskListId, setTaskListId] = useState<string>('')
   const [isShowSearchMovies, setIsShowSearchMovies] = useState<boolean>(false)
 
   if (status === 'loading')
@@ -36,25 +36,25 @@ const Home: NextPage = () => {
       {session && !isShowSearchMovies && (
         <>
           <Header
-            setSelectedTaskListId={setSelectedTaskListId}
+            setTaskListId={setTaskListId}
             setIsShowSearchMovies={setIsShowSearchMovies}
           />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
             <Button my={4} onClick={() => setIsShowSearchMovies(true)}>
               タスクを登録する
             </Button>
-            <Tasks taskListId={selectedTaskListId} />
+            <Tasks taskListId={taskListId} />
           </Grid>
         </>
       )}
       {session && isShowSearchMovies && (
         <>
           <Header
-            setSelectedTaskListId={setSelectedTaskListId}
+            setTaskListId={setTaskListId}
             setIsShowSearchMovies={setIsShowSearchMovies}
           />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
-            <Search taskListId={selectedTaskListId} />
+            <Search taskListId={taskListId} />
           </Grid>
         </>
       )}

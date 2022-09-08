@@ -22,12 +22,12 @@ import { TaskList } from 'src/types/taskLists'
 
 const NavLink = ({
   children,
-  setSelectedTaskListId,
+  setTaskListId,
   taskListId,
   setIsShowSearchMovies,
 }: {
   children: ReactNode
-  setSelectedTaskListId: (id: string) => void
+  setTaskListId: (id: string) => void
   taskListId: string
   setIsShowSearchMovies: (boolean: boolean) => void
 }) => (
@@ -40,7 +40,7 @@ const NavLink = ({
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
     onClick={() => {
-      setSelectedTaskListId(taskListId)
+      setTaskListId(taskListId)
       setIsShowSearchMovies(false)
     }}
   >
@@ -49,11 +49,11 @@ const NavLink = ({
 )
 
 type Props = {
-  setSelectedTaskListId: (id: string) => void
+  setTaskListId: (id: string) => void
   setIsShowSearchMovies: (boolean: boolean) => void
 }
 
-const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
+const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
@@ -63,10 +63,10 @@ const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
     ;(async () => {
       await getTaskLists(undefined, token).then((taskLists) => {
         setTaskLists(taskLists)
-        setSelectedTaskListId(taskLists[0].id)
+        setTaskListId(taskLists[0].id)
       })
     })()
-  }, [setSelectedTaskListId, token])
+  }, [setTaskListId, token])
 
   return (
     <>
@@ -89,7 +89,7 @@ const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
               {taskLists.map((taskList) => (
                 <NavLink
                   key={taskList.id}
-                  setSelectedTaskListId={setSelectedTaskListId}
+                  setTaskListId={setTaskListId}
                   taskListId={taskList.id}
                   setIsShowSearchMovies={setIsShowSearchMovies}
                 >
@@ -122,7 +122,7 @@ const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
               {taskLists.map((taskList) => (
                 <NavLink
                   key={taskList.id}
-                  setSelectedTaskListId={setSelectedTaskListId}
+                  setTaskListId={setTaskListId}
                   taskListId={taskList.id}
                   setIsShowSearchMovies={setIsShowSearchMovies}
                 >
