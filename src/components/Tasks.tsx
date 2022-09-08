@@ -36,22 +36,48 @@ const Tasks = ({ selectedTaskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [tasks, setTasks] = useState<Task[]>([])
-  // const [nextPageToken, setNextPageToken] = useState<string>("");
+  // const [nextPageToken, setNextPageToken] = useState<string>('')
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await getTasks({ taskListId: selectedTaskListId }, token)
-      const uncompletedTasks = response.items
-        .filter((task) => task.status === 'needsAction')
-        .filter((task) => task.parent === undefined)
+      const response = await getTasks(
+        {
+          taskListId: selectedTaskListId,
+          nextPageToken: '',
+        },
+        token
+      )
+
+      let tmpTasks: Task[] = response.data.items
+      for (
+        let nextPageToken = response.data.nextPageToken;
+        nextPageToken?.length;
+
+      ) {
+        const response = await getTasks(
+          {
+            taskListId: selectedTaskListId,
+            nextPageToken,
+          },
+          token
+        )
+        tmpTasks = [...tmpTasks, ...response.data.items]
+        if (response.data.nextPageToken?.length) {
+          nextPageToken = response.data.nextPageToken
+        } else {
+          nextPageToken = ''
+        }
+      }
+      const uncompletedTasks = tmpTasks
+        .filter(
+          (task) => task.status === 'needsAction' && task.parent === undefined
+        )
+
         .sort((a, b) => parseInt(a.position) - parseInt(b.position))
       setTasks(uncompletedTasks)
-      // if (response.nextPageToken) {
-      //   setNextPageToken(response.nextPageToken);
-      // }
     }
     fetchTasks()
-  }, [selectedTaskListId, token])
+  }, [selectedTaskListId, tasks, token])
 
   return (
     <VStack {...vStackProps}>
