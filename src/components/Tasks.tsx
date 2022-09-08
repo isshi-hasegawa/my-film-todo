@@ -13,7 +13,7 @@ import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
 
 type Props = {
-  selectedTaskListId: string
+  taskListId: string
 }
 
 const vStackProps = {
@@ -27,7 +27,7 @@ const vStackProps = {
   divider: <StackDivider />,
 }
 
-const Tasks = ({ selectedTaskListId }: Props) => {
+const Tasks = ({ taskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [tasks, setTasks] = useState<Task[]>([])
@@ -36,7 +36,7 @@ const Tasks = ({ selectedTaskListId }: Props) => {
     const fetchTasks = async () => {
       const firstCalledResponse = await getTasks(
         {
-          taskListId: selectedTaskListId,
+          taskListId,
         },
         token
       )
@@ -49,7 +49,7 @@ const Tasks = ({ selectedTaskListId }: Props) => {
       ) {
         const response = await getTasks(
           {
-            taskListId: selectedTaskListId,
+            taskListId,
             nextPageToken,
           },
           token
@@ -69,13 +69,13 @@ const Tasks = ({ selectedTaskListId }: Props) => {
       setTasks(uncompletedTasks)
     }
     fetchTasks()
-  }, [selectedTaskListId, tasks, token])
+  }, [taskListId, tasks, token])
 
   const deleteTaskHandler = (taskId: string) => {
     ;(async () => {
       await deleteTask(
         {
-          taskListId: selectedTaskListId,
+          taskListId,
           taskId,
         },
         token

@@ -16,10 +16,9 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
-import { CreateTaskParam } from 'src/api/tasksApi'
 
 type Props = {
-  selectedTaskListId: string
+  taskListId: string
 }
 
 const vStackProps = {
@@ -39,7 +38,7 @@ const buttonProps = {
   'aria-label': 'check',
 }
 
-const Search = ({ selectedTaskListId }: Props) => {
+const Search = ({ taskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
@@ -58,9 +57,8 @@ const Search = ({ selectedTaskListId }: Props) => {
   const createTaskHandler = (id: number) => {
     ;(async () => {
       const response = await getMovieData(id, 'watch/providers')
-
+      const title = response.title
       let notes: string = ''
-
       response['watch/providers']?.results?.JP?.flatrate?.map((provider) => {
         if (provider.provider_name === 'Netflix')
           notes = notes.concat('Netflix', ' ')
@@ -69,16 +67,16 @@ const Search = ({ selectedTaskListId }: Props) => {
         if (provider.provider_name === 'Disney Plus')
           notes = notes.concat('Disney+', ' ')
       })
-
       notes = notes.concat(`${response.runtime}分`)
 
-      const params: CreateTaskParam = {
-        taskListId: selectedTaskListId,
-        title: response.title,
-        notes,
-      } as const
-
-      await createTask(params, token)
+      await createTask(
+        {
+          taskListId,
+          title,
+          notes,
+        },
+        token
+      )
     })()
   }
 

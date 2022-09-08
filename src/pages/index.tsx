@@ -43,7 +43,7 @@ const Home: NextPage = () => {
             <Button my={4} onClick={() => setIsShowSearchMovies(true)}>
               タスクを登録する
             </Button>
-            <Tasks selectedTaskListId={selectedTaskListId} />
+            <Tasks taskListId={selectedTaskListId} />
           </Grid>
         </>
       )}
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
             setIsShowSearchMovies={setIsShowSearchMovies}
           />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
-            <Search selectedTaskListId={selectedTaskListId} />
+            <Search taskListId={selectedTaskListId} />
           </Grid>
         </>
       )}
