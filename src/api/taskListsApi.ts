@@ -1,10 +1,9 @@
 import { api } from 'src/utils/api'
-import type { TaskList, TaskListsResponse } from 'src/types/taskLists'
-
-type GetTaskListsParams = {
-  maxResults?: number
-  pageToken?: string
-}
+import type {
+  GetTaskListsParams,
+  TaskList,
+  TaskListsResponse,
+} from 'src/types/taskLists'
 
 export const getTaskLists = async (
   params?: GetTaskListsParams,

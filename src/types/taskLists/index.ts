@@ -13,3 +13,8 @@ export type TaskListsResponse = {
   nextPageToken?: string
   items: TaskList[]
 }
+
+export type GetTaskListsParams = {
+  maxResults?: number
+  pageToken?: string
+}
