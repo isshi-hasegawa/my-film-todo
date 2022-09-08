@@ -1,6 +1,6 @@
 import {
-  Box,
   HStack,
+  IconButton,
   Spacer,
   StackDivider,
   Text,
@@ -33,7 +33,7 @@ const Tasks = ({ taskListId }: Props) => {
   const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    ;(async () => {
       const firstCalledResponse = await getTasks(
         {
           taskListId,
@@ -67,11 +67,10 @@ const Tasks = ({ taskListId }: Props) => {
         )
         .sort((a, b) => parseInt(a.position) - parseInt(b.position))
       setTasks(uncompletedTasks)
-    }
-    fetchTasks()
+    })()
   }, [taskListId, tasks, token])
 
-  const deleteTaskHandler = (taskId: string) => {
+  const handleDeleteTask = (taskId: string) => {
     ;(async () => {
       await deleteTask(
         {
@@ -87,12 +86,16 @@ const Tasks = ({ taskListId }: Props) => {
     <VStack {...vStackProps}>
       {tasks.map((task) => (
         <HStack key={task.id}>
-          <FaRegCircle />
+          <IconButton
+            bgColor="white"
+            icon={<FaRegCircle />}
+            aria-label="Check Button"
+          />
           <Text>{task.title}</Text>
           <Spacer />
           <FaTrash
             onClick={() => {
-              deleteTaskHandler(task.id)
+              handleDeleteTask(task.id)
             }}
           />
         </HStack>

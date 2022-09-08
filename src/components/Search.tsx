@@ -54,7 +54,7 @@ const Search = ({ taskListId }: Props) => {
     fetchSearchResults()
   }, [keyword])
 
-  const createTaskHandler = (id: number) => {
+  const handleCreateTask = (id: number) => {
     ;(async () => {
       const response = await getMovieData(id, 'watch/providers')
       const title = response.title
@@ -96,7 +96,7 @@ const Search = ({ taskListId }: Props) => {
             {searchResults.map((result) => (
               <HStack
                 key={result.id}
-                onClick={() => createTaskHandler(result.id!)}
+                onClick={() => handleCreateTask(result.id!)}
               >
                 <IconButton {...buttonProps} />
                 {result.poster_path && (
