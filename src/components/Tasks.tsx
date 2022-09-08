@@ -1,15 +1,10 @@
-import {
-  HStack,
-  IconButton,
-  StackDivider,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
+import { HStack, StackDivider, Text, VStack } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { BiCircle } from 'react-icons/bi'
+import { FaRegCheckCircle, FaRegCircle } from 'react-icons/fa'
 import { getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
+import { IconButton } from '@chakra-ui/react'
 
 type Props = {
   selectedTaskListId: string
@@ -18,18 +13,12 @@ type Props = {
 const vStackProps = {
   p: '4',
   w: '100%',
-  maxW: { base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' },
+  maxW: { base: '100vw', sm: '80vw', lg: '50vw', xl: '40vw' },
   borderColor: 'gray.100',
   borderWidth: '2px',
   borderRadius: 'lg',
   alignItems: 'stretch',
   divider: <StackDivider />,
-}
-
-const buttonProps = {
-  icon: <BiCircle />,
-  isRound: true,
-  'aria-label': 'check',
 }
 
 const Tasks = ({ selectedTaskListId }: Props) => {
@@ -80,7 +69,7 @@ const Tasks = ({ selectedTaskListId }: Props) => {
     <VStack {...vStackProps}>
       {tasks.map((task) => (
         <HStack key={task.id}>
-          <IconButton {...buttonProps} />
+          <FaRegCircle />
           <Text>{task.title}</Text>
         </HStack>
       ))}
