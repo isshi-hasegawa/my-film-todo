@@ -1,10 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
@@ -12,41 +11,13 @@ import {
   MenuList,
   MenuItem,
   useDisclosure,
-  useColorModeValue,
   Stack,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
 import { getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
-
-const NavLink = ({
-  children,
-  setTaskListId,
-  taskListId,
-  setIsShowSearchMovies,
-}: {
-  children: ReactNode
-  setTaskListId: (id: string) => void
-  taskListId: string
-  setIsShowSearchMovies: (boolean: boolean) => void
-}) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
-    }}
-    onClick={() => {
-      setTaskListId(taskListId)
-      setIsShowSearchMovies(false)
-    }}
-  >
-    {children}
-  </Link>
-)
+import NavLink from 'src/components/NavLink'
 
 type Props = {
   setTaskListId: (id: string) => void
