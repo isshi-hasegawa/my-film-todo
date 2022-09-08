@@ -93,10 +93,16 @@ const Tasks = ({ taskListId }: Props) => {
           />
           <Text>{task.title}</Text>
           <Spacer />
-          <FaTrash
-            onClick={() => {
-              handleDeleteTask(task.id)
-            }}
+          <IconButton
+            bgColor="white"
+            icon={
+              <FaTrash
+                onClick={() => {
+                  handleDeleteTask(task.id)
+                }}
+              />
+            }
+            aria-label="Delete Button"
           />
         </HStack>
       ))}
