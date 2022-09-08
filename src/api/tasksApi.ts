@@ -1,12 +1,26 @@
 import { api } from 'src/utils/api'
-import type {
-  Task,
-  TasksResponse,
-  GetTasksParams,
-  CreateTaskParam,
-} from 'src/types/tasks'
+import type { Task, TasksResponse } from 'src/types/tasks'
 
-export const getTasks = async (params: GetTasksParams, token: string) => {
+export type GetTasksParams = {
+  taskListId: string
+  nextPageToken?: string
+}
+
+export type CreateTaskParam = { taskListId: string } & Partial<Task>
+
+export type DeleteTaskParams = {
+  taskListId: string
+  taskId: string
+}
+
+export const getTasks = async (
+  params: GetTasksParams,
+  token: string
+): Promise<TasksResponse> => {
+  if (!params.nextPageToken?.length) {
+    params.nextPageToken = ''
+  }
+
   const response = await api.get<TasksResponse>(
     `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks?maxResults=100&pageToken=${params.nextPageToken}`,
     {
@@ -18,7 +32,7 @@ export const getTasks = async (params: GetTasksParams, token: string) => {
       },
     }
   )
-  return response
+  return response.data
 }
 
 export const createTask = async (
@@ -39,4 +53,18 @@ export const createTask = async (
     }
   )
   return response.data
+}
+export const deleteTask = async (
+  params: DeleteTaskParams,
+  token: string
+): Promise<void> => {
+  await api.delete<Task>(
+    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks/${params.taskId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    }
+  )
 }

@@ -36,14 +36,14 @@ const WatchProviders = ({ id }: Props) => {
   }, [id])
 
   return (
-    <HStack>
+    <HStack boxSizing="border-box">
       {watchProviders.map((provider) => (
         <Image
           key={provider.provider_id}
           src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
           alt="logo"
           borderRadius={50}
-          boxSize={50}
+          boxSize={{ md: '50px', sm: '25px' }}
         />
       ))}
       {isPurchasableInAppleItunes && (
@@ -51,7 +51,7 @@ const WatchProviders = ({ id }: Props) => {
           src={`https://image.tmdb.org/t/p/original/peURlLlr8jggOwK53fJ5wdQl05y.jpg`}
           alt="logo"
           borderRadius={50}
-          boxSize={50}
+          boxSize={{ md: '50px', sm: '25px' }}
         />
       )}
     </HStack>

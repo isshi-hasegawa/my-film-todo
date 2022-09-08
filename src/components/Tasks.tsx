@@ -1,14 +1,15 @@
 import {
+  Box,
   HStack,
-  IconButton,
+  Spacer,
   StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { BiCircle } from 'react-icons/bi'
-import { getTasks } from 'src/api/tasksApi'
+import { FaRegCircle, FaTrash } from 'react-icons/fa'
+import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
 
 type Props = {
@@ -18,7 +19,7 @@ type Props = {
 const vStackProps = {
   p: '4',
   w: '100%',
-  maxW: { base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' },
+  maxW: { base: '100vw', sm: '80vw', lg: '50vw', xl: '40vw' },
   borderColor: 'gray.100',
   borderWidth: '2px',
   borderRadius: 'lg',
@@ -26,31 +27,23 @@ const vStackProps = {
   divider: <StackDivider />,
 }
 
-const buttonProps = {
-  icon: <BiCircle />,
-  isRound: true,
-  'aria-label': 'check',
-}
-
 const Tasks = ({ selectedTaskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [tasks, setTasks] = useState<Task[]>([])
-  // const [nextPageToken, setNextPageToken] = useState<string>('')
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await getTasks(
+      const firstCalledResponse = await getTasks(
         {
           taskListId: selectedTaskListId,
-          nextPageToken: '',
         },
         token
       )
 
-      let tmpTasks: Task[] = response.data.items
+      let tmpTasks: Task[] = firstCalledResponse.items
       for (
-        let nextPageToken = response.data.nextPageToken;
+        let nextPageToken = firstCalledResponse.nextPageToken;
         nextPageToken?.length;
 
       ) {
@@ -61,9 +54,9 @@ const Tasks = ({ selectedTaskListId }: Props) => {
           },
           token
         )
-        tmpTasks = [...tmpTasks, ...response.data.items]
-        if (response.data.nextPageToken?.length) {
-          nextPageToken = response.data.nextPageToken
+        tmpTasks = [...tmpTasks, ...response.items]
+        if (response.nextPageToken?.length) {
+          nextPageToken = response.nextPageToken
         } else {
           nextPageToken = ''
         }
@@ -72,24 +65,38 @@ const Tasks = ({ selectedTaskListId }: Props) => {
         .filter(
           (task) => task.status === 'needsAction' && task.parent === undefined
         )
-
         .sort((a, b) => parseInt(a.position) - parseInt(b.position))
       setTasks(uncompletedTasks)
     }
     fetchTasks()
   }, [selectedTaskListId, tasks, token])
 
+  const deleteTaskHundler = (taskId: string) => {
+    ;(async () => {
+      await deleteTask(
+        {
+          taskListId: selectedTaskListId,
+          taskId,
+        },
+        token
+      )
+    })()
+  }
+
   return (
     <VStack {...vStackProps}>
       {tasks.map((task) => (
         <HStack key={task.id}>
-          <IconButton {...buttonProps} />
+          <FaRegCircle />
           <Text>{task.title}</Text>
+          <Spacer />
+          <FaTrash
+            onClick={() => {
+              deleteTaskHundler(task.id)
+            }}
+          />
         </HStack>
       ))}
-      {/* <HStack>
-        <Text>さらに読み込む</Text>
-      </HStack> */}
     </VStack>
   )
 }

@@ -1,4 +1,5 @@
 import {
+  Grid,
   HStack,
   IconButton,
   Image,
@@ -15,7 +16,7 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
-import { CreateTaskParam } from 'src/types/tasks'
+import { CreateTaskParam } from 'src/api/tasksApi'
 
 type Props = {
   selectedTaskListId: string
@@ -92,30 +93,36 @@ const Search = ({ selectedTaskListId }: Props) => {
         placeholder="タイトルを入力してください"
         onChange={(e) => setKeyword(e.target.value)}
       />
-      {keyword && searchResults.length > 0 && (
-        <VStack {...vStackProps} backgroundColor="gray.100">
-          {searchResults.map((result) => (
-            <HStack key={result.id} onClick={() => createMovieTask(result.id!)}>
-              <IconButton {...buttonProps} />
-              {result.poster_path && (
-                <Image
-                  src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
-                  alt="poster"
-                  width="150px"
-                  height="210px"
-                />
-              )}
-              <Stack>
-                <Text>{result.title}</Text>
-                <Text fontSize="sm" color="gray.600">
-                  {result.release_date?.substring(0, 4)}
-                </Text>
-                <WatchProviders id={result.id!} />
-              </Stack>
-            </HStack>
-          ))}
-        </VStack>
-      )}
+
+      <Grid py={5}>
+        {keyword && searchResults.length > 0 && (
+          <VStack {...vStackProps} backgroundColor="gray.100">
+            {searchResults.map((result) => (
+              <HStack
+                key={result.id}
+                onClick={() => createMovieTask(result.id!)}
+              >
+                <IconButton {...buttonProps} />
+                {result.poster_path && (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
+                    alt="poster"
+                    width={{ md: '150px', sm: '60px' }}
+                    height={{ md: '210px', sm: '84px' }}
+                  />
+                )}
+                <Stack>
+                  <Text>{result.title}</Text>
+                  <Text fontSize="sm" color="gray.600">
+                    {result.release_date?.substring(0, 4)}
+                  </Text>
+                  <WatchProviders id={result.id!} />
+                </Stack>
+              </HStack>
+            ))}
+          </VStack>
+        )}
+      </Grid>
     </>
   )
 }

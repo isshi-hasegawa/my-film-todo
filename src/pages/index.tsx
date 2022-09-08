@@ -14,13 +14,7 @@ const Home: NextPage = () => {
 
   if (status === 'loading')
     return (
-      <Grid
-        sx={{
-          h: '100vh',
-          placeItems: 'center',
-          px: '5rem',
-        }}
-      >
+      <Grid h="100vh" placeItems="center" px="5rem">
         <Spinner size="xl" />
       </Grid>
     )
@@ -45,13 +39,7 @@ const Home: NextPage = () => {
             setSelectedTaskListId={setSelectedTaskListId}
             setIsShowSearchMovies={setIsShowSearchMovies}
           />
-          <Grid
-            sx={{
-              placeItems: 'center',
-              px: '5rem',
-            }}
-            paddingTop="72px"
-          >
+          <Grid placeItems="center" px="5rem" paddingTop="72px">
             <Button my={4} onClick={() => setIsShowSearchMovies(true)}>
               タスクを登録する
             </Button>
@@ -65,13 +53,7 @@ const Home: NextPage = () => {
             setSelectedTaskListId={setSelectedTaskListId}
             setIsShowSearchMovies={setIsShowSearchMovies}
           />
-          <Grid
-            sx={{
-              placeItems: 'center',
-              px: '5rem',
-            }}
-            paddingTop="72px"
-          >
+          <Grid placeItems="center" px="5rem" paddingTop="72px">
             <Search selectedTaskListId={selectedTaskListId} />
           </Grid>
         </>
