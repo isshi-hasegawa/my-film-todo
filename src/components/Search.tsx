@@ -31,6 +31,7 @@ const vStackProps = {
   alignItems: 'stretch',
   divider: <StackDivider />,
   bgColor: 'gray.100',
+  cursor: 'pointer',
 }
 
 const Search = ({ taskListId }: Props) => {
