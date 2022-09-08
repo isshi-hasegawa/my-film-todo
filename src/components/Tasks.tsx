@@ -42,7 +42,6 @@ const Tasks = ({ selectedTaskListId }: Props) => {
       const firstCalledResponse = await getTasks(
         {
           taskListId: selectedTaskListId,
-          nextPageToken: '',
         },
         token
       )
