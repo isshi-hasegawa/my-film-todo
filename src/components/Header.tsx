@@ -60,13 +60,12 @@ const Header = ({ setSelectedTaskListId, setIsShowSearchMovies }: Props) => {
   const [taskLists, setTaskLists] = useState<TaskList[]>([])
 
   useEffect(() => {
-    const fetchTaskLists = async () => {
+    ;(async () => {
       await getTaskLists(undefined, token).then((taskLists) => {
         setTaskLists(taskLists)
         setSelectedTaskListId(taskLists[0].id)
       })
-    }
-    fetchTaskLists()
+    })()
   }, [setSelectedTaskListId, token])
 
   return (

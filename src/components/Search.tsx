@@ -55,8 +55,8 @@ const Search = ({ selectedTaskListId }: Props) => {
     fetchSearchResults()
   }, [keyword])
 
-  const createMovieTask = (id: number) => {
-    const fetchMovieData = async () => {
+  const createTaskHandler = (id: number) => {
+    ;(async () => {
       const response = await getMovieData(id, 'watch/providers')
 
       let notes: string = ''
@@ -79,9 +79,7 @@ const Search = ({ selectedTaskListId }: Props) => {
       } as const
 
       await createTask(params, token)
-    }
-
-    fetchMovieData()
+    })()
   }
 
   return (
@@ -100,7 +98,7 @@ const Search = ({ selectedTaskListId }: Props) => {
             {searchResults.map((result) => (
               <HStack
                 key={result.id}
-                onClick={() => createMovieTask(result.id!)}
+                onClick={() => createTaskHandler(result.id!)}
               >
                 <IconButton {...buttonProps} />
                 {result.poster_path && (

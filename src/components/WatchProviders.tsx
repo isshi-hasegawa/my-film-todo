@@ -13,7 +13,7 @@ const WatchProviders = ({ id }: Props) => {
     useState<boolean>(false)
 
   useEffect(() => {
-    const fetchWatchProviders = async () => {
+    ;(async () => {
       const response = await getWatchProviders(id)
 
       if (response.results?.JP?.flatrate) {
@@ -30,9 +30,7 @@ const WatchProviders = ({ id }: Props) => {
         (provider) => provider.provider_name === 'Apple iTunes'
       )
       if (appleItunes) setIsPurchasableInAppleItunes(true)
-    }
-
-    fetchWatchProviders()
+    })()
   }, [id])
 
   return (

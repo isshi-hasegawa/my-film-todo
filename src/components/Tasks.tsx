@@ -71,7 +71,7 @@ const Tasks = ({ selectedTaskListId }: Props) => {
     fetchTasks()
   }, [selectedTaskListId, tasks, token])
 
-  const deleteTaskHundler = (taskId: string) => {
+  const deleteTaskHandler = (taskId: string) => {
     ;(async () => {
       await deleteTask(
         {
@@ -92,7 +92,7 @@ const Tasks = ({ selectedTaskListId }: Props) => {
           <Spacer />
           <FaTrash
             onClick={() => {
-              deleteTaskHundler(task.id)
+              deleteTaskHandler(task.id)
             }}
           />
         </HStack>
