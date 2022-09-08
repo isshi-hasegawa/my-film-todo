@@ -36,11 +36,10 @@ const Tasks = ({ selectedTaskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [tasks, setTasks] = useState<Task[]>([])
-  // const [nextPageToken, setNextPageToken] = useState<string>('')
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await getTasks(
+      const firstCalledResponse = await getTasks(
         {
           taskListId: selectedTaskListId,
           nextPageToken: '',
@@ -48,9 +47,9 @@ const Tasks = ({ selectedTaskListId }: Props) => {
         token
       )
 
-      let tmpTasks: Task[] = response.data.items
+      let tmpTasks: Task[] = firstCalledResponse.items
       for (
-        let nextPageToken = response.data.nextPageToken;
+        let nextPageToken = firstCalledResponse.nextPageToken;
         nextPageToken?.length;
 
       ) {
@@ -61,9 +60,9 @@ const Tasks = ({ selectedTaskListId }: Props) => {
           },
           token
         )
-        tmpTasks = [...tmpTasks, ...response.data.items]
-        if (response.data.nextPageToken?.length) {
-          nextPageToken = response.data.nextPageToken
+        tmpTasks = [...tmpTasks, ...response.items]
+        if (response.nextPageToken?.length) {
+          nextPageToken = response.nextPageToken
         } else {
           nextPageToken = ''
         }
@@ -72,7 +71,6 @@ const Tasks = ({ selectedTaskListId }: Props) => {
         .filter(
           (task) => task.status === 'needsAction' && task.parent === undefined
         )
-
         .sort((a, b) => parseInt(a.position) - parseInt(b.position))
       setTasks(uncompletedTasks)
     }
@@ -87,9 +85,6 @@ const Tasks = ({ selectedTaskListId }: Props) => {
           <Text>{task.title}</Text>
         </HStack>
       ))}
-      {/* <HStack>
-        <Text>さらに読み込む</Text>
-      </HStack> */}
     </VStack>
   )
 }
