@@ -30,12 +30,7 @@ const vStackProps = {
   borderRadius: 'lg',
   alignItems: 'stretch',
   divider: <StackDivider />,
-}
-
-const buttonProps = {
-  icon: <FiPlusCircle />,
-  isRound: true,
-  'aria-label': 'check',
+  bgColor: 'gray.100',
 }
 
 const Search = ({ taskListId }: Props) => {
@@ -92,13 +87,17 @@ const Search = ({ taskListId }: Props) => {
 
       <Grid py={5}>
         {keyword && searchResults.length > 0 && (
-          <VStack {...vStackProps} backgroundColor="gray.100">
+          <VStack {...vStackProps}>
             {searchResults.map((result) => (
               <HStack
                 key={result.id}
                 onClick={() => handleCreateTask(result.id!)}
               >
-                <IconButton {...buttonProps} />
+                <IconButton
+                  icon={<FiPlusCircle />}
+                  isRound
+                  aria-label="Add Button"
+                />
                 {result.poster_path && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
