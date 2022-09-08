@@ -15,7 +15,7 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
-import { CreateTaskParam } from 'src/types/tasks'
+import { CreateTaskParam } from 'src/api/tasksApi'
 
 type Props = {
   selectedTaskListId: string
