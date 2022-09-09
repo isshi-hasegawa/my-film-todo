@@ -41,7 +41,7 @@ const Search = ({ taskListId }: Props) => {
   const [searchResults, setSearchResults] = useState<MovieResult[]>([])
 
   useEffect(() => {
-    if (keyword.length === 0) return
+    if (!keyword.length) return
 
     const fetchSearchResults = async () => {
       const response = await searchMovie(keyword)
@@ -97,14 +97,14 @@ const Search = ({ taskListId }: Props) => {
                 <IconButton
                   icon={<FiPlusCircle />}
                   isRound
-                  aria-label="Add Task Button"
+                  aria-label="Add Button"
                 />
                 {result.poster_path && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
                     alt="poster"
-                    width={{ md: '150px', sm: '60px' }}
-                    height={{ md: '210px', sm: '84px' }}
+                    width={{ base: '45px', md: '150px' }}
+                    height={{ base: '63px', md: '210px' }}
                   />
                 )}
                 <Stack>

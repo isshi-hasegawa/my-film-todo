@@ -39,12 +39,14 @@ const Home: NextPage = () => {
             setTaskListId={setTaskListId}
             setIsShowSearch={setIsShowSearch}
           />
-          <Grid placeItems="center" px="5rem" paddingTop="72px">
-            <Button my={4} onClick={() => setIsShowSearch(true)}>
-              タスクを登録する
-            </Button>
-            <Tasks taskListId={taskListId} />
-          </Grid>
+          {taskListId.length && (
+            <Grid placeItems="center" px="5rem" paddingTop="72px">
+              <Button my={4} onClick={() => setIsShowSearch(true)}>
+                タスクを登録する
+              </Button>
+              <Tasks taskListId={taskListId} />
+            </Grid>
+          )}
         </>
       )}
       {session && isShowSearch && (
