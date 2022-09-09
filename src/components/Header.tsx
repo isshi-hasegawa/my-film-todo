@@ -13,18 +13,18 @@ import {
   useDisclosure,
   Stack,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
-import { getTaskLists } from 'src/api/taskListsApi'
+import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
 import NavLink from 'src/components/NavLink'
 
 type Props = {
   setTaskListId: (id: string) => void
-  setIsShowSearchMovies: (boolean: boolean) => void
+  setIsShowSearch: (boolean: boolean) => void
 }
 
-const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
+const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
@@ -38,6 +38,12 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
       })
     })()
   }, [setTaskListId, token])
+
+  const handleCreateTaskList = () => {
+    ;(async () => {
+      await createTaskList({ title: '新しいリスト' }, token)
+    })()
+  }
 
   return (
     <>
@@ -62,11 +68,19 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
                   key={taskList.id}
                   setTaskListId={setTaskListId}
                   taskListId={taskList.id}
-                  setIsShowSearchMovies={setIsShowSearchMovies}
+                  setIsShowSearch={setIsShowSearch}
                 >
                   {taskList.title}
                 </NavLink>
               ))}
+              <IconButton
+                size="sm"
+                icon={<AddIcon />}
+                aria-label="Add List Button"
+                onClick={() => {
+                  handleCreateTaskList()
+                }}
+              />
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -95,11 +109,19 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
                   key={taskList.id}
                   setTaskListId={setTaskListId}
                   taskListId={taskList.id}
-                  setIsShowSearchMovies={setIsShowSearchMovies}
+                  setIsShowSearch={setIsShowSearch}
                 >
                   {taskList.title}
                 </NavLink>
               ))}
+              <IconButton
+                size="sm"
+                icon={<AddIcon />}
+                aria-label="Add List Button"
+                onClick={() => {
+                  handleCreateTaskList()
+                }}
+              />
             </Stack>
           </Box>
         ) : null}

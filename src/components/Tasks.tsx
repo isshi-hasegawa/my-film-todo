@@ -90,7 +90,7 @@ const Tasks = ({ taskListId }: Props) => {
           <IconButton
             bgColor="white"
             icon={<FaRegCircle />}
-            aria-label="Check Button"
+            aria-label="Check Task Button"
           />
           <Stack>
             <Text>{task.title}</Text>
@@ -110,7 +110,7 @@ const Tasks = ({ taskListId }: Props) => {
                 }}
               />
             }
-            aria-label="Delete Button"
+            aria-label="Delete Task Button"
           />
         </HStack>
       ))}

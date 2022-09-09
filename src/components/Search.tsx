@@ -97,7 +97,7 @@ const Search = ({ taskListId }: Props) => {
                 <IconButton
                   icon={<FiPlusCircle />}
                   isRound
-                  aria-label="Add Button"
+                  aria-label="Add Task Button"
                 />
                 {result.poster_path && (
                   <Image
