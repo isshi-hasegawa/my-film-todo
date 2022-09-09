@@ -13,9 +13,9 @@ import {
   useDisclosure,
   Stack,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
-import { getTaskLists } from 'src/api/taskListsApi'
+import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
 import NavLink from 'src/components/NavLink'
 
@@ -38,6 +38,12 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
       })
     })()
   }, [setTaskListId, token])
+
+  const handleCreateTaskList = () => {
+    ;(async () => {
+      await createTaskList({ title: 'hoge' }, token)
+    })()
+  }
 
   return (
     <>
@@ -67,6 +73,14 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
                   {taskList.title}
                 </NavLink>
               ))}
+              <IconButton
+                size="sm"
+                icon={<AddIcon />}
+                aria-label="Add List Button"
+                onClick={() => {
+                  handleCreateTaskList()
+                }}
+              />
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
