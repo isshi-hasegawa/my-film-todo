@@ -5,12 +5,12 @@ const NavLink = ({
   children,
   setTaskListId,
   taskListId,
-  setIsShowSearchMovies,
+  setIsShowSearch,
 }: {
   children: ReactNode
   setTaskListId: (id: string) => void
   taskListId: string
-  setIsShowSearchMovies: (boolean: boolean) => void
+  setIsShowSearch: (boolean: boolean) => void
 }) => (
   <Link
     px={2}
@@ -22,7 +22,7 @@ const NavLink = ({
     }}
     onClick={() => {
       setTaskListId(taskListId)
-      setIsShowSearchMovies(false)
+      setIsShowSearch(false)
     }}
   >
     {children}

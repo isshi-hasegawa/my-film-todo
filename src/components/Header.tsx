@@ -21,10 +21,10 @@ import NavLink from 'src/components/NavLink'
 
 type Props = {
   setTaskListId: (id: string) => void
-  setIsShowSearchMovies: (boolean: boolean) => void
+  setIsShowSearch: (boolean: boolean) => void
 }
 
-const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
+const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
@@ -68,7 +68,7 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
                   key={taskList.id}
                   setTaskListId={setTaskListId}
                   taskListId={taskList.id}
-                  setIsShowSearchMovies={setIsShowSearchMovies}
+                  setIsShowSearch={setIsShowSearch}
                 >
                   {taskList.title}
                 </NavLink>
@@ -109,7 +109,7 @@ const Header = ({ setTaskListId, setIsShowSearchMovies }: Props) => {
                   key={taskList.id}
                   setTaskListId={setTaskListId}
                   taskListId={taskList.id}
-                  setIsShowSearchMovies={setIsShowSearchMovies}
+                  setIsShowSearch={setIsShowSearch}
                 >
                   {taskList.title}
                 </NavLink>

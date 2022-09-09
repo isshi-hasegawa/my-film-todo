@@ -10,7 +10,7 @@ import Search from 'src/components/Search'
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
   const [taskListId, setTaskListId] = useState<string>('')
-  const [isShowSearchMovies, setIsShowSearchMovies] = useState<boolean>(false)
+  const [isShowSearch, setIsShowSearch] = useState<boolean>(false)
 
   if (status === 'loading')
     return (
@@ -33,25 +33,25 @@ const Home: NextPage = () => {
           <SignIn />
         </Grid>
       )}
-      {session && !isShowSearchMovies && (
+      {session && !isShowSearch && (
         <>
           <Header
             setTaskListId={setTaskListId}
-            setIsShowSearchMovies={setIsShowSearchMovies}
+            setIsShowSearch={setIsShowSearch}
           />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
-            <Button my={4} onClick={() => setIsShowSearchMovies(true)}>
+            <Button my={4} onClick={() => setIsShowSearch(true)}>
               タスクを登録する
             </Button>
             <Tasks taskListId={taskListId} />
           </Grid>
         </>
       )}
-      {session && isShowSearchMovies && (
+      {session && isShowSearch && (
         <>
           <Header
             setTaskListId={setTaskListId}
-            setIsShowSearchMovies={setIsShowSearchMovies}
+            setIsShowSearch={setIsShowSearch}
           />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
             <Search taskListId={taskListId} />
