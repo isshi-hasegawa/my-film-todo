@@ -41,7 +41,7 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
 
   const handleCreateTaskList = () => {
     ;(async () => {
-      await createTaskList({ title: 'hoge' }, token)
+      await createTaskList({ title: '新しいリスト' }, token)
     })()
   }
 
@@ -114,6 +114,14 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
                   {taskList.title}
                 </NavLink>
               ))}
+              <IconButton
+                size="sm"
+                icon={<AddIcon />}
+                aria-label="Add List Button"
+                onClick={() => {
+                  handleCreateTaskList()
+                }}
+              />
             </Stack>
           </Box>
         ) : null}
