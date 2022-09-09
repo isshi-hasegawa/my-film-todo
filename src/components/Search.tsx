@@ -103,8 +103,8 @@ const Search = ({ taskListId }: Props) => {
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
                     alt="poster"
-                    width={{ base: '45px', md: '150px' }}
-                    height={{ base: '63px', md: '210px' }}
+                    width={{ base: '45px', sm: '60px', md: '150px' }}
+                    height={{ base: '63px', sm: '84px', md: '210px' }}
                   />
                 )}
                 <Stack>
