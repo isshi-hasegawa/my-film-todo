@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import {
   Box,
   Flex,
@@ -12,12 +11,14 @@ import {
   MenuItem,
   useDisclosure,
   Stack,
+  Spinner,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
 import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
 import NavLink from 'src/components/NavLink'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 type Props = {
   setTaskListId: (id: string) => void
@@ -28,22 +29,24 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
-  const [taskLists, setTaskLists] = useState<TaskList[]>([])
 
-  useEffect(() => {
-    ;(async () => {
-      await getTaskLists(undefined, token).then((taskLists) => {
-        setTaskLists(taskLists)
-        setTaskListId(taskLists[0].id)
-      })
-    })()
-  }, [setTaskListId, token])
-
-  const handleCreateTaskList = () => {
-    ;(async () => {
-      await createTaskList({ title: '新しいリスト' }, token)
-    })()
+  const fetchTaskLists = async () => {
+    const response = await getTaskLists(undefined, token)
+    setTaskListId(response[0].id)
+    return response
   }
+
+  const { data: taskLists, isFetching } = useQuery<TaskList[]>(
+    ['taskLists'],
+    fetchTaskLists
+  )
+
+  const queryClient = useQueryClient()
+
+  const { mutate: createTaskListMutate, isLoading } = useMutation(
+    () => createTaskList({ title: '新しいリスト' }, token),
+    { onSuccess: () => queryClient.invalidateQueries(['taskLists']) }
+  )
 
   return (
     <>
@@ -63,22 +66,28 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              {taskLists.map((taskList) => (
-                <NavLink
-                  key={taskList.id}
-                  setTaskListId={setTaskListId}
-                  taskListId={taskList.id}
-                  setIsShowSearch={setIsShowSearch}
-                >
-                  {taskList.title}
-                </NavLink>
-              ))}
+              {isFetching || isLoading ? (
+                <Spinner size="xl" />
+              ) : (
+                taskLists?.map((taskList) => (
+                  <NavLink
+                    key={taskList.id}
+                    setTaskListId={setTaskListId}
+                    taskListId={taskList.id}
+                    setIsShowSearch={setIsShowSearch}
+                  >
+                    {taskList.title}
+                  </NavLink>
+                ))
+              )}
+              {}
+
               <IconButton
                 size="sm"
                 icon={<AddIcon />}
                 aria-label="Add List Button"
                 onClick={() => {
-                  handleCreateTaskList()
+                  createTaskListMutate()
                 }}
               />
             </HStack>
@@ -104,22 +113,27 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {taskLists.map((taskList) => (
-                <NavLink
-                  key={taskList.id}
-                  setTaskListId={setTaskListId}
-                  taskListId={taskList.id}
-                  setIsShowSearch={setIsShowSearch}
-                >
-                  {taskList.title}
-                </NavLink>
-              ))}
+              {isFetching || isLoading ? (
+                <Spinner size="xl" />
+              ) : (
+                taskLists?.map((taskList) => (
+                  <NavLink
+                    key={taskList.id}
+                    setTaskListId={setTaskListId}
+                    taskListId={taskList.id}
+                    setIsShowSearch={setIsShowSearch}
+                  >
+                    {taskList.title}
+                  </NavLink>
+                ))
+              )}
+
               <IconButton
                 size="sm"
                 icon={<AddIcon />}
                 aria-label="Add List Button"
                 onClick={() => {
-                  handleCreateTaskList()
+                  createTaskListMutate()
                 }}
               />
             </Stack>
