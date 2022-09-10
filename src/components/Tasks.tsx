@@ -2,16 +2,17 @@ import {
   HStack,
   IconButton,
   Spacer,
+  Spinner,
   Stack,
   StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
 import { FaRegCircle, FaTrash } from 'react-icons/fa'
 import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
+import { useQuery } from '@tanstack/react-query'
 
 type Props = {
   taskListId: string
@@ -31,45 +32,41 @@ const vStackProps = {
 const Tasks = ({ taskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
-  const [tasks, setTasks] = useState<Task[]>([])
 
-  useEffect(() => {
-    ;(async () => {
-      const firstCalledResponse = await getTasks(
+  const fetchTasks = async () => {
+    const firstCalledResponse = await getTasks(
+      {
+        taskListId,
+      },
+      token
+    )
+
+    let tasks: Task[] = firstCalledResponse.items
+    for (
+      let nextPageToken = firstCalledResponse.nextPageToken;
+      nextPageToken?.length;
+
+    ) {
+      const response = await getTasks(
         {
           taskListId,
+          nextPageToken,
         },
         token
       )
-
-      let tmpTasks: Task[] = firstCalledResponse.items
-      for (
-        let nextPageToken = firstCalledResponse.nextPageToken;
-        nextPageToken?.length;
-
-      ) {
-        const response = await getTasks(
-          {
-            taskListId,
-            nextPageToken,
-          },
-          token
-        )
-        tmpTasks = [...tmpTasks, ...response.items]
-        if (response.nextPageToken?.length) {
-          nextPageToken = response.nextPageToken
-        } else {
-          nextPageToken = ''
-        }
+      tasks = [...tasks, ...response.items]
+      if (response.nextPageToken?.length) {
+        nextPageToken = response.nextPageToken
+      } else {
+        nextPageToken = ''
       }
-      const uncompletedTasks = tmpTasks
-        .filter(
-          (task) => task.status === 'needsAction' && task.parent === undefined
-        )
-        .sort((a, b) => parseInt(a.position) - parseInt(b.position))
-      setTasks(uncompletedTasks)
-    })()
-  }, [taskListId, tasks, token])
+    }
+    return tasks
+      .filter(
+        (task) => task.status === 'needsAction' && task.parent === undefined
+      )
+      .sort((a, b) => parseInt(a.position) - parseInt(b.position))
+  }
 
   const handleDeleteTask = (taskId: string) => {
     ;(async () => {
@@ -83,9 +80,16 @@ const Tasks = ({ taskListId }: Props) => {
     })()
   }
 
+  const { data: tasks, isFetching } = useQuery<Task[]>(
+    ['tasks', taskListId],
+    fetchTasks
+  )
+
+  if (isFetching) return <Spinner size="xl" />
+
   return (
     <VStack {...vStackProps}>
-      {tasks.map((task) => (
+      {tasks?.map((task) => (
         <HStack key={task.id}>
           <IconButton
             bgColor="white"
