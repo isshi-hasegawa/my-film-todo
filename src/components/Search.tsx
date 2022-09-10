@@ -51,7 +51,7 @@ const Search = () => {
     fetchSearchResults
   )
 
-  const { mutate: createTaskMutate, isLoading } = useMutation(
+  const { mutate: createTaskMutate } = useMutation(
     (resultId: number) => mutateCreateTask(resultId),
     {
       onSuccess: () =>
@@ -100,41 +100,36 @@ const Search = () => {
       />
 
       <Grid py={5}>
-        {isFetching ? (
-          <Spinner size="xl" placeItems="center" />
-        ) : (
+        {isFetching && <Spinner size="xl" placeItems="center" />}
+        {keyword === '' ? null : (
           <VStack {...vStackProps}>
-            {isLoading ? (
-              <Spinner size="xl" />
-            ) : (
-              searchResults?.map((result) => (
-                <HStack
-                  key={result.id}
-                  onClick={() => createTaskMutate(result.id!)}
-                >
-                  <IconButton
-                    icon={<FiPlusCircle />}
-                    isRound
-                    aria-label="Add Button"
+            {searchResults?.map((result) => (
+              <HStack
+                key={result.id}
+                onClick={() => createTaskMutate(result.id!)}
+              >
+                <IconButton
+                  icon={<FiPlusCircle />}
+                  isRound
+                  aria-label="Add Button"
+                />
+                {result.poster_path && (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
+                    alt="poster"
+                    width={{ base: '45px', sm: '60px', md: '150px' }}
+                    height={{ base: '63px', sm: '84px', md: '210px' }}
                   />
-                  {result.poster_path && (
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
-                      alt="poster"
-                      width={{ base: '45px', sm: '60px', md: '150px' }}
-                      height={{ base: '63px', sm: '84px', md: '210px' }}
-                    />
-                  )}
-                  <Stack>
-                    <Text>{result.title}</Text>
-                    <Text fontSize="sm" color="gray.600">
-                      {result.release_date?.substring(0, 4)}
-                    </Text>
-                    <WatchProviders id={result.id!} />
-                  </Stack>
-                </HStack>
-              ))
-            )}
+                )}
+                <Stack>
+                  <Text>{result.title}</Text>
+                  <Text fontSize="sm" color="gray.600">
+                    {result.release_date?.substring(0, 4)}
+                  </Text>
+                  <WatchProviders id={result.id!} />
+                </Stack>
+              </HStack>
+            ))}
           </VStack>
         )}
       </Grid>
