@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { RecoilRoot } from 'recoil'
 import { ChakraProvider } from '@chakra-ui/react'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
@@ -9,9 +10,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
+        <RecoilRoot>
+          <ChakraProvider>
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </RecoilRoot>
       </QueryClientProvider>
     </SessionProvider>
   )
