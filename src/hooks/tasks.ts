@@ -35,24 +35,26 @@ export const useTasks = () => {
       const response = await getMovieData(id, 'watch/providers')
       const title = response.title
       let notes: string = ''
-      response['watch/providers']?.results?.JP?.flatrate?.map((provider) => {
-        if (provider.provider_name === 'Netflix')
-          notes = notes.concat('Netflix', ' ')
-        if (provider.provider_name === 'Amazon Prime Video')
-          notes = notes.concat('Amazon Prime Video', ' ')
-        if (provider.provider_name === 'Disney Plus')
-          notes = notes.concat('Disney+', ' ')
-      })
+      response['watch/providers']?.results?.JP?.flatrate?.forEach(
+        (provider) => {
+          switch (provider.provider_name) {
+            case 'Netflix':
+              notes = notes.concat('Netflix', ' ')
+              break
+            case 'Amazon Prime Video':
+              notes = notes.concat('Amazon Prime Video', ' ')
+              break
+            case 'Disney Plus':
+              notes = notes.concat('Disney+', ' ')
+              break
+            default:
+              break
+          }
+        }
+      )
       notes = notes.concat(`${response.runtime}分`)
 
-      await createTask(
-        {
-          taskListId,
-          title,
-          notes,
-        },
-        token
-      )
+      await createTask({ taskListId, title, notes }, token)
     },
     [taskListId, token]
   )
