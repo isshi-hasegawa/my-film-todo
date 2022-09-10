@@ -27,7 +27,7 @@ const vStackProps = {
 
 const Tasks = () => {
   const { taskListId } = useTaskListIdState()
-  const { fetchAllTasks, deleteOneTask } = useTasks()
+  const { fetchAllTasks, completeTask, deleteOneTask } = useTasks()
 
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
@@ -35,12 +35,16 @@ const Tasks = () => {
   )
 
   const queryClient = useQueryClient()
-  const { mutate: deleteTaskMutate, isLoading } = useMutation(
+  const { mutate: deleteTaskMutate } = useMutation(
     (taskId: string) => deleteOneTask(taskId),
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
+  const { mutate: completeTaskMutate } = useMutation(
+    (taskId: string) => completeTask(taskId),
+    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+  )
 
-  if (isFetching || isLoading) return <Spinner size="xl" />
+  if (isFetching) return <Spinner size="xl" />
 
   return (
     <VStack {...vStackProps}>
@@ -50,6 +54,9 @@ const Tasks = () => {
             bgColor="white"
             icon={<FaRegCircle />}
             aria-label="Check Task Button"
+            onClick={() => {
+              completeTaskMutate(task.id)
+            }}
           />
           <Stack>
             <Text>{task.title}</Text>

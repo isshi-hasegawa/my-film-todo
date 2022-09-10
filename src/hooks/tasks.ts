@@ -74,6 +74,7 @@ export const useTasks = () => {
   return {
     fetchAllTasks,
     createTaskWithMovieInfo,
+    completeTask,
     deleteOneTask,
   }
 }
