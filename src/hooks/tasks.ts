@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
 import { useSession } from 'next-auth/react'
-import { getTasks, updateTask, deleteTask } from 'src/api/tasksApi'
+import { getTasks, createTask, updateTask, deleteTask } from 'src/api/tasksApi'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { Task } from 'src/types/tasks'
+import { getMovieData } from 'src/api/tmdbApi'
 
 export const useTasks = () => {
   const { taskListId } = useTaskListIdState()
@@ -29,6 +30,33 @@ export const useTasks = () => {
       .sort((a, b) => parseInt(a.position) - parseInt(b.position))
   }, [taskListId, token])
 
+  const createTaskWithMovieInfo = useCallback(
+    async (id: number) => {
+      const response = await getMovieData(id, 'watch/providers')
+      const title = response.title
+      let notes: string = ''
+      response['watch/providers']?.results?.JP?.flatrate?.map((provider) => {
+        if (provider.provider_name === 'Netflix')
+          notes = notes.concat('Netflix', ' ')
+        if (provider.provider_name === 'Amazon Prime Video')
+          notes = notes.concat('Amazon Prime Video', ' ')
+        if (provider.provider_name === 'Disney Plus')
+          notes = notes.concat('Disney+', ' ')
+      })
+      notes = notes.concat(`${response.runtime}分`)
+
+      await createTask(
+        {
+          taskListId,
+          title,
+          notes,
+        },
+        token
+      )
+    },
+    [taskListId, token]
+  )
+
   const completeTask = useCallback(
     async (taskId: string) => {
       await updateTask({ taskListId, taskId, status: 'completed' }, token)
@@ -45,6 +73,7 @@ export const useTasks = () => {
 
   return {
     fetchAllTasks,
+    createTaskWithMovieInfo,
     deleteOneTask,
   }
 }

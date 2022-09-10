@@ -13,13 +13,11 @@ import {
 } from '@chakra-ui/react'
 import { MovieResult } from 'moviedb-promise/dist/request-types'
 import { useState } from 'react'
-import { getMovieData, searchMovie } from 'src/api/tmdbApi'
+import { searchMovie } from 'src/api/tmdbApi'
 import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
-import { createTask } from 'src/api/tasksApi'
-import { useSession } from 'next-auth/react'
 import { useQuery, useMutation } from '@tanstack/react-query'
-import { useTaskListIdState } from 'src/hooks/taskListIdState'
+import { useTasks } from 'src/hooks/tasks'
 
 const vStackProps = {
   p: '4',
@@ -35,11 +33,9 @@ const vStackProps = {
 }
 
 const Search = () => {
-  const { data: session } = useSession()
-  const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
-  const { taskListId } = useTaskListIdState()
   const toast = useToast()
+  const { createTaskWithMovieInfo } = useTasks()
 
   const fetchSearchResults = async () => {
     const response = await searchMovie(keyword)
@@ -52,7 +48,7 @@ const Search = () => {
   )
 
   const { mutate: createTaskMutate } = useMutation(
-    (resultId: number) => mutateCreateTask(resultId),
+    (resultId: number) => createTaskWithMovieInfo(resultId),
     {
       onSuccess: () =>
         toast({
@@ -64,30 +60,6 @@ const Search = () => {
         }),
     }
   )
-
-  const mutateCreateTask = async (id: number) => {
-    const response = await getMovieData(id, 'watch/providers')
-    const title = response.title
-    let notes: string = ''
-    response['watch/providers']?.results?.JP?.flatrate?.map((provider) => {
-      if (provider.provider_name === 'Netflix')
-        notes = notes.concat('Netflix', ' ')
-      if (provider.provider_name === 'Amazon Prime Video')
-        notes = notes.concat('Amazon Prime Video', ' ')
-      if (provider.provider_name === 'Disney Plus')
-        notes = notes.concat('Disney+', ' ')
-    })
-    notes = notes.concat(`${response.runtime}分`)
-
-    await createTask(
-      {
-        taskListId,
-        title,
-        notes,
-      },
-      token
-    )
-  }
 
   return (
     <>
