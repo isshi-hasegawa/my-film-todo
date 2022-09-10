@@ -22,11 +22,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRecoilState } from 'recoil'
 import { taskListIdState } from 'src/states/taskListIdState'
 
-type Props = {
-  setIsShowSearch: (boolean: boolean) => void
-}
-
-const Header = ({ setIsShowSearch }: Props) => {
+const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
@@ -72,11 +68,7 @@ const Header = ({ setIsShowSearch }: Props) => {
                 <Spinner size="xl" />
               ) : (
                 taskLists?.map((taskList) => (
-                  <NavLink
-                    key={taskList.id}
-                    taskListId={taskList.id}
-                    setIsShowSearch={setIsShowSearch}
-                  >
+                  <NavLink key={taskList.id} propTaskListId={taskList.id}>
                     {taskList.title}
                   </NavLink>
                 ))
@@ -118,11 +110,7 @@ const Header = ({ setIsShowSearch }: Props) => {
                 <Spinner size="xl" />
               ) : (
                 taskLists?.map((taskList) => (
-                  <NavLink
-                    key={taskList.id}
-                    taskListId={taskList.id}
-                    setIsShowSearch={setIsShowSearch}
-                  >
+                  <NavLink key={taskList.id} propTaskListId={taskList.id}>
                     {taskList.title}
                   </NavLink>
                 ))
