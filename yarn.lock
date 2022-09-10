@@ -1619,6 +1619,20 @@
   dependencies:
     "tslib" "^2.4.0"
 
+"@tanstack/query-core@4.2.3":
+  "integrity" "sha512-zdt5lYWs1dZaA3IxJbCgtAfHZJScRZONpiLL7YkeOkrme5MfjQqTpjq7LYbzpyuwPOh2Jx68le0PLl57JFv5hQ=="
+  "resolved" "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.2.3.tgz"
+  "version" "4.2.3"
+
+"@tanstack/react-query@^4.2.3":
+  "integrity" "sha512-JLaMOxoJTkiAu7QpevRCt2uI/0vd3E8K/rSlCuRgWlcW5DeJDFpDS5kfzmLO5MOcD97fgsJRrDbxDORxR1FdJA=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.2.3.tgz"
+  "version" "4.2.3"
+  dependencies:
+    "@tanstack/query-core" "4.2.3"
+    "@types/use-sync-external-store" "^0.0.3"
+    "use-sync-external-store" "^1.2.0"
+
 "@testing-library/dom@^8.5.0":
   "integrity" "sha512-KnH2MnJUzmFNPW6RIKfd+zf2Wue8mEKX0M3cpX6aKl5ZXrJM1/c/Pc8c2xDNYQCnJO48Sm5ITbMXgqTr3h4jxQ=="
   "resolved" "https://registry.npmjs.org/@testing-library/dom/-/dom-8.17.1.tgz"
@@ -1835,6 +1849,11 @@
   "integrity" "sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw=="
   "resolved" "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.2.tgz"
   "version" "4.0.2"
+
+"@types/use-sync-external-store@^0.0.3":
+  "integrity" "sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA=="
+  "resolved" "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
+  "version" "0.0.3"
 
 "@types/yargs-parser@*":
   "integrity" "sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA=="
@@ -4813,7 +4832,7 @@
   dependencies:
     "@babel/runtime" "^7.12.13"
 
-"react-dom@^17.0.2 || ^18", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@^18.0.0", "react-dom@>=18", "react-dom@18.2.0":
+"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.2 || ^18", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@^18.0.0", "react-dom@>=18", "react-dom@18.2.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -5540,7 +5559,7 @@
     "detect-node-es" "^1.1.0"
     "tslib" "^2.0.0"
 
-"use-sync-external-store@1.2.0":
+"use-sync-external-store@^1.2.0", "use-sync-external-store@1.2.0":
   "integrity" "sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA=="
   "resolved" "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   "version" "1.2.0"

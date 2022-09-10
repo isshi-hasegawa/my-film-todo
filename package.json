@@ -31,6 +31,7 @@
     "@chakra-ui/react": "2.3.2",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
+    "@tanstack/react-query": "^4.2.3",
     "axios": "0.27.2",
     "framer-motion": "7.3.2",
     "moviedb-promise": "3.1.18",
