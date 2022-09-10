@@ -68,7 +68,7 @@ const Header = () => {
                 <Spinner size="xl" />
               ) : (
                 taskLists?.map((taskList) => (
-                  <NavLink key={taskList.id} propTaskListId={taskList.id}>
+                  <NavLink key={taskList.id} id={taskList.id}>
                     {taskList.title}
                   </NavLink>
                 ))
@@ -110,7 +110,7 @@ const Header = () => {
                 <Spinner size="xl" />
               ) : (
                 taskLists?.map((taskList) => (
-                  <NavLink key={taskList.id} propTaskListId={taskList.id}>
+                  <NavLink key={taskList.id} id={taskList.id}>
                     {taskList.title}
                   </NavLink>
                 ))

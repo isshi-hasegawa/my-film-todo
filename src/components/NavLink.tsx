@@ -4,13 +4,7 @@ import { useRecoilState } from 'recoil'
 import { taskListIdState } from 'src/states/taskListIdState'
 import { isShowSearchState } from 'src/states/isShowSearchState'
 
-const NavLink = ({
-  children,
-  propTaskListId,
-}: {
-  children: ReactNode
-  propTaskListId: string
-}) => {
+const NavLink = ({ children, id }: { children: ReactNode; id: string }) => {
   const [, setTaskListId] = useRecoilState<string>(taskListIdState)
   const [, setIsShowSearch] = useRecoilState<boolean>(isShowSearchState)
 
@@ -24,7 +18,7 @@ const NavLink = ({
         bg: useColorModeValue('gray.200', 'gray.700'),
       }}
       onClick={() => {
-        setTaskListId(propTaskListId)
+        setTaskListId(id)
         setIsShowSearch(false)
       }}
     >
