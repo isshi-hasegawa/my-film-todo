@@ -4,6 +4,7 @@ import {
   IconButton,
   Image,
   Input,
+  Spinner,
   Stack,
   StackDivider,
   Text,
@@ -16,6 +17,7 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 type Props = {
   taskListId: string
@@ -38,17 +40,16 @@ const Search = ({ taskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
-  const [searchResults, setSearchResults] = useState<MovieResult[]>([])
 
-  useEffect(() => {
-    if (!keyword.length) return
+  const fetchSearchResults = async () => {
+    const response = await searchMovie(keyword)
+    return response.results as MovieResult[]
+  }
 
-    const fetchSearchResults = async () => {
-      const response = await searchMovie(keyword)
-      setSearchResults(response.results as MovieResult[])
-    }
-    fetchSearchResults()
-  }, [keyword])
+  const { data: searchResults, isFetching } = useQuery<MovieResult[]>(
+    ['searchResults', keyword],
+    fetchSearchResults
+  )
 
   const handleCreateTask = (id: number) => {
     ;(async () => {
@@ -87,9 +88,11 @@ const Search = ({ taskListId }: Props) => {
       />
 
       <Grid py={5}>
-        {keyword && searchResults.length > 0 && (
+        {isFetching ? (
+          <Spinner size="xl" placeItems="center" />
+        ) : (
           <VStack {...vStackProps}>
-            {searchResults.map((result) => (
+            {searchResults?.map((result) => (
               <HStack
                 key={result.id}
                 onClick={() => handleCreateTask(result.id!)}
