@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil'
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
 const taskListIdState = atom<string>({
   key: 'taskListIdState',
@@ -6,7 +6,8 @@ const taskListIdState = atom<string>({
 })
 
 export const useTaskListIdState = () => {
-  const [taskListId, setTaskListId] = useRecoilState<string>(taskListIdState)
+  const taskListId = useRecoilValue<string>(taskListIdState)
+  const setTaskListId = useSetRecoilState<string>(taskListIdState)
 
   return {
     taskListId,

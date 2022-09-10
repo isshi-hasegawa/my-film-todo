@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil'
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
 const isShowSearchState = atom<boolean>({
   key: 'isShowSearchState',
@@ -6,9 +6,8 @@ const isShowSearchState = atom<boolean>({
 })
 
 export const useIsShowSearchState = () => {
-  const [isShowSearch, setIsShowSearch] =
-    useRecoilState<boolean>(isShowSearchState)
-
+  const isShowSearch = useRecoilValue<boolean>(isShowSearchState)
+  const setIsShowSearch = useSetRecoilState<boolean>(isShowSearchState)
   return {
     isShowSearch,
     setIsShowSearch,
