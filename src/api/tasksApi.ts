@@ -6,9 +6,14 @@ export type GetTasksParams = {
   nextPageToken?: string
 }
 
-export type CreateTaskParam = { taskListId: string } & Partial<Task>
+type CreateTaskParam = { taskListId: string } & Partial<Task>
 
-export type DeleteTaskParams = {
+type UpdateTaskParams = {
+  taskListId: string
+  taskId: string
+} & Partial<Task>
+
+type DeleteTaskParams = {
   taskListId: string
   taskId: string
 }
@@ -17,10 +22,11 @@ export const getTasks = async (
   params: GetTasksParams,
   token: string
 ): Promise<TasksResponse> => {
-  if (!params.nextPageToken?.length) params.nextPageToken = ''
+  const { taskListId, nextPageToken } = params
+  const optionalUrl = nextPageToken ?? `&pageToken=${nextPageToken}`
 
   const response = await api.get<TasksResponse>(
-    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks?maxResults=100&pageToken=${params.nextPageToken}`,
+    `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks?maxResults=100${optionalUrl}`,
     {
       params: {
         ...params,
@@ -37,11 +43,12 @@ export const createTask = async (
   params: CreateTaskParam,
   token: string
 ): Promise<Task> => {
+  const { taskListId, ...rest } = params
+
   const response = await api.post<Task>(
-    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks`,
+    `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks`,
     {
-      title: params.title,
-      notes: params.notes,
+      ...rest,
     },
     {
       headers: {
@@ -52,12 +59,36 @@ export const createTask = async (
   )
   return response.data
 }
+
+export const updateTask = async (
+  params: UpdateTaskParams,
+  token: string
+): Promise<Task> => {
+  const { taskListId, taskId, ...rest } = params
+
+  const response = await api.patch<Task>(
+    `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks/${taskId}`,
+    {
+      ...rest,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+    }
+  )
+  return response.data
+}
+
 export const deleteTask = async (
   params: DeleteTaskParams,
   token: string
 ): Promise<void> => {
+  const { taskListId, taskId } = params
+
   await api.delete<Task>(
-    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks/${params.taskId}`,
+    `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks/${taskId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
