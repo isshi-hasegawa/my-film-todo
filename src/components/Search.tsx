@@ -18,7 +18,7 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
 import { useRecoilState } from 'recoil'
 import { taskListIdState } from 'src/states/taskListIdState'
 
