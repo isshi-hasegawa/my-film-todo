@@ -48,7 +48,7 @@ const Search = () => {
   )
 
   const { mutate: createTaskMutate } = useMutation(
-    (resultId: number) => createTaskWithMovieInfo(resultId),
+    (id: number) => createTaskWithMovieInfo(id),
     {
       onSuccess: () =>
         toast({
