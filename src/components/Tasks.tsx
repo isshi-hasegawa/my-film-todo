@@ -13,8 +13,7 @@ import { FaRegCircle, FaTrash } from 'react-icons/fa'
 import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRecoilState } from 'recoil'
-import { taskListIdState } from 'src/states/taskListIdState'
+import { useTaskListIdState } from 'src/hooks/taskListIdState'
 
 const vStackProps = {
   p: '4',
@@ -30,7 +29,7 @@ const vStackProps = {
 const Tasks = () => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
-  const [taskListId] = useRecoilState<string>(taskListIdState)
+  const { taskListId } = useTaskListIdState()
 
   const fetchTasks = async () => {
     const firstCalledResponse = await getTasks(

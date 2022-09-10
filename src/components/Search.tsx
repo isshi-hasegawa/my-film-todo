@@ -19,8 +19,7 @@ import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
 import { useQuery, useMutation } from '@tanstack/react-query'
-import { useRecoilState } from 'recoil'
-import { taskListIdState } from 'src/states/taskListIdState'
+import { useTaskListIdState } from 'src/hooks/taskListIdState'
 
 const vStackProps = {
   p: '4',
@@ -39,7 +38,7 @@ const Search = () => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
-  const [taskListId] = useRecoilState<string>(taskListIdState)
+  const { taskListId } = useTaskListIdState()
   const toast = useToast()
 
   const fetchSearchResults = async () => {

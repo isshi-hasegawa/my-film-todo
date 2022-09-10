@@ -1,12 +1,11 @@
 import { Link, useColorModeValue } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { useRecoilState } from 'recoil'
-import { taskListIdState } from 'src/states/taskListIdState'
-import { isShowSearchState } from 'src/states/isShowSearchState'
+import { useTaskListIdState } from 'src/hooks/taskListIdState'
+import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
 const NavLink = ({ children, id }: { children: ReactNode; id: string }) => {
-  const [, setTaskListId] = useRecoilState<string>(taskListIdState)
-  const [, setIsShowSearch] = useRecoilState<boolean>(isShowSearchState)
+  const { setTaskListId } = useTaskListIdState()
+  const { setIsShowSearch } = useIsShowSearchState()
 
   return (
     <Link

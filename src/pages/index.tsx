@@ -5,15 +5,13 @@ import SignIn from './auth/signin'
 import Header from 'src/components/Header'
 import Tasks from 'src/components/Tasks'
 import Search from 'src/components/Search'
-import { useRecoilState } from 'recoil'
-import { taskListIdState } from 'src/states/taskListIdState'
-import { isShowSearchState } from 'src/states/isShowSearchState'
+import { useTaskListIdState } from 'src/hooks/taskListIdState'
+import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
-  const [taskListId] = useRecoilState<string>(taskListIdState)
-  const [isShowSearch, setIsShowSearch] =
-    useRecoilState<boolean>(isShowSearchState)
+  const { taskListId } = useTaskListIdState()
+  const { isShowSearch, setIsShowSearch } = useIsShowSearchState()
 
   if (status === 'loading')
     return (
