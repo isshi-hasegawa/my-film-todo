@@ -8,6 +8,7 @@ import {
   Stack,
   StackDivider,
   Text,
+  useToast,
   VStack,
 } from '@chakra-ui/react'
 import { MovieResult } from 'moviedb-promise/dist/request-types'
@@ -40,6 +41,7 @@ const Search = ({ taskListId }: Props) => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
+  const toast = useToast()
 
   const fetchSearchResults = async () => {
     const response = await searchMovie(keyword)
@@ -55,7 +57,16 @@ const Search = ({ taskListId }: Props) => {
 
   const { mutate: createTaskMutate, isLoading } = useMutation(
     (resultId: number) => mutateCreateTask(resultId),
-    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+    {
+      onSuccess: () =>
+        toast({
+          title: 'タスクを登録しました！',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'bottom-left',
+        }),
+    }
   )
 
   const mutateCreateTask = async (id: number) => {
