@@ -6,10 +6,12 @@ import Header from 'src/components/Header'
 import Tasks from 'src/components/Tasks'
 import { useState } from 'react'
 import Search from 'src/components/Search'
+import { useRecoilState } from 'recoil'
+import { taskListIdState } from 'src/states/taskListIdState'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
-  const [taskListId, setTaskListId] = useState<string>('')
+  const [taskListId] = useRecoilState<string>(taskListIdState)
   const [isShowSearch, setIsShowSearch] = useState<boolean>(false)
 
   if (status === 'loading')
@@ -35,28 +37,24 @@ const Home: NextPage = () => {
       )}
       {session && !isShowSearch && (
         <>
-          <Header
-            setTaskListId={setTaskListId}
-            setIsShowSearch={setIsShowSearch}
-          />
-          {taskListId.length && (
+          <Header setIsShowSearch={setIsShowSearch} />
+          {taskListId === '' ? (
+            <Heading>リストを作成してください</Heading>
+          ) : (
             <Grid placeItems="center" px="5rem" paddingTop="72px">
               <Button my={4} onClick={() => setIsShowSearch(true)}>
                 タスクを登録する
               </Button>
-              <Tasks taskListId={taskListId} />
+              <Tasks />
             </Grid>
           )}
         </>
       )}
       {session && isShowSearch && (
         <>
-          <Header
-            setTaskListId={setTaskListId}
-            setIsShowSearch={setIsShowSearch}
-          />
+          <Header setIsShowSearch={setIsShowSearch} />
           <Grid placeItems="center" px="5rem" paddingTop="72px">
-            <Search taskListId={taskListId} />
+            <Search />
           </Grid>
         </>
       )}

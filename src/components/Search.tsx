@@ -19,10 +19,8 @@ import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-
-type Props = {
-  taskListId: string
-}
+import { useRecoilState } from 'recoil'
+import { taskListIdState } from 'src/states/taskListIdState'
 
 const vStackProps = {
   p: '4',
@@ -37,10 +35,11 @@ const vStackProps = {
   cursor: 'pointer',
 }
 
-const Search = ({ taskListId }: Props) => {
+const Search = () => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
+  const [taskListId] = useRecoilState<string>(taskListIdState)
   const toast = useToast()
 
   const fetchSearchResults = async () => {
@@ -52,8 +51,6 @@ const Search = ({ taskListId }: Props) => {
     ['searchResults', keyword],
     fetchSearchResults
   )
-
-  const queryClient = useQueryClient()
 
   const { mutate: createTaskMutate, isLoading } = useMutation(
     (resultId: number) => mutateCreateTask(resultId),

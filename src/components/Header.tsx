@@ -19,16 +19,18 @@ import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
 import NavLink from 'src/components/NavLink'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRecoilState } from 'recoil'
+import { taskListIdState } from 'src/states/taskListIdState'
 
 type Props = {
-  setTaskListId: (id: string) => void
   setIsShowSearch: (boolean: boolean) => void
 }
 
-const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
+const Header = ({ setIsShowSearch }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
+  const [, setTaskListId] = useRecoilState<string>(taskListIdState)
 
   const fetchTaskLists = async () => {
     const response = await getTaskLists(undefined, token)
@@ -72,7 +74,6 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
                 taskLists?.map((taskList) => (
                   <NavLink
                     key={taskList.id}
-                    setTaskListId={setTaskListId}
                     taskListId={taskList.id}
                     setIsShowSearch={setIsShowSearch}
                   >
@@ -119,7 +120,6 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
                 taskLists?.map((taskList) => (
                   <NavLink
                     key={taskList.id}
-                    setTaskListId={setTaskListId}
                     taskListId={taskList.id}
                     setIsShowSearch={setIsShowSearch}
                   >
