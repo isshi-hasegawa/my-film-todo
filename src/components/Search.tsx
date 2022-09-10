@@ -18,11 +18,8 @@ import { FiPlusCircle } from 'react-icons/fi'
 import WatchProviders from 'src/components/WatchProviders'
 import { createTask } from 'src/api/tasksApi'
 import { useSession } from 'next-auth/react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-
-type Props = {
-  taskListId: string
-}
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { useTaskListIdState } from 'src/hooks/taskListIdState'
 
 const vStackProps = {
   p: '4',
@@ -37,10 +34,11 @@ const vStackProps = {
   cursor: 'pointer',
 }
 
-const Search = ({ taskListId }: Props) => {
+const Search = () => {
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const [keyword, setKeyword] = useState<string>('')
+  const { taskListId } = useTaskListIdState()
   const toast = useToast()
 
   const fetchSearchResults = async () => {
@@ -53,9 +51,7 @@ const Search = ({ taskListId }: Props) => {
     fetchSearchResults
   )
 
-  const queryClient = useQueryClient()
-
-  const { mutate: createTaskMutate, isLoading } = useMutation(
+  const { mutate: createTaskMutate } = useMutation(
     (resultId: number) => mutateCreateTask(resultId),
     {
       onSuccess: () =>
@@ -104,41 +100,36 @@ const Search = ({ taskListId }: Props) => {
       />
 
       <Grid py={5}>
-        {isFetching ? (
-          <Spinner size="xl" placeItems="center" />
-        ) : (
+        {isFetching && <Spinner size="xl" placeItems="center" />}
+        {keyword === '' ? null : (
           <VStack {...vStackProps}>
-            {isLoading ? (
-              <Spinner size="xl" />
-            ) : (
-              searchResults?.map((result) => (
-                <HStack
-                  key={result.id}
-                  onClick={() => createTaskMutate(result.id!)}
-                >
-                  <IconButton
-                    icon={<FiPlusCircle />}
-                    isRound
-                    aria-label="Add Button"
+            {searchResults?.map((result) => (
+              <HStack
+                key={result.id}
+                onClick={() => createTaskMutate(result.id!)}
+              >
+                <IconButton
+                  icon={<FiPlusCircle />}
+                  isRound
+                  aria-label="Add Button"
+                />
+                {result.poster_path && (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
+                    alt="poster"
+                    width={{ base: '45px', sm: '60px', md: '150px' }}
+                    height={{ base: '63px', sm: '84px', md: '210px' }}
                   />
-                  {result.poster_path && (
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
-                      alt="poster"
-                      width={{ base: '45px', sm: '60px', md: '150px' }}
-                      height={{ base: '63px', sm: '84px', md: '210px' }}
-                    />
-                  )}
-                  <Stack>
-                    <Text>{result.title}</Text>
-                    <Text fontSize="sm" color="gray.600">
-                      {result.release_date?.substring(0, 4)}
-                    </Text>
-                    <WatchProviders id={result.id!} />
-                  </Stack>
-                </HStack>
-              ))
-            )}
+                )}
+                <Stack>
+                  <Text>{result.title}</Text>
+                  <Text fontSize="sm" color="gray.600">
+                    {result.release_date?.substring(0, 4)}
+                  </Text>
+                  <WatchProviders id={result.id!} />
+                </Stack>
+              </HStack>
+            ))}
           </VStack>
         )}
       </Grid>
