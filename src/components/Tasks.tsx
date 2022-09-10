@@ -8,12 +8,11 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useSession } from 'next-auth/react'
 import { FaRegCircle, FaTrash } from 'react-icons/fa'
-import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
+import { useTasks } from 'src/hooks/tasks'
 
 const vStackProps = {
   p: '4',
@@ -27,58 +26,25 @@ const vStackProps = {
 }
 
 const Tasks = () => {
-  const { data: session } = useSession()
-  const token = session?.accessToken as string
   const { taskListId } = useTaskListIdState()
-
-  const fetchTasks = async () => {
-    const firstCalledResponse = await getTasks(
-      {
-        taskListId,
-      },
-      token
-    )
-
-    let tasks: Task[] = firstCalledResponse.items
-    for (
-      let nextPageToken = firstCalledResponse.nextPageToken;
-      nextPageToken?.length;
-
-    ) {
-      const response = await getTasks(
-        {
-          taskListId,
-          nextPageToken,
-        },
-        token
-      )
-      tasks = [...tasks, ...response.items]
-      if (response.nextPageToken?.length) {
-        nextPageToken = response.nextPageToken
-      } else {
-        nextPageToken = ''
-      }
-    }
-    return tasks
-      .filter(
-        (task) => task.status === 'needsAction' && task.parent === undefined
-      )
-      .sort((a, b) => parseInt(a.position) - parseInt(b.position))
-  }
+  const { fetchAllTasks, completeTask, deleteOneTask } = useTasks()
 
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
-    fetchTasks
+    fetchAllTasks
   )
 
   const queryClient = useQueryClient()
-
-  const { mutate: deleteTaskMutate, isLoading } = useMutation(
-    (taskId: string) => deleteTask({ taskListId, taskId }, token),
+  const { mutate: deleteTaskMutate } = useMutation(
+    (taskId: string) => deleteOneTask(taskId),
+    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+  )
+  const { mutate: completeTaskMutate } = useMutation(
+    (taskId: string) => completeTask(taskId),
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
 
-  if (isFetching || isLoading) return <Spinner size="xl" />
+  if (isFetching) return <Spinner size="xl" />
 
   return (
     <VStack {...vStackProps}>
@@ -88,6 +54,9 @@ const Tasks = () => {
             bgColor="white"
             icon={<FaRegCircle />}
             aria-label="Check Task Button"
+            onClick={() => {
+              completeTaskMutate(task.id)
+            }}
           />
           <Stack>
             <Text>{task.title}</Text>
