@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react'
 import { FaRegCircle, FaTrash } from 'react-icons/fa'
 import { deleteTask, getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 type Props = {
   taskListId: string
@@ -68,24 +68,19 @@ const Tasks = ({ taskListId }: Props) => {
       .sort((a, b) => parseInt(a.position) - parseInt(b.position))
   }
 
-  const handleDeleteTask = (taskId: string) => {
-    ;(async () => {
-      await deleteTask(
-        {
-          taskListId,
-          taskId,
-        },
-        token
-      )
-    })()
-  }
-
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
     fetchTasks
   )
 
-  if (isFetching) return <Spinner size="xl" />
+  const queryClient = useQueryClient()
+
+  const { mutate: deleteTaskMutate, isLoading } = useMutation(
+    (taskId: string) => deleteTask({ taskListId, taskId }, token),
+    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+  )
+
+  if (isFetching || isLoading) return <Spinner size="xl" />
 
   return (
     <VStack {...vStackProps}>
@@ -110,7 +105,7 @@ const Tasks = ({ taskListId }: Props) => {
             icon={
               <FaTrash
                 onClick={() => {
-                  handleDeleteTask(task.id)
+                  deleteTaskMutate(task.id)
                 }}
               />
             }
