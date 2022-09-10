@@ -40,14 +40,13 @@ const Header = ({ setTaskListId, setIsShowSearch }: Props) => {
     ['taskLists'],
     fetchTaskLists
   )
+
   const queryClient = useQueryClient()
 
   const { mutate: createTaskListMutate, isLoading } = useMutation(
     () => createTaskList({ title: '新しいリスト' }, token),
     { onSuccess: () => queryClient.invalidateQueries(['taskLists']) }
   )
-
-  // if (isFetching || isLoading) return <Spinner size="xl" />
 
   return (
     <>
