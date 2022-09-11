@@ -1,7 +1,5 @@
 import {
-  Button,
   HStack,
-  IconButton,
   Spacer,
   Spinner,
   Stack,
@@ -9,11 +7,14 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { CalendarIcon, CheckCircleIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useTasks } from 'src/hooks/tasks'
+import CompleteButton from 'src/components/tasks/CompleteButton'
+import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
+import UpdateDueButtonWithDueDate from 'src/components/tasks/UpdateDueButtonWithDueDate'
+import DeleteButton from 'src/components/tasks/DeleteButton'
 
 const vStackProps = {
   p: '4',
@@ -65,14 +66,7 @@ const Tasks = () => {
     <VStack {...vStackProps}>
       {tasks?.map((task) => (
         <HStack key={task.id}>
-          <IconButton
-            bgColor="white"
-            icon={<CheckCircleIcon />}
-            aria-label="Check Task Button"
-            onClick={() => {
-              completeTaskMutate(task.id)
-            }}
-          />
+          <CompleteButton onClick={completeTaskMutate} taskId={task.id} />
           <Stack>
             <Text>{task.title}</Text>
             <Text fontSize="sm" color="gray.600">
@@ -80,61 +74,25 @@ const Tasks = () => {
             </Text>
             <HStack display={{ md: 'none' }}>
               {task.due ? (
-                <Button
-                  variant="outline"
-                  colorScheme="blue"
-                  leftIcon={<CalendarIcon />}
-                >
+                <UpdateDueButtonWithDueDate>
                   {formatTaskDue(task.due)}
-                </Button>
+                </UpdateDueButtonWithDueDate>
               ) : (
-                <IconButton
-                  variant="outline"
-                  colorScheme="blue"
-                  icon={<CalendarIcon />}
-                  aria-label="Update Task Due Button"
-                />
+                <UpdateDueButton />
               )}
-
-              <IconButton
-                variant="outline"
-                colorScheme="red"
-                icon={<DeleteIcon />}
-                aria-label="Delete Task Button"
-                onClick={() => {
-                  deleteTaskMutate(task.id)
-                }}
-              />
+              <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
             </HStack>
           </Stack>
           <Spacer />
           <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
             {task.due ? (
-              <Button
-                variant="outline"
-                colorScheme="blue"
-                leftIcon={<CalendarIcon />}
-              >
+              <UpdateDueButtonWithDueDate>
                 {formatTaskDue(task.due)}
-              </Button>
+              </UpdateDueButtonWithDueDate>
             ) : (
-              <IconButton
-                variant="outline"
-                colorScheme="blue"
-                icon={<CalendarIcon />}
-                aria-label="Update Task Due Button"
-              />
+              <UpdateDueButton />
             )}
-
-            <IconButton
-              variant="outline"
-              colorScheme="red"
-              icon={<DeleteIcon />}
-              aria-label="Delete Task Button"
-              onClick={() => {
-                deleteTaskMutate(task.id)
-              }}
-            />
+            <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
           </HStack>
         </HStack>
       ))}
