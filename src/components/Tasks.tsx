@@ -1,4 +1,5 @@
 import {
+  Button,
   HStack,
   IconButton,
   Spacer,
@@ -8,7 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { FaRegCircle, FaTrash } from 'react-icons/fa'
+import { CalendarIcon, CheckCircleIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
@@ -44,6 +45,20 @@ const Tasks = () => {
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
 
+  const formatTaskDue = (due: string): string => {
+    const today = new Date()
+    const year = due.substring(0, 4)
+    const month = due[5] === '0' ? due.substring(6, 7) : due.substring(5, 7)
+    const date = due[8] === '0' ? due.substring(9, 10) : due.substring(8, 10)
+
+    const formattedDate =
+      year === today.getFullYear().toString()
+        ? `${month}月${date}日`
+        : `${year}年${month}月${date}日`
+
+    return formattedDate
+  }
+
   if (isFetching) return <Spinner size="xl" />
 
   return (
@@ -52,7 +67,7 @@ const Tasks = () => {
         <HStack key={task.id}>
           <IconButton
             bgColor="white"
-            icon={<FaRegCircle />}
+            icon={<CheckCircleIcon />}
             aria-label="Check Task Button"
             onClick={() => {
               completeTaskMutate(task.id)
@@ -65,18 +80,31 @@ const Tasks = () => {
             </Text>
           </Stack>
           <Spacer />
+          {task.due ? (
+            <Button
+              variant="outline"
+              colorScheme="blue"
+              leftIcon={<CalendarIcon />}
+            >
+              {formatTaskDue(task.due)}
+            </Button>
+          ) : (
+            <IconButton
+              variant="outline"
+              colorScheme="blue"
+              icon={<CalendarIcon />}
+              aria-label="Update Task Due Button"
+            />
+          )}
+
           <IconButton
             variant="outline"
             colorScheme="red"
-            bgColor="white"
-            icon={
-              <FaTrash
-                onClick={() => {
-                  deleteTaskMutate(task.id)
-                }}
-              />
-            }
+            icon={<DeleteIcon />}
             aria-label="Delete Task Button"
+            onClick={() => {
+              deleteTaskMutate(task.id)
+            }}
           />
         </HStack>
       ))}
