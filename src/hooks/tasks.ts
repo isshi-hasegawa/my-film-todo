@@ -21,13 +21,15 @@ export const useTasks = () => {
       } else {
         nextPageToken = ''
       }
-    } while ((nextPageToken = ''))
+    } while (nextPageToken.length)
 
-    return tasks
+    const sortedTasks = tasks
       .filter(
         (task) => task.status === 'needsAction' && task.parent === undefined
       )
       .sort((a, b) => parseInt(a.position) - parseInt(b.position))
+
+    return sortedTasks
   }, [taskListId, token])
 
   const createTaskWithMovieInfo = useCallback(

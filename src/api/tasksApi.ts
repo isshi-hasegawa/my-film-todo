@@ -22,11 +22,9 @@ export const getTasks = async (
   params: GetTasksParams,
   token: string
 ): Promise<TasksResponse> => {
-  const { taskListId, nextPageToken } = params
-  const optionalUrl = nextPageToken ?? `&pageToken=${nextPageToken}`
-
   const response = await api.get<TasksResponse>(
-    `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks?maxResults=100${optionalUrl}`,
+    `https://tasks.googleapis.com/tasks/v1/lists/${params.taskListId}/tasks?maxResults=100&pageToken=${params.nextPageToken}`,
+    // `https://tasks.googleapis.com/tasks/v1/lists/${taskListId}/tasks?maxResults=100${optionalUrl}`,
     {
       params: {
         ...params,
