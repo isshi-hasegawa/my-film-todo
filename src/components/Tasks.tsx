@@ -9,8 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { CalendarIcon, DeleteIcon } from '@chakra-ui/icons'
-import { FaRegCircle } from 'react-icons/fa'
+import { CalendarIcon, CheckCircleIcon, DeleteIcon } from '@chakra-ui/icons'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
@@ -68,7 +67,7 @@ const Tasks = () => {
         <HStack key={task.id}>
           <IconButton
             bgColor="white"
-            icon={<FaRegCircle />}
+            icon={<CheckCircleIcon />}
             aria-label="Check Task Button"
             onClick={() => {
               completeTaskMutate(task.id)
