@@ -78,34 +78,64 @@ const Tasks = () => {
             <Text fontSize="sm" color="gray.600">
               {task.notes}
             </Text>
+            <HStack display={{ md: 'none' }}>
+              {task.due ? (
+                <Button
+                  variant="outline"
+                  colorScheme="blue"
+                  leftIcon={<CalendarIcon />}
+                >
+                  {formatTaskDue(task.due)}
+                </Button>
+              ) : (
+                <IconButton
+                  variant="outline"
+                  colorScheme="blue"
+                  icon={<CalendarIcon />}
+                  aria-label="Update Task Due Button"
+                />
+              )}
+
+              <IconButton
+                variant="outline"
+                colorScheme="red"
+                icon={<DeleteIcon />}
+                aria-label="Delete Task Button"
+                onClick={() => {
+                  deleteTaskMutate(task.id)
+                }}
+              />
+            </HStack>
           </Stack>
           <Spacer />
-          {task.due ? (
-            <Button
-              variant="outline"
-              colorScheme="blue"
-              leftIcon={<CalendarIcon />}
-            >
-              {formatTaskDue(task.due)}
-            </Button>
-          ) : (
+          <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
+            {task.due ? (
+              <Button
+                variant="outline"
+                colorScheme="blue"
+                leftIcon={<CalendarIcon />}
+              >
+                {formatTaskDue(task.due)}
+              </Button>
+            ) : (
+              <IconButton
+                variant="outline"
+                colorScheme="blue"
+                icon={<CalendarIcon />}
+                aria-label="Update Task Due Button"
+              />
+            )}
+
             <IconButton
               variant="outline"
-              colorScheme="blue"
-              icon={<CalendarIcon />}
-              aria-label="Update Task Due Button"
+              colorScheme="red"
+              icon={<DeleteIcon />}
+              aria-label="Delete Task Button"
+              onClick={() => {
+                deleteTaskMutate(task.id)
+              }}
             />
-          )}
-
-          <IconButton
-            variant="outline"
-            colorScheme="red"
-            icon={<DeleteIcon />}
-            aria-label="Delete Task Button"
-            onClick={() => {
-              deleteTaskMutate(task.id)
-            }}
-          />
+          </HStack>
         </HStack>
       ))}
     </VStack>
