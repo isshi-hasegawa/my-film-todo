@@ -69,7 +69,7 @@ export const useTasks = () => {
   )
 
   const updateTaskDue = useCallback(
-    async (taskId: string, due: string) => {
+    async (taskId: string, due: string = '') => {
       await updateTask({ taskListId, taskId, due }, token)
     },
     [taskListId, token]

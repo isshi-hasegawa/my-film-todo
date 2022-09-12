@@ -42,7 +42,7 @@ const Tasks = () => {
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
   const { mutate: updateTaskDueMutate } = useMutation(
-    ({ taskId, due }: { taskId: string; due: string }) =>
+    ({ taskId, due }: { taskId: string; due?: string }) =>
       updateTaskDue(taskId, due),
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
