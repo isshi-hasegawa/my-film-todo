@@ -1,7 +1,6 @@
 import {
   Grid,
   HStack,
-  IconButton,
   Image,
   Input,
   Spinner,
@@ -14,8 +13,7 @@ import {
 import { MovieResult } from 'moviedb-promise/dist/request-types'
 import { useState } from 'react'
 import { searchMovie } from 'src/api/tmdbApi'
-import { FiPlusCircle } from 'react-icons/fi'
-import WatchProviders from 'src/components/WatchProviders'
+import WatchProviders from 'src/components/search/WatchProviders'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useTasks } from 'src/hooks/tasks'
 
@@ -80,11 +78,6 @@ const Search = () => {
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
               >
-                <IconButton
-                  icon={<FiPlusCircle />}
-                  isRound
-                  aria-label="Add Button"
-                />
                 {result.poster_path && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}

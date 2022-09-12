@@ -17,7 +17,7 @@ import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
 import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { TaskList } from 'src/types/taskLists'
-import NavLink from 'src/components/NavLink'
+import NavLink from 'src/components/header/NavLink'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 
