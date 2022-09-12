@@ -5,7 +5,6 @@ import { FcGoogle } from 'react-icons/fc'
 const SignIn = () => {
   return (
     <Button
-      w={'full'}
       variant={'outline'}
       leftIcon={<FcGoogle />}
       onClick={() => signIn('google')}

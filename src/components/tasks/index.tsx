@@ -1,4 +1,5 @@
 import {
+  Heading,
   HStack,
   Spacer,
   Spinner,
@@ -54,35 +55,41 @@ const Tasks = () => {
   if (isFetching) return <Spinner size="xl" />
 
   return (
-    <VStack {...vStackProps}>
-      {tasks?.map((task) => (
-        <HStack key={task.id}>
-          <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
-          <Stack>
-            <Text>{task.title}</Text>
-            <Text fontSize="sm" color="gray.600">
-              {task.notes}
-            </Text>
-            <HStack display={{ md: 'none' }}>
-              <UpdateDueButton
-                taskId={task.id}
-                due={task.due}
-                onChange={updateTaskDueMutate}
-              />
+    <>
+      {tasks?.length ? (
+        <Heading>タスクを登録してください</Heading>
+      ) : (
+        <VStack {...vStackProps}>
+          {tasks?.map((task) => (
+            <HStack key={task.id}>
+              <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
+              <Stack>
+                <Text>{task.title}</Text>
+                <Text fontSize="sm" color="gray.600">
+                  {task.notes}
+                </Text>
+                <HStack display={{ md: 'none' }}>
+                  <UpdateDueButton
+                    taskId={task.id}
+                    due={task.due}
+                    onChange={updateTaskDueMutate}
+                  />
+                </HStack>
+              </Stack>
+              <Spacer />
+              <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
+                <UpdateDueButton
+                  taskId={task.id}
+                  due={task.due}
+                  onChange={updateTaskDueMutate}
+                />
+              </HStack>
+              <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
             </HStack>
-          </Stack>
-          <Spacer />
-          <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
-            <UpdateDueButton
-              taskId={task.id}
-              due={task.due}
-              onChange={updateTaskDueMutate}
-            />
-          </HStack>
-          <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
-        </HStack>
-      ))}
-    </VStack>
+          ))}
+        </VStack>
+      )}
+    </>
   )
 }
 
