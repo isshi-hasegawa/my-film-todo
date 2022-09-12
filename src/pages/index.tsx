@@ -40,7 +40,7 @@ const Home: NextPage = () => {
           {taskListId === '' ? (
             <Heading>リストを作成してください</Heading>
           ) : (
-            <Grid placeItems="center" px="5rem" paddingTop="72px">
+            <Grid placeItems="center" px="1rem" paddingTop="72px">
               <Button my={4} onClick={() => setIsShowSearch(true)}>
                 タスクを登録する
               </Button>
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
       {session && isShowSearch && (
         <>
           <Header />
-          <Grid placeItems="center" px="5rem" paddingTop="72px">
+          <Grid placeItems="center" px="3rem" paddingTop="72px">
             <Search />
           </Grid>
         </>
