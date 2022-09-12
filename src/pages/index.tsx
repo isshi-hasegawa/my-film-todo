@@ -22,39 +22,32 @@ const Home: NextPage = () => {
 
   return (
     <>
-      {!session && (
-        <Grid
-          sx={{
-            h: '100vh',
-            placeItems: 'center',
-            px: '5rem',
-          }}
-        >
+      {!session ? (
+        <Grid h="100vh" placeItems="center" px="5rem">
           <Heading>ログインしてください</Heading>
           <SignIn />
         </Grid>
-      )}
-      {session && !isShowSearch && (
+      ) : (
         <>
           <Header />
-          {taskListId === '' ? (
-            <Heading>リストを作成してください</Heading>
+          {!isShowSearch ? (
+            <>
+              {taskListId === '' ? (
+                <Heading>リストを作成してください</Heading>
+              ) : (
+                <Grid placeItems="center" px="1rem" paddingTop="72px">
+                  <Button my={4} onClick={() => setIsShowSearch(true)}>
+                    タスクを登録する
+                  </Button>
+                  <Tasks />
+                </Grid>
+              )}
+            </>
           ) : (
-            <Grid placeItems="center" px="1rem" paddingTop="72px">
-              <Button my={4} onClick={() => setIsShowSearch(true)}>
-                タスクを登録する
-              </Button>
-              <Tasks />
+            <Grid placeItems="center" px="3rem" paddingTop="72px">
+              <Search />
             </Grid>
           )}
-        </>
-      )}
-      {session && isShowSearch && (
-        <>
-          <Header />
-          <Grid placeItems="center" px="3rem" paddingTop="72px">
-            <Search />
-          </Grid>
         </>
       )}
     </>
