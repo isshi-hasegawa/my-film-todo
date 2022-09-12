@@ -13,7 +13,6 @@ import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useTasks } from 'src/hooks/tasks'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
-import UpdateDueButtonWithDueDate from 'src/components/tasks/UpdateDueButtonWithDueDate'
 import DeleteButton from 'src/components/tasks/DeleteButton'
 
 const vStackProps = {
@@ -46,20 +45,6 @@ const Tasks = () => {
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
 
-  const formatTaskDue = (due: string): string => {
-    const today = new Date()
-    const year = due.substring(0, 4)
-    const month = due[5] === '0' ? due.substring(6, 7) : due.substring(5, 7)
-    const date = due[8] === '0' ? due.substring(9, 10) : due.substring(8, 10)
-
-    const formattedDate =
-      year === today.getFullYear().toString()
-        ? `${month}月${date}日`
-        : `${year}年${month}月${date}日`
-
-    return formattedDate
-  }
-
   if (isFetching) return <Spinner size="xl" />
 
   return (
@@ -73,25 +58,13 @@ const Tasks = () => {
               {task.notes}
             </Text>
             <HStack display={{ md: 'none' }}>
-              {task.due ? (
-                <UpdateDueButtonWithDueDate>
-                  {formatTaskDue(task.due)}
-                </UpdateDueButtonWithDueDate>
-              ) : (
-                <UpdateDueButton />
-              )}
+              <UpdateDueButton />
               <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
             </HStack>
           </Stack>
           <Spacer />
           <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
-            {task.due ? (
-              <UpdateDueButtonWithDueDate>
-                {formatTaskDue(task.due)}
-              </UpdateDueButtonWithDueDate>
-            ) : (
-              <UpdateDueButton />
-            )}
+            <UpdateDueButton />
             <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
           </HStack>
         </HStack>
