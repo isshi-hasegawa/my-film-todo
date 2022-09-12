@@ -58,15 +58,14 @@ const Tasks = () => {
               {task.notes}
             </Text>
             <HStack display={{ md: 'none' }}>
-              <UpdateDueButton />
-              <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
+              <UpdateDueButton due={task.due} />
             </HStack>
           </Stack>
           <Spacer />
           <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
-            <UpdateDueButton />
-            <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
+            <UpdateDueButton due={task.due} />
           </HStack>
+          <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
         </HStack>
       ))}
     </VStack>
