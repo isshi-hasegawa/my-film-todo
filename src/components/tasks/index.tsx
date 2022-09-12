@@ -56,7 +56,7 @@ const Tasks = () => {
 
   return (
     <>
-      {tasks?.length ? (
+      {!tasks?.length ? (
         <Heading>タスクを登録してください</Heading>
       ) : (
         <VStack {...vStackProps}>
