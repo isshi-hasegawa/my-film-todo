@@ -7,6 +7,7 @@ import Tasks from 'src/components/tasks'
 import Search from 'src/components/search'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
+import Footer from 'src/components/footer'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
               <Search />
             </Grid>
           )}
+          <Footer />
         </>
       )}
     </>
