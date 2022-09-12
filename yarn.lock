@@ -2534,7 +2534,7 @@
     "whatwg-mimetype" "^3.0.0"
     "whatwg-url" "^11.0.0"
 
-"date-fns@^2.0.1", "date-fns@^2.24.0":
+"date-fns@^2.0.1", "date-fns@^2.24.0", "date-fns@^2.29.2":
   "integrity" "sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA=="
   "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.29.2.tgz"
   "version" "2.29.2"
