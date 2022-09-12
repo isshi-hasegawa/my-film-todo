@@ -2,11 +2,11 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 
 const DeleteButton = ({
-  onClick,
   taskId,
+  onClick,
 }: {
-  onClick: (taskId: string) => void
   taskId: string
+  onClick: (taskId: string) => void
 }) => {
   return (
     <IconButton

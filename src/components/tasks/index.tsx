@@ -65,7 +65,7 @@ const Tasks = () => {
           <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
             <UpdateDueButton due={task.due} />
           </HStack>
-          <DeleteButton onClick={deleteTaskMutate} taskId={task.id} />
+          <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
         </HStack>
       ))}
     </VStack>
