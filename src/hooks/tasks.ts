@@ -68,6 +68,13 @@ export const useTasks = () => {
     [taskListId, token]
   )
 
+  const updateTaskDue = useCallback(
+    async (taskId: string, due: string) => {
+      await updateTask({ taskListId, taskId, due }, token)
+    },
+    [taskListId, token]
+  )
+
   const deleteOneTask = useCallback(
     async (taskId: string) => {
       await deleteTask({ taskListId, taskId }, token)
@@ -79,6 +86,7 @@ export const useTasks = () => {
     fetchAllTasks,
     createTaskWithMovieInfo,
     completeTask,
+    updateTaskDue,
     deleteOneTask,
   }
 }

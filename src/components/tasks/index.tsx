@@ -28,7 +28,8 @@ const vStackProps = {
 
 const Tasks = () => {
   const { taskListId } = useTaskListIdState()
-  const { fetchAllTasks, completeTask, deleteOneTask } = useTasks()
+  const { fetchAllTasks, completeTask, updateTaskDue, deleteOneTask } =
+    useTasks()
 
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
@@ -36,12 +37,17 @@ const Tasks = () => {
   )
 
   const queryClient = useQueryClient()
-  const { mutate: deleteTaskMutate } = useMutation(
-    (taskId: string) => deleteOneTask(taskId),
-    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
-  )
   const { mutate: completeTaskMutate } = useMutation(
     (taskId: string) => completeTask(taskId),
+    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+  )
+  const { mutate: updateTaskDueMutate } = useMutation(
+    ({ taskId, due }: { taskId: string; due: string }) =>
+      updateTaskDue(taskId, due),
+    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+  )
+  const { mutate: deleteTaskMutate } = useMutation(
+    (taskId: string) => deleteOneTask(taskId),
     { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
   )
 
@@ -51,19 +57,27 @@ const Tasks = () => {
     <VStack {...vStackProps}>
       {tasks?.map((task) => (
         <HStack key={task.id}>
-          <CompleteButton onClick={completeTaskMutate} taskId={task.id} />
+          <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
           <Stack>
             <Text>{task.title}</Text>
             <Text fontSize="sm" color="gray.600">
               {task.notes}
             </Text>
             <HStack display={{ md: 'none' }}>
-              <UpdateDueButton due={task.due} />
+              <UpdateDueButton
+                taskId={task.id}
+                due={task.due}
+                onChange={updateTaskDueMutate}
+              />
             </HStack>
           </Stack>
           <Spacer />
           <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
-            <UpdateDueButton due={task.due} />
+            <UpdateDueButton
+              taskId={task.id}
+              due={task.due}
+              onChange={updateTaskDueMutate}
+            />
           </HStack>
           <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
         </HStack>

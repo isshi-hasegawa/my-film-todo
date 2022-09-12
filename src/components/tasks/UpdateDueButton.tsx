@@ -3,9 +3,17 @@ import { Button, IconButton } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
-import { parse } from 'date-fns'
+import { parse, format } from 'date-fns'
 
-const UpdateDueButton = ({ due }: { due: string | undefined }) => {
+const UpdateDueButton = ({
+  taskId,
+  due,
+  onChange,
+}: {
+  taskId: string
+  due: string | undefined
+  onChange: ({ taskId, due }: { taskId: string; due: string }) => void
+}) => {
   const today = new Date()
   const parsedDue = due
     ? parse(due.substring(0, 10), 'yyyy-MM-dd', new Date())
@@ -20,7 +28,10 @@ const UpdateDueButton = ({ due }: { due: string | undefined }) => {
     <DatePicker
       selected={parsedDue}
       locale={ja}
-      onChange={(date: Date) => console.log(date)}
+      onChange={(date: Date) => {
+        const due = `${format(date, 'yyyy-MM-dd')}T00:00:00+00:00`
+        onChange({ taskId, due })
+      }}
       minDate={today}
       monthsShown={2}
       customInput={

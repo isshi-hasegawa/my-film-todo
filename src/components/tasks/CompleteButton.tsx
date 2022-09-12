@@ -2,11 +2,11 @@ import { CheckCircleIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
 
 const CompleteButton = ({
-  onClick,
   taskId,
+  onClick,
 }: {
-  onClick: (taskId: string) => void
   taskId: string
+  onClick: (taskId: string) => void
 }) => {
   return (
     <IconButton
