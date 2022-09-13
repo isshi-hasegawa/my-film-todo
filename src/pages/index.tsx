@@ -5,13 +5,11 @@ import SignIn from './auth/signin'
 import Header from 'src/components/header'
 import Tasks from 'src/components/tasks'
 import Search from 'src/components/search'
-import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 import Footer from 'src/components/footer'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
-  const { taskListId } = useTaskListIdState()
   const { isShowSearch, setIsShowSearch } = useIsShowSearchState()
 
   if (status === 'loading')
@@ -32,18 +30,12 @@ const Home: NextPage = () => {
         <>
           <Header />
           {!isShowSearch ? (
-            <>
-              {taskListId === '' ? (
-                <Heading>リストを作成してください</Heading>
-              ) : (
-                <Grid placeItems="center" px="1rem" paddingTop="72px">
-                  <Button my={4} onClick={() => setIsShowSearch(true)}>
-                    タスクを登録する
-                  </Button>
-                  <Tasks />
-                </Grid>
-              )}
-            </>
+            <Grid placeItems="center" px="1rem" paddingTop="72px">
+              <Button my={4} onClick={() => setIsShowSearch(true)}>
+                タスクを登録する
+              </Button>
+              <Tasks />
+            </Grid>
           ) : (
             <Grid placeItems="center" px="3rem" paddingTop="72px">
               <Search />
