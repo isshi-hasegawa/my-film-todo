@@ -10,7 +10,7 @@ const SignIn = () => {
       onClick={() => signIn('google')}
     >
       <Center>
-        <Text>Sign in with Google</Text>
+        <Text>Googleでログインする</Text>
       </Center>
     </Button>
   )
