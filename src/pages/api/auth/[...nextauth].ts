@@ -19,9 +19,6 @@ export default NextAuth({
     signIn: '/auth/signin',
   },
   secret: process.env.NEXT_PUBLIC_SECRET,
-  session: {
-    maxAge: 30 * 24 * 60 * 60,
-  },
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
