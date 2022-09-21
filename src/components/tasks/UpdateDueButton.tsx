@@ -1,4 +1,4 @@
-import { CalendarIcon, CloseIcon } from '@chakra-ui/icons'
+import { CalendarIcon } from '@chakra-ui/icons'
 import { Button, IconButton } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
@@ -28,29 +28,23 @@ const UpdateDueButton = ({
     <DatePicker
       selected={parsedDue}
       locale={ja}
-      onChange={(date: Date) => {
-        const due = `${format(date, 'yyyy-MM-dd')}T00:00:00+00:00`
-        onChange({ taskId, due })
-      }}
+      onChange={(date: Date) =>
+        onChange({
+          taskId,
+          due: `${format(date, 'yyyy-MM-dd')}T00:00:00+00:00`,
+        })
+      }
       minDate={today}
       monthsShown={2}
       customInput={
         due ? (
-          <>
-            <Button
-              variant="outline"
-              colorScheme="blue"
-              leftIcon={<CalendarIcon />}
-            >
-              {daysAfter === 0 ? '今日' : `${daysAfter}日後`}
-            </Button>
-            <IconButton
-              backgroundColor="white"
-              aria-label="Delete Due Button"
-              icon={<CloseIcon color="gray" />}
-              onClick={() => onChange({ taskId })}
-            />
-          </>
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            leftIcon={<CalendarIcon />}
+          >
+            {daysAfter === 0 ? '今日' : `${daysAfter}日後`}
+          </Button>
         ) : (
           <IconButton
             variant="outline"

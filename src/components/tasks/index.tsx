@@ -14,6 +14,7 @@ import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useTasks } from 'src/hooks/tasks'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
+import DeleteDueButton from 'src/components/tasks/DeleteDueButton'
 import DeleteButton from 'src/components/tasks/DeleteButton'
 
 const vStackProps = {
@@ -74,6 +75,13 @@ const Tasks = () => {
                     due={task.due}
                     onChange={updateTaskDueMutate}
                   />
+                  {/* {task.due && (
+                    <DeleteDueButton
+                      taskId={task.id}
+                      onClick={updateTaskDueMutate}
+                    />
+                  )} */}
+                  <Spacer />
                 </HStack>
               </Stack>
               <Spacer />
@@ -83,6 +91,12 @@ const Tasks = () => {
                   due={task.due}
                   onChange={updateTaskDueMutate}
                 />
+                {task.due && (
+                  <DeleteDueButton
+                    taskId={task.id}
+                    onClick={updateTaskDueMutate}
+                  />
+                )}
               </HStack>
               <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
             </HStack>

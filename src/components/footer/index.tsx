@@ -16,7 +16,7 @@ const Footer = () => {
       w="100%"
       position="fixed"
       bottom={0}
-      display={{ base: 'none', sm: 'none' }}
+      display={{ base: 'none', sm: 'none', md: 'flex' }}
     >
       <Container
         as={Stack}
