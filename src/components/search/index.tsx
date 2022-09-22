@@ -78,6 +78,7 @@ const Search = () => {
               <HStack
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
+                _hover={{ bg: 'gray.200' }}
               >
                 {result.poster_path && (
                   <Image
