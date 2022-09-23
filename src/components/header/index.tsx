@@ -14,14 +14,14 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
 import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
-import { TaskList } from 'src/types/taskLists'
-import NavLink from 'src/components/header/NavLink'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
+import { TaskList } from 'src/types/taskLists'
 import AddListButton from 'src/components/header/AddListButton'
+import NavLink from 'src/components/header/NavLink'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
