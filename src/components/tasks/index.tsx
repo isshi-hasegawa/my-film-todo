@@ -13,6 +13,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useTasks } from 'src/hooks/tasks'
 import CompleteButton from 'src/components/tasks/CompleteButton'
+import AddDueButton from 'src/components/tasks/AddDueButton'
 import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
 import DeleteDueButton from 'src/components/tasks/DeleteDueButton'
 import DeleteButton from 'src/components/tasks/DeleteButton'
@@ -70,12 +71,12 @@ const Tasks = () => {
                   {task.notes}
                 </Text>
                 <HStack display={{ md: 'none' }}>
-                  <UpdateDueButton
+                  {/* <UpdateDueButton
                     taskId={task.id}
                     due={task.due}
                     onChange={updateTaskDueMutate}
                   />
-                  {/* {task.due && (
+                  {task.due && (
                     <DeleteDueButton
                       taskId={task.id}
                       onClick={updateTaskDueMutate}
@@ -86,16 +87,23 @@ const Tasks = () => {
               </Stack>
               <Spacer />
               <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
-                <UpdateDueButton
-                  taskId={task.id}
-                  due={task.due}
-                  onChange={updateTaskDueMutate}
-                />
-                {task.due && (
-                  <DeleteDueButton
+                {!task.due ? (
+                  <AddDueButton
                     taskId={task.id}
-                    onClick={updateTaskDueMutate}
+                    onChange={updateTaskDueMutate}
                   />
+                ) : (
+                  <>
+                    <UpdateDueButton
+                      taskId={task.id}
+                      due={task.due}
+                      onChange={updateTaskDueMutate}
+                    />
+                    <DeleteDueButton
+                      taskId={task.id}
+                      onClick={updateTaskDueMutate}
+                    />
+                  </>
                 )}
               </HStack>
               <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />

@@ -1,29 +1,19 @@
 import { CalendarIcon } from '@chakra-ui/icons'
-import { Button } from '@chakra-ui/react'
+import { IconButton } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
-import { parse, format } from 'date-fns'
+import { format } from 'date-fns'
 
-const UpdateDueButton = ({
+const AddDueButton = ({
   taskId,
-  due,
   onChange,
 }: {
   taskId: string
-  due: string
   onChange: ({ taskId, due }: { taskId: string; due?: string }) => void
 }) => {
-  const today = new Date()
-  const parsedDue = parse(due.substring(0, 10), 'yyyy-MM-dd', new Date())
-  const daysAfter =
-    Math.round(
-      (parsedDue?.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-    ) + 1
-
   return (
     <DatePicker
-      selected={parsedDue}
       locale={ja}
       onChange={(date: Date) =>
         onChange({
@@ -33,16 +23,15 @@ const UpdateDueButton = ({
       }
       monthsShown={2}
       customInput={
-        <Button
+        <IconButton
           variant="outline"
           colorScheme="blue"
-          leftIcon={<CalendarIcon />}
-        >
-          {daysAfter === 0 ? '今日' : `${daysAfter}日後`}
-        </Button>
+          icon={<CalendarIcon />}
+          aria-label="Add Due Button"
+        />
       }
     />
   )
 }
 
-export default UpdateDueButton
+export default AddDueButton
