@@ -1,5 +1,5 @@
 import { CalendarIcon } from '@chakra-ui/icons'
-import { Button } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -15,8 +15,8 @@ const UpdateDueButton = ({
   onChange: ({ taskId, due }: { taskId: string; due?: string }) => void
 }) => {
   const today = new Date()
-  const parsedDue = parse(due.substring(0, 10), 'yyyy-MM-dd', new Date())
-  const daysAfter =
+  const parsedDue: Date = parse(due.substring(0, 10), 'yyyy-MM-dd', today)
+  const daysAfter: number =
     Math.round(
       (parsedDue?.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
     ) + 1
@@ -38,7 +38,10 @@ const UpdateDueButton = ({
           colorScheme="blue"
           leftIcon={<CalendarIcon />}
         >
-          {daysAfter === 0 ? '今日' : `${daysAfter}日後`}
+          {daysAfter < 0 && <Text color="red.400">期限切れ</Text>}
+          {daysAfter === 0 && <Text color="red.400">今日</Text>}
+          {daysAfter === 1 && '明日'}
+          {daysAfter > 2 && `${daysAfter}日後`}
         </Button>
       }
     />

@@ -71,17 +71,24 @@ const Tasks = () => {
                   {task.notes}
                 </Text>
                 <HStack display={{ md: 'none' }}>
-                  {/* <UpdateDueButton
-                    taskId={task.id}
-                    due={task.due}
-                    onChange={updateTaskDueMutate}
-                  />
-                  {task.due && (
-                    <DeleteDueButton
+                  {!task.due ? (
+                    <AddDueButton
                       taskId={task.id}
-                      onClick={updateTaskDueMutate}
+                      onChange={updateTaskDueMutate}
                     />
-                  )} */}
+                  ) : (
+                    <>
+                      <UpdateDueButton
+                        taskId={task.id}
+                        due={task.due}
+                        onChange={updateTaskDueMutate}
+                      />
+                      <DeleteDueButton
+                        taskId={task.id}
+                        onClick={updateTaskDueMutate}
+                      />
+                    </>
+                  )}
                   <Spacer />
                 </HStack>
               </Stack>
