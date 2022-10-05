@@ -30,14 +30,14 @@ const Home: NextPage = () => {
         <>
           <Header />
           {!isShowSearch ? (
-            <Grid placeItems="center" px="1rem" paddingTop="72px">
+            <Grid placeItems="center" px="1rem" py="72px">
               <Button my={4} onClick={() => setIsShowSearch(true)}>
                 タスクを登録する
               </Button>
               <Tasks />
             </Grid>
           ) : (
-            <Grid placeItems="center" px="3rem" paddingTop="72px">
+            <Grid placeItems="center" px="3rem" py="72px">
               <Search />
             </Grid>
           )}

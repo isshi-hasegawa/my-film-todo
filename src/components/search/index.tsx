@@ -53,7 +53,13 @@ const Search = () => {
           title: 'タスクを登録しました！',
           status: 'success',
           duration: 3000,
-          isClosable: true,
+          position: 'bottom-left',
+        }),
+      onError: () =>
+        toast({
+          title: 'タスクの登録に失敗しました…',
+          status: 'error',
+          duration: 3000,
           position: 'bottom-left',
         }),
     }
@@ -78,6 +84,7 @@ const Search = () => {
               <HStack
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
+                _hover={{ bg: 'gray.200' }}
               >
                 {result.poster_path && (
                   <Image

@@ -1,5 +1,5 @@
-import { CheckCircleIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
+import { FiCircle } from 'react-icons/fi'
 
 const CompleteButton = ({
   taskId,
@@ -11,7 +11,7 @@ const CompleteButton = ({
   return (
     <IconButton
       bgColor="white"
-      icon={<CheckCircleIcon />}
+      icon={<FiCircle />}
       aria-label="Check Task Button"
       onClick={() => {
         onClick(taskId)
