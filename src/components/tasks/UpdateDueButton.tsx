@@ -41,7 +41,7 @@ const UpdateDueButton = ({
           {daysAfter < 0 && <Text color="red.400">期限切れ</Text>}
           {daysAfter === 0 && <Text color="red.400">今日</Text>}
           {daysAfter === 1 && '明日'}
-          {daysAfter > 2 && `${daysAfter}日後`}
+          {daysAfter >= 2 && `${daysAfter}日後`}
         </Button>
       }
     />
