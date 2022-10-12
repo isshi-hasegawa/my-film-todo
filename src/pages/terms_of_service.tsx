@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Box, Text, OrderedList, ListItem } from '@chakra-ui/react'
+import { Box, Text, OrderedList, ListItem, Heading } from '@chakra-ui/react'
 import Footer from 'src/components/footer'
 import Head from 'next/head'
 
@@ -11,17 +11,13 @@ const TermsOfService: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box placeItems="center" px="5rem" py="72px">
-        <Text fontSize="4xl" fontWeight="bold">
-          利用規約
-        </Text>
+        <Heading as="h1">利用規約</Heading>
         <br />
         <Text>
           この利用規約（以下、「本規約」といいます。）は、このウェブサイト上で提供するサービス（以下、「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下、「ユーザー」といいます。）には、本規約に従って、本サービスをご利用いただきます。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第1条（適用）
-        </Text>
+        <Heading as="h2">第1条（適用）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -35,9 +31,7 @@ const TermsOfService: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第2条（利用登録）
-        </Text>
+        <Heading as="h2">第2条（利用登録）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -57,25 +51,19 @@ const TermsOfService: NextPage = () => {
           </OrderedList>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第3条（ユーザーIDおよびパスワードの管理）
-        </Text>
+        <Heading as="h2">第3条（ユーザーIDおよびパスワードの管理）</Heading>
         <br />
         <Text>
           本サービスは、Googleアカウントおよびパスワードの取り扱い関して、Google社の利用規約に準ずるものとします。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第4条（利用料金及び支払い方法）
-        </Text>
+        <Heading as="h2">第4条（利用料金及び支払い方法）</Heading>
         <br />
         <Text>
           ユーザーは本サービスを無料で利用することができます。そのため、料金の支払いに関する取り決めは一切しません。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第5条（禁止事項）
-        </Text>
+        <Heading as="h2">第5条（禁止事項）</Heading>
         <br />
         <Text>
           ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。
@@ -139,9 +127,7 @@ const TermsOfService: NextPage = () => {
           <ListItem>その他、本サービスが不適切と判断する行為</ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第6条（本サービスの提供の停止等）
-        </Text>
+        <Heading as="h2">第6条（本サービスの提供の停止等）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -164,9 +150,7 @@ const TermsOfService: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第7条（著作権）
-        </Text>
+        <Heading as="h2">第7条（著作権）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -180,9 +164,7 @@ const TermsOfService: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第8条（利用制限および登録抹消）
-        </Text>
+        <Heading as="h2">第8条（利用制限および登録抹消）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -209,18 +191,14 @@ const TermsOfService: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第9条（退会）
-        </Text>
+        <Heading as="h2">第9条（退会）</Heading>
         <br />
         <Text>
           本サービスはGoogle
           OAuth認証でのみ認証しユーザーの会員データを外部サーバーに保持していないため、会員データを削除する概念(一般的に「退会」と呼ばれる)がないものとします。ユーザーが本サービスとGoogleアカウントの情報とを遮断したい場合は、ユーザー自身でGoogleアカウント情報のサイト内から本サービスを切り離す作業をするものとします。その際、本サービスは遮断した会員の登録情報、またはコンテンツについて継続して保有する義務やそこで生じた一切の責任を負わないものとします。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第10条（保証の否認および免責事項）
-        </Text>
+        <Heading as="h2">第10条（保証の否認および免責事項）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -237,49 +215,37 @@ const TermsOfService: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第11条（サービス内容の変更等）
-        </Text>
+        <Heading as="h2">第11条（サービス内容の変更等）</Heading>
         <br />
         <Text>
           本サービスは、ユーザーに通知することなく、本サービスの内容を変更しまたは本サービスの提供を中止することができるものとし、これによってユーザーに生じた損害について一切の責任を負いません。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第12条（利用規約の変更）
-        </Text>
+        <Heading as="h2">第12条（利用規約の変更）</Heading>
         <br />
         <Text>
           本サービスは、必要と判断した場合には、ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお、本規約の変更後、本サービスの利用を開始した場合には、当該ユーザーは変更後の規約に同意したものとみなします。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第13条（個人情報の取扱い）
-        </Text>
+        <Heading as="h2">第13条（個人情報の取扱い）</Heading>
         <br />
         <Text>
           本サービスは、本サービスの利用によって取得する個人情報については、本サービス「プライバシーポリシー」に従い適切に取り扱うものとします。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第14条（通知または連絡）
-        </Text>
+        <Heading as="h2">第14条（通知または連絡）</Heading>
         <br />
         <Text>
           ユーザーと本サービスとの間の通知または連絡は、本サービスの定める方法によって行うものとします。本サービスは、ユーザーから、本サービスが別途定める方式に従った変更届け出がない限り、現在登録されている連絡先が有効なものとみなして当該連絡先へ通知または連絡を行い、これらは、発信時にユーザーへ到達したものとみなします。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第15条（権利義務の譲渡の禁止）
-        </Text>
+        <Heading as="h2">第15条（権利義務の譲渡の禁止）</Heading>
         <br />
         <Text>
           ユーザーは、本サービスの書面による事前の承諾なく、利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第16条（準拠法・裁判管轄）
-        </Text>
+        <Heading as="h2">第16条（準拠法・裁判管轄）</Heading>
         <br />
         <OrderedList>
           <ListItem>

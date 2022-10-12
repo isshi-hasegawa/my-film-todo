@@ -11,15 +11,13 @@ const PrivacyPolicy: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box placeItems="center" px="5rem" py="72px">
-        <Heading>プライバシーポリシー</Heading>
+        <Heading as="h1">プライバシーポリシー</Heading>
         <br />
         <Text>
           本サービスは、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。
         </Text>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第1条（個人情報）
-        </Text>
+        <Heading as="h2">第1条（個人情報）</Heading>
         <br />
         <Text>
           本サービスでは登録およびご利用に際して以下の情報を取得し、それらを個人情報として取り扱います。
@@ -29,9 +27,7 @@ const PrivacyPolicy: NextPage = () => {
           <ListItem>その他本サービスへのアクセス時に生成されるログ</ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第2条（個人情報を収集・利用する目的）
-        </Text>
+        <Heading as="h2">第2条（個人情報を収集・利用する目的）</Heading>
         <br />
         <Text>
           本サービスが個人情報を収集・利用する目的は、以下のとおりです。
@@ -53,9 +49,7 @@ const PrivacyPolicy: NextPage = () => {
           <ListItem>上記の利用目的に付随する目的</ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第3条（利用目的の変更）
-        </Text>
+        <Heading as="h2">第3条（利用目的の変更）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -100,9 +94,7 @@ const PrivacyPolicy: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第4条（個人情報の第三者提供）
-        </Text>
+        <Heading as="h2">第4条（個人情報の第三者提供）</Heading>
         <br />
         <OrderedList>
           <ListItem>
@@ -113,9 +105,7 @@ const PrivacyPolicy: NextPage = () => {
           </ListItem>
         </OrderedList>
         <br />
-        <Text fontSize="3xl" fontWeight="bold">
-          第5条（プライバシーポリシーの変更）
-        </Text>
+        <Heading as="h2">第5条（プライバシーポリシーの変更）</Heading>
         <br />
         <OrderedList>
           <ListItem>
