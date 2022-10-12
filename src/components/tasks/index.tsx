@@ -59,7 +59,7 @@ const Tasks = () => {
   return (
     <>
       {!tasks?.length ? (
-        <Heading>タスクを登録してください</Heading>
+        <Text>まだタスクの登録がありません</Text>
       ) : (
         <VStack {...vStackProps}>
           {tasks?.map((task) => (

@@ -1,14 +1,17 @@
 import type { NextPage } from 'next'
-import { Box, Text, OrderedList, ListItem } from '@chakra-ui/react'
+import Head from 'next/head'
+import { Box, Text, OrderedList, ListItem, Heading } from '@chakra-ui/react'
 import Footer from 'src/components/footer'
 
 const PrivacyPolicy: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>プライバシーポリシー</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Box placeItems="center" px="5rem" py="72px">
-        <Text fontSize="4xl" fontWeight="bold">
-          プライバシーポリシー
-        </Text>
+        <Heading>プライバシーポリシー</Heading>
         <br />
         <Text>
           本サービスは、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。

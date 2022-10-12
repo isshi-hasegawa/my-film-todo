@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import { useSession } from 'next-auth/react'
-import { Box, Button, Flex, Grid, Heading, Spinner } from '@chakra-ui/react'
+import { Button, Flex, Grid, Heading, Spinner } from '@chakra-ui/react'
 import SignIn from './auth/signin'
 import Header from 'src/components/header'
 import Tasks from 'src/components/tasks'
@@ -21,6 +22,11 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>俺の映画リスト</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       {!session ? (
         <Grid h="100vh" placeItems="center" px="5rem">
           <Heading>ログインしてください</Heading>

@@ -1,10 +1,15 @@
 import type { NextPage } from 'next'
 import { Box, Text, OrderedList, ListItem } from '@chakra-ui/react'
 import Footer from 'src/components/footer'
+import Head from 'next/head'
 
 const TermsOfService: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>利用規約</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Box placeItems="center" px="5rem" py="72px">
         <Text fontSize="4xl" fontWeight="bold">
           利用規約
