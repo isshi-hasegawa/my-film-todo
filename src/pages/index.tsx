@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
-import { Button, Grid, Heading, Spinner } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Heading, Spinner } from '@chakra-ui/react'
 import SignIn from './auth/signin'
 import Header from 'src/components/header'
 import Tasks from 'src/components/tasks'
@@ -27,22 +27,22 @@ const Home: NextPage = () => {
           <SignIn />
         </Grid>
       ) : (
-        <>
+        <Flex direction="column" minH="100vh">
           <Header />
-          {!isShowSearch ? (
-            <Grid placeItems="center" px="1rem" py="72px">
-              <Button my={4} onClick={() => setIsShowSearch(true)}>
-                タスクを登録する
-              </Button>
-              <Tasks />
-            </Grid>
-          ) : (
-            <Grid placeItems="center" px="3rem" py="72px">
+          <Grid placeItems="center" px="1rem" py="72px" flex={1}>
+            {!isShowSearch ? (
+              <>
+                <Button my={4} onClick={() => setIsShowSearch(true)}>
+                  タスクを登録する
+                </Button>
+                <Tasks />
+              </>
+            ) : (
               <Search />
-            </Grid>
-          )}
+            )}
+          </Grid>
           <Footer />
-        </>
+        </Flex>
       )}
     </>
   )

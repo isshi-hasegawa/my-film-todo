@@ -15,9 +15,6 @@ const Footer = () => {
       bg={useColorModeValue('gray.50', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
       w="100%"
-      position="fixed"
-      bottom={0}
-      display={{ base: 'none', sm: 'none', md: 'flex' }}
     >
       <Container
         as={Stack}
