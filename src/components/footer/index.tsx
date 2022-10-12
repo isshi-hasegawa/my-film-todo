@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {
   Box,
   Container,
@@ -28,6 +29,7 @@ const Footer = () => {
         align={{ base: 'center', md: 'center' }}
       >
         <Text>© 2022 isshi-hasegawa. All rights reserved</Text>
+        <Link href="/terms_of_service">利用規約</Link>
         <Stack direction={'row'} spacing={6}>
           <SocialButton
             label={'Twitter'}
