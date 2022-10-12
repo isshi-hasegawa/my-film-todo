@@ -30,6 +30,7 @@ const Footer = () => {
       >
         <Text>© 2022 isshi-hasegawa. All rights reserved</Text>
         <Link href="/terms_of_service">利用規約</Link>
+        <Link href="/privacy_policy">プライバシーポリシー</Link>
         <Stack direction={'row'} spacing={6}>
           <SocialButton
             label={'Twitter'}
