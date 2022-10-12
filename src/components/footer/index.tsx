@@ -25,7 +25,8 @@ const Footer = () => {
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
       >
-        <Text>© 2022 isshi-hasegawa. All rights reserved</Text>
+        <Text>© 2022 isshi-hasegawa All rights reserved.</Text>
+        <Text>powered by TMDb, JustWatch</Text>
         <Link href="/terms_of_service">利用規約</Link>
         <Link href="/privacy_policy">プライバシーポリシー</Link>
         <Stack direction={'row'} spacing={6}>
