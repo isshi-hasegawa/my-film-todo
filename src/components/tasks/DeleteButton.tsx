@@ -11,7 +11,7 @@ const DeleteButton = ({
   return (
     <IconButton
       variant="outline"
-      colorScheme="red"
+      colorScheme="gray"
       icon={<DeleteIcon />}
       aria-label="Delete Button"
       onClick={() => {
