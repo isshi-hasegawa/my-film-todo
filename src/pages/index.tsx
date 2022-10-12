@@ -28,10 +28,13 @@ const Home: NextPage = () => {
       </Head>
 
       {!session ? (
-        <Grid h="100vh" placeItems="center" px="5rem">
-          <Heading>ログインしてください</Heading>
-          <SignIn />
-        </Grid>
+        <Flex direction="column" minH="100vh">
+          <Grid h="100vh" placeItems="center" px="5rem">
+            <Heading>ログインしてください</Heading>
+            <SignIn />
+          </Grid>
+          <Footer />
+        </Flex>
       ) : (
         <Flex direction="column" minH="100vh">
           <Header />
