@@ -9,9 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
     "test": "jest --watch",
-    "test:ci": "jest --ci",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
+    "test:e2e": "playWright test",
     "prepare": "simple-git-hooks > /dev/null"
   },
   "simple-git-hooks": {
@@ -45,6 +43,7 @@
     "recoil": "0.7.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.27.1",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@types/eslint": "8.4.6",
