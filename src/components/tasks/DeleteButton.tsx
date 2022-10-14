@@ -17,6 +17,7 @@ const DeleteButton = ({
       onClick={() => {
         onClick(taskId)
       }}
+      data-testid="delete-button"
     />
   )
 }

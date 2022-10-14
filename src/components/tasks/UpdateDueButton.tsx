@@ -38,6 +38,7 @@ const UpdateDueButton = ({
           colorScheme="blue"
           leftIcon={<CalendarIcon />}
         >
+          <div data-testid="days-after"></div>
           {daysAfter < 0 && <Text color="red.400">期限切れ</Text>}
           {daysAfter === 0 && <Text color="red.400">今日</Text>}
           {daysAfter === 1 && '明日'}

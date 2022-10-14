@@ -28,6 +28,7 @@ const AddDueButton = ({
           colorScheme="blue"
           icon={<CalendarIcon />}
           aria-label="Add Due Button"
+          data-testid="add-due-button"
         />
       }
     />

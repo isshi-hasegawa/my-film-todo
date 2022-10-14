@@ -16,6 +16,7 @@ const CompleteButton = ({
       onClick={() => {
         onClick(taskId)
       }}
+      data-testid="complete-button"
     />
   )
 }

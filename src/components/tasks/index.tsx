@@ -60,7 +60,7 @@ const Tasks = () => {
       {!tasks?.length ? (
         <Text>まだタスクの登録がありません</Text>
       ) : (
-        <VStack {...vStackProps}>
+        <VStack {...vStackProps} data-testid="tasks">
           {tasks?.map((task) => (
             <HStack key={task.id}>
               <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
