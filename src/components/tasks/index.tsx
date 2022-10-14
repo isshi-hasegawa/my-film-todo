@@ -58,7 +58,9 @@ const Tasks = () => {
   return (
     <>
       {!tasks?.length ? (
-        <Text>まだタスクの登録がありません</Text>
+        <Text data-testid="message-tasks-zero">
+          まだタスクの登録がありません
+        </Text>
       ) : (
         <VStack {...vStackProps} data-testid="tasks">
           {tasks?.map((task) => (
