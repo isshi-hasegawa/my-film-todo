@@ -66,7 +66,7 @@ const Search = () => {
   )
 
   return (
-    <>
+    <div data-testid="search">
       <Input
         id="field"
         color="secondary"
@@ -74,17 +74,19 @@ const Search = () => {
         placeholder="タイトルを入力してください"
         onChange={(e) => setKeyword(e.target.value)}
         maxW={{ base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' }}
+        data-testid="search-input"
       />
 
       <Grid py={5}>
         {isFetching && <Spinner size="xl" placeItems="center" />}
         {keyword === '' ? null : (
-          <VStack {...vStackProps}>
+          <VStack {...vStackProps} data-testid="search-results">
             {searchResults?.map((result) => (
               <HStack
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
                 _hover={{ bg: 'gray.200' }}
+                data-testid="search-result"
               >
                 {result.poster_path && (
                   <Image
@@ -106,7 +108,7 @@ const Search = () => {
           </VStack>
         )}
       </Grid>
-    </>
+    </div>
   )
 }
 

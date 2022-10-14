@@ -1,5 +1,4 @@
 import {
-  Heading,
   HStack,
   Spacer,
   Spinner,
@@ -66,8 +65,8 @@ const Tasks = () => {
             <HStack key={task.id}>
               <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
               <Stack>
-                <Text>{task.title}</Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text data-testid="task-title">{task.title}</Text>
+                <Text fontSize="sm" color="gray.600" data-testid="task-notes">
                   {task.notes}
                 </Text>
                 <HStack display={{ md: 'none' }}>

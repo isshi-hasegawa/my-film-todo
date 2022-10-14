@@ -41,7 +41,11 @@ const Home: NextPage = () => {
           <Grid placeItems="center" px="1rem" py="72px" flex={1}>
             {!isShowSearch ? (
               <>
-                <Button my={4} onClick={() => setIsShowSearch(true)}>
+                <Button
+                  my={4}
+                  onClick={() => setIsShowSearch(true)}
+                  data-testid="create-task-button"
+                >
                   タスクを登録する
                 </Button>
                 <Tasks />
