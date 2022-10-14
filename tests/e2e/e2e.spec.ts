@@ -20,7 +20,7 @@ test.describe('ログイン後', () => {
   // })
 
   test('タスクの登録と削除', async ({ page }) => {
-    await expect(page.locator('data-testid=search')).not.toBeVisible()
+    await expect(page.locator('data-testid=search-input')).not.toBeVisible()
     const createTaskButton = await page.locator(
       'data-testid=create-task-button'
     )

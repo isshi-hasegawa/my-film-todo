@@ -66,7 +66,7 @@ const Search = () => {
   )
 
   return (
-    <div data-testid="search">
+    <>
       <Input
         id="field"
         color="secondary"
@@ -108,7 +108,7 @@ const Search = () => {
           </VStack>
         )}
       </Grid>
-    </div>
+    </>
   )
 }
 
