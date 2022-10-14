@@ -9,7 +9,15 @@ test.describe('ログイン後', () => {
     // await page.screenshot({ path: 'screenshot.png', fullPage: true })
   })
 
-  // test('リストの登録', async ({ page }) => {})
+  test('リストの登録', async ({ page }) => {
+    await expect(
+      page.locator('data-testid=task-list-title >> nth=0')
+    ).toHaveText('マイタスク')
+    await page.locator('data-testid=add-list-button').click()
+    await expect(
+      page.locator('data-testid=task-list-title >> nth=-1')
+    ).toHaveText('新しいリスト')
+  })
 
   test('タスクの登録', async ({ page }) => {
     await expect(page.locator('data-testid=search')).not.toBeVisible()

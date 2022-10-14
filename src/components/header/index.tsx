@@ -80,10 +80,7 @@ const Header = () => {
                 </TaskListLink>
               ))
             )}
-            <AddListButton
-              onClick={createTaskListMutate}
-              data-testid="add-list-button"
-            />
+            <AddListButton onClick={createTaskListMutate} />
           </HStack>
         </HStack>
         <Flex alignItems={'center'}>

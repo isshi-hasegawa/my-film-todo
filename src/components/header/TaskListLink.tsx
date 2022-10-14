@@ -28,7 +28,7 @@ const TaskListLink = ({
       }}
       data-testid="task-list"
     >
-      {children}
+      <div data-testid="task-list-title">{children}</div>
     </Link>
   )
 }
