@@ -3,7 +3,13 @@ import { ReactNode } from 'react'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
-const NavLink = ({ children, id }: { children: ReactNode; id: string }) => {
+const TaskListLink = ({
+  children,
+  id,
+}: {
+  children: ReactNode
+  id: string
+}) => {
   const { setTaskListId } = useTaskListIdState()
   const { setIsShowSearch } = useIsShowSearchState()
 
@@ -20,10 +26,11 @@ const NavLink = ({ children, id }: { children: ReactNode; id: string }) => {
         setTaskListId(id)
         setIsShowSearch(false)
       }}
+      data-testid="task-list"
     >
       {children}
     </Link>
   )
 }
 
-export default NavLink
+export default TaskListLink

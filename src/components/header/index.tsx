@@ -21,7 +21,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { TaskList } from 'src/types/taskLists'
 import AddListButton from 'src/components/header/AddListButton'
-import NavLink from 'src/components/header/NavLink'
+import TaskListLink from 'src/components/header/TaskListLink'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -75,12 +75,15 @@ const Header = () => {
               <Spinner />
             ) : (
               taskLists?.map((taskList) => (
-                <NavLink key={taskList.id} id={taskList.id}>
+                <TaskListLink key={taskList.id} id={taskList.id}>
                   {taskList.title}
-                </NavLink>
+                </TaskListLink>
               ))
             )}
-            <AddListButton onClick={createTaskListMutate} />
+            <AddListButton
+              onClick={createTaskListMutate}
+              data-testid="add-list-button"
+            />
           </HStack>
         </HStack>
         <Flex alignItems={'center'}>
@@ -108,9 +111,9 @@ const Header = () => {
               <Spinner />
             ) : (
               taskLists?.map((taskList) => (
-                <NavLink key={taskList.id} id={taskList.id}>
+                <TaskListLink key={taskList.id} id={taskList.id}>
                   {taskList.title}
-                </NavLink>
+                </TaskListLink>
               ))
             )}
             <AddListButton onClick={createTaskListMutate} />
