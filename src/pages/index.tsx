@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
-import { Button, Flex, Grid, Heading, Spinner } from '@chakra-ui/react'
-import SignIn from './auth/signin'
+import { Button, Flex, Grid, Spinner } from '@chakra-ui/react'
 import Header from 'src/components/header'
 import Tasks from 'src/components/tasks'
 import Search from 'src/components/search'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
+import About from 'src/components/about'
 import Footer from 'src/components/footer'
 
 const Home: NextPage = () => {
@@ -28,11 +28,8 @@ const Home: NextPage = () => {
       </Head>
 
       {!session ? (
-        <Flex direction="column" minH="100vh">
-          <Grid h="100vh" placeItems="center" px="5rem">
-            <Heading>ログインしてください</Heading>
-            <SignIn />
-          </Grid>
+        <Flex direction="column" minH="100vh" placeItems="center">
+          <About />
           <Footer />
         </Flex>
       ) : (
@@ -46,7 +43,7 @@ const Home: NextPage = () => {
                   onClick={() => setIsShowSearch(true)}
                   data-testid="create-task-button"
                 >
-                  タスクを登録する
+                  作品を登録する
                 </Button>
                 <Tasks />
               </>
