@@ -13,6 +13,7 @@ import {
   Stack,
   Spinner,
   useToast,
+  Image,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
@@ -22,6 +23,7 @@ import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { TaskList } from 'src/types/taskLists'
 import AddListButton from 'src/components/header/AddListButton'
 import TaskListLink from 'src/components/header/TaskListLink'
+import Link from 'next/link'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -69,7 +71,16 @@ const Header = () => {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems={'center'}>
-          <Box>Logo</Box>
+          <Link href="/">
+            <a>
+              <Image
+                src="/logo.png"
+                alt="logo"
+                htmlWidth={250}
+                htmlHeight={40}
+              />
+            </a>
+          </Link>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             {isFetching || isLoading ? (
               <Spinner />

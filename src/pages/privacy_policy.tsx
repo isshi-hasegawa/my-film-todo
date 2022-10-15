@@ -1,7 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { Box, Text, OrderedList, ListItem, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  OrderedList,
+  ListItem,
+  Heading,
+  Image,
+} from '@chakra-ui/react'
 import Footer from 'src/components/footer'
+import Link from 'next/link'
 
 const PrivacyPolicy: NextPage = () => {
   return (
@@ -11,6 +19,12 @@ const PrivacyPolicy: NextPage = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box placeItems="center" px="5rem" py="72px">
+        <Link href="/">
+          <a>
+            <Image src="/logo.png" alt="logo" htmlWidth={250} htmlHeight={40} />
+          </a>
+        </Link>
+        <br />
         <Heading as="h1">プライバシーポリシー</Heading>
         <br />
         <Text>
