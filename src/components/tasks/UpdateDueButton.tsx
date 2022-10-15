@@ -15,19 +15,18 @@ const UpdateDueButton = ({
   onChange: ({ taskId, due }: { taskId: string; due?: string }) => void
 }) => {
   const today = new Date()
-  const parsedDue: Date = parse(due.substring(0, 10), 'yyyy-MM-dd', today)
-  const daysAfter: number = Math.round(
-    (parsedDue?.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+  const dueDate: Date = parse(due.substring(0, 10), 'yyyy-MM-dd', new Date())
+  const daysAfter: number = Math.ceil(
+    (dueDate?.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
   )
 
   return (
     <DatePicker
-      selected={parsedDue}
+      selected={dueDate}
       locale={ja}
       onChange={(date: Date) =>
         onChange({
           taskId,
-          // due: `${format(date, 'yyyy-MM-dd')}T00:00:00+00:00`,
           due: `${format(date, 'yyyy-MM-dd')}T00:00:00.000Z`,
         })
       }
