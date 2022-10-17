@@ -15,15 +15,13 @@ const SignIn = () => {
     //     <Text>Googleでログインする</Text>
     //   </Center>
     // </Button>
-    <Button
-      variant={'outline'}
-      // leftIcon={<FcGoogle />}
-      onClick={() => router.push('login')}
-    >
-      <Center>
-        <Text>Googleでログインする</Text>
-      </Center>
-    </Button>
+    <Image
+      src="/btn_google_signin_light_normal_web.png"
+      alt="login_button"
+      onClick={() => {
+        signIn('google')
+      }}
+    />
   )
 }
 
