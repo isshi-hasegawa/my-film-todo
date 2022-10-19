@@ -18,16 +18,6 @@ const About = () => {
         </Heading>
       </VStack>
       <br />
-      <Text as="b">どんなサービス？</Text>
-      <br />
-      <Text>
-        動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツールです
-      </Text>
-      <br />
-      <Text>
-        動画配信サービスをまたいで「次にどの映画を観るか」を管理しましょう
-      </Text>
-      <br />
       <SignIn />
       <Text fontSize="sm">ご利用にはGoogleアカウントが必要です</Text>
       <Text fontSize="sm">
@@ -38,10 +28,20 @@ const About = () => {
         >
           Google Todoリスト
         </Link>
-        にタスクを追加したり、更新したり、削除する操作を行います
+        に操作を行います
       </Text>
       <br />
       <VStack bgColor="gray.300" px="50px">
+        <br />
+        <Text as="b">どんなサービス？</Text>
+        <br />
+        <Text>
+          動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツールです
+        </Text>
+        <br />
+        <Text>
+          動画配信サービスをまたいで「次にどの映画を観るか」を管理しましょう
+        </Text>
         <br />
         <Image src="/demo1.png" alt="demo1" htmlWidth={450} htmlHeight={350} />
         <Text>映画を検索することができます</Text>
