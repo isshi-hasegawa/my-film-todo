@@ -3,11 +3,7 @@ import { useEffect, useState } from 'react'
 import { getWatchProviders } from 'src/api/tmdbApi'
 import { WatchProvider } from 'src/types/tmdb'
 
-type Props = {
-  id: number
-}
-
-const WatchProviders = ({ id }: Props) => {
+const WatchProviders = ({ id }: { id: number }) => {
   const [watchProviders, setWatchProviders] = useState<WatchProvider[]>([])
   const [isPurchasableInAppleItunes, setIsPurchasableInAppleItunes] =
     useState<boolean>(false)
