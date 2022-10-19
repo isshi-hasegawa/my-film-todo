@@ -11,7 +11,7 @@ import {
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
-import { useTasks } from 'src/hooks/tasks'
+import { useTasks } from 'src/hooks/useTasks'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
 import UpdateDueButton from 'src/components/tasks/UpdateDueButton'

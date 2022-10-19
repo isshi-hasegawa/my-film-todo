@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { searchMovie } from 'src/api/tmdbApi'
 import WatchProviders from 'src/components/search/WatchProviders'
 import { useQuery, useMutation } from '@tanstack/react-query'
-import { useTasks } from 'src/hooks/tasks'
+import { useTasks } from 'src/hooks/useTasks'
 
 const vStackProps = {
   p: '4',
