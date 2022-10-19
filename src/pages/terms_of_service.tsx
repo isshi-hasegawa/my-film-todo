@@ -15,7 +15,7 @@ const TermsOfService: NextPage = () => {
   return (
     <>
       <Head>
-        <title>利用規約</title>
+        <title>俺の映画リスト | 利用規約</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box placeItems="center" px="5rem" py="72px">

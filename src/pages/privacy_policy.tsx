@@ -25,7 +25,7 @@ const PrivacyPolicy: NextPage = () => {
           </a>
         </Link>
         <br />
-        <Heading as="h1">プライバシーポリシー</Heading>
+        <Heading as="h1">俺の映画リスト | プライバシーポリシー</Heading>
         <br />
         <Text>
           本サービスは、ユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。
