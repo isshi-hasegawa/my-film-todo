@@ -6,6 +6,7 @@ import {
   StackDivider,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -32,6 +33,7 @@ const Tasks = () => {
   const { taskListId } = useTaskListIdState()
   const { fetchAllTasks, completeTask, updateTaskDue, deleteOneTask } =
     useTasks()
+  const toast = useToast()
 
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
@@ -41,16 +43,46 @@ const Tasks = () => {
   const queryClient = useQueryClient()
   const { mutate: completeTaskMutate } = useMutation(
     (taskId: string) => completeTask(taskId),
-    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        toast({
+          title: 'タスクを完了しました！',
+          status: 'success',
+          duration: 3000,
+          position: 'bottom-left',
+        })
+      },
+    }
   )
   const { mutate: updateTaskDueMutate } = useMutation(
     ({ taskId, due }: { taskId: string; due?: string }) =>
       updateTaskDue(taskId, due),
-    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        toast({
+          title: 'タスクの期限を更新しました！',
+          status: 'success',
+          duration: 3000,
+          position: 'bottom-left',
+        })
+      },
+    }
   )
   const { mutate: deleteTaskMutate } = useMutation(
     (taskId: string) => deleteOneTask(taskId),
-    { onSuccess: () => queryClient.invalidateQueries(['tasks']) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        toast({
+          title: 'タスクを削除しました！',
+          status: 'success',
+          duration: 3000,
+          position: 'bottom-left',
+        })
+      },
+    }
   )
 
   if (isFetching) return <Spinner size="xl" />
