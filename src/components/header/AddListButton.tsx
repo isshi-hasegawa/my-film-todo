@@ -9,6 +9,10 @@ const AddListButton = ({ onClick }: { onClick: () => void }) => {
       aria-label="Add List Button"
       onClick={() => onClick()}
       colorScheme="blackAlpha"
+      _hover={{
+        textDecoration: 'none',
+        bg: 'gray.500',
+      }}
       data-testid="add-list-button"
     >
       <Center>
