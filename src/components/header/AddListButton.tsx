@@ -1,16 +1,20 @@
 import { AddIcon } from '@chakra-ui/icons'
-import { IconButton } from '@chakra-ui/react'
+import { Button, Center, Text } from '@chakra-ui/react'
 
 const AddListButton = ({ onClick }: { onClick: () => void }) => {
   return (
-    <IconButton
+    <Button
       size="sm"
-      icon={<AddIcon />}
+      leftIcon={<AddIcon />}
       aria-label="Add List Button"
       onClick={() => onClick()}
       colorScheme="blackAlpha"
       data-testid="add-list-button"
-    />
+    >
+      <Center>
+        <Text>新しいリストを追加する</Text>
+      </Center>
+    </Button>
   )
 }
 
