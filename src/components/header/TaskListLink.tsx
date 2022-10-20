@@ -26,6 +26,7 @@ const TaskListLink = ({
         setTaskListId(id)
         setIsShowSearch(false)
       }}
+      color="white"
       data-testid="task-list"
     >
       <div data-testid="task-list-title">{children}</div>

@@ -61,7 +61,7 @@ const Header = () => {
   )
 
   return (
-    <Box bgColor="gray.100" px={4} position="fixed" w="100%" zIndex={1}>
+    <Box bgColor="black" px={4} position="fixed" w="100%" zIndex={1}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
           size={'md'}
@@ -69,6 +69,7 @@ const Header = () => {
           aria-label={'Open Menu'}
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
+          colorScheme="blackAlpha"
         />
         <HStack spacing={8} alignItems={'center'}>
           <Link href="/">

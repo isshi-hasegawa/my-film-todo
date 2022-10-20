@@ -8,6 +8,7 @@ const AddListButton = ({ onClick }: { onClick: () => void }) => {
       icon={<AddIcon />}
       aria-label="Add List Button"
       onClick={() => onClick()}
+      colorScheme="blackAlpha"
       data-testid="add-list-button"
     />
   )
