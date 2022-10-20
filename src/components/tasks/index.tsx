@@ -12,6 +12,7 @@ import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useTasks } from 'src/hooks/useTasks'
+import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
 import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
@@ -89,6 +90,8 @@ const Tasks = () => {
 
   return (
     <>
+      <SearchScreenSwitchButton />
+
       {!tasks?.length ? (
         <Text data-testid="message-tasks-zero">まだ作品の登録がありません</Text>
       ) : (
