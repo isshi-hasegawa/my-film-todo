@@ -71,11 +71,15 @@ const Search = () => {
         id="field"
         color="secondary"
         variant="flushed"
-        placeholder="タイトルを入力してください"
+        placeholder="作品名を入力してください 例：スパイダーマン"
         onChange={(e) => setKeyword(e.target.value)}
         maxW={{ base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' }}
         data-testid="search-input"
       />
+
+      <br />
+      <Text>登録したい作品をクリックしてください</Text>
+      <br />
 
       <Grid py={5}>
         {isFetching && <Spinner size="xl" placeItems="center" />}
