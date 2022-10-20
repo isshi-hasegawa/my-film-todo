@@ -89,15 +89,16 @@ const Search = () => {
               <HStack
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
-                _hover={{ bg: 'gray.200' }}
+                _hover={{ bg: 'gray.300' }}
+                p={5}
                 data-testid="search-result"
               >
                 {result.poster_path && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
                     alt="poster"
-                    width={{ base: '60px', sm: '60px', md: '150px' }}
-                    height={{ base: '84px', sm: '84px', md: '210px' }}
+                    width={{ base: '75px', sm: '75px', md: '150px' }}
+                    height={{ base: '95px', sm: '95px', md: '210px' }}
                   />
                 )}
                 <Stack>
