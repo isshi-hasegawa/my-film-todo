@@ -4,7 +4,7 @@ test.describe('ログイン後', () => {
   test.use({ storageState: 'authenticatedState.json' })
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5000')
+    await page.goto('http://localhost:3000')
     // await page.waitForTimeout(5000)
     // await page.screenshot({ path: 'screenshot.png', fullPage: true })
   })
@@ -24,7 +24,7 @@ test.describe('ログイン後', () => {
     const createTaskButton = await page.locator(
       'data-testid=create-task-button'
     )
-    await expect(createTaskButton).toHaveText('作品を登録する')
+    await expect(createTaskButton).toHaveText('このリストに作品を登録する')
     await createTaskButton.click()
     await page.locator('data-testid=search-input').fill('ダークナイト')
     await expect(page.locator('data-testid=search-results')).toBeVisible()
@@ -62,7 +62,7 @@ test.describe('ログイン後', () => {
 
     await page.locator('data-testid=complete-button >> nth=0').click()
     await expect(page.locator('data-testid=message-tasks-zero')).toHaveText(
-      'まだタスクの登録がありません'
+      'まだ作品の登録がありません'
     )
   })
 
