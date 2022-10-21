@@ -10,7 +10,7 @@ const TaskListLink = ({
   children: ReactNode
   id: string
 }) => {
-  const { setTaskListId } = useTaskListIdState()
+  const { taskListId, setTaskListId } = useTaskListIdState()
   const { setIsShowSearch } = useIsShowSearchState()
 
   return (
@@ -27,6 +27,7 @@ const TaskListLink = ({
         setIsShowSearch(false)
       }}
       color="white"
+      bg={id === taskListId ? 'whiteAlpha.600' : ''}
       data-testid="task-list"
     >
       <div data-testid="task-list-title">{children}</div>
