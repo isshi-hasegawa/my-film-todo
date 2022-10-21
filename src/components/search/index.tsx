@@ -2,7 +2,6 @@ import {
   Grid,
   HStack,
   Image,
-  Input,
   Spinner,
   Stack,
   StackDivider,
@@ -13,9 +12,10 @@ import {
 import { MovieResult } from 'moviedb-promise/dist/request-types'
 import { useState } from 'react'
 import { searchMovie } from 'src/api/tmdbApi'
-import WatchProviders from 'src/components/search/WatchProviders'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useTasks } from 'src/hooks/useTasks'
+import SearchInput from 'src/components/search/SearchInput'
+import WatchProviders from 'src/components/search/WatchProviders'
 
 const vStackProps = {
   p: '4',
@@ -67,15 +67,8 @@ const Search = () => {
 
   return (
     <>
-      <Input
-        id="field"
-        color="secondary"
-        variant="flushed"
-        placeholder="作品名を入力してください 例：スパイダーマン"
-        onChange={(e) => setKeyword(e.target.value)}
-        maxW={{ base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' }}
-        data-testid="search-input"
-      />
+      <SearchInput onChange={setKeyword} />
+
       <br />
       <Text>登録したい作品をクリックしてください</Text>
       <br />

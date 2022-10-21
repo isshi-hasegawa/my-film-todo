@@ -14,6 +14,7 @@ const AddDueButton = ({
 }) => {
   return (
     <DatePicker
+      data-testid="date-picker"
       locale={ja}
       onChange={(date: Date) =>
         onChange({
@@ -24,11 +25,11 @@ const AddDueButton = ({
       monthsShown={2}
       customInput={
         <IconButton
+          data-testid="add-due-button"
           variant="outline"
           colorScheme="blue"
           icon={<CalendarIcon />}
           aria-label="Add Due Button"
-          data-testid="add-due-button"
         />
       }
     />
