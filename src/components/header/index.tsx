@@ -84,7 +84,7 @@ const Header = () => {
           </Link>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             {isFetching || isLoading ? (
-              <Spinner />
+              <Spinner color="white" />
             ) : (
               taskLists?.map((taskList) => (
                 <TaskListLink key={taskList.id} id={taskList.id}>
@@ -117,7 +117,7 @@ const Header = () => {
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
             {isFetching || isLoading ? (
-              <Spinner />
+              <Spinner color="white" />
             ) : (
               taskLists?.map((taskList) => (
                 <TaskListLink key={taskList.id} id={taskList.id}>
