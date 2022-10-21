@@ -1,16 +1,24 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useSession, signIn } from 'next-auth/react'
 import { Flex, Grid, Spinner } from '@chakra-ui/react'
 import Header from 'src/components/header'
 import Tasks from 'src/components/tasks'
 import Search from 'src/components/search'
-import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 import About from 'src/components/about'
 import Footer from 'src/components/footer'
+import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
+
+  useEffect(() => {
+    if (session?.error === 'RefreshAccessTokenError') {
+      signIn() // Force sign in to hopefully resolve error
+    }
+  }, [session])
+
   const { isShowSearch } = useIsShowSearchState()
 
   if (status === 'loading')

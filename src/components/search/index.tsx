@@ -76,13 +76,14 @@ const Search = () => {
         maxW={{ base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' }}
         data-testid="search-input"
       />
+      <br />
+      <Text>登録したい作品をクリックしてください</Text>
+      <br />
 
       <Grid py={5}>
         {isFetching && <Spinner size="xl" placeItems="center" />}
         {keyword === '' ? null : (
           <>
-            <Text>登録したい作品をクリックしてください</Text>
-            <br />
             <VStack {...vStackProps} data-testid="search-results">
               {searchResults?.map((result) => (
                 <HStack
