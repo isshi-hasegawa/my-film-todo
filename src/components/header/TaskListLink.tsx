@@ -1,5 +1,5 @@
-import { Link } from '@chakra-ui/react'
 import { ReactNode } from 'react'
+import { Link } from '@chakra-ui/react'
 import { useTaskListIdState } from 'src/hooks/taskListIdState'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
@@ -28,7 +28,7 @@ const TaskListLink = ({
       }}
       color="white"
       bg={id === taskListId ? 'whiteAlpha.600' : ''}
-      data-testid="task-list"
+      data-testid="task-list-link"
     >
       <div data-testid="task-list-title">{children}</div>
     </Link>
