@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react'
 import { setup } from 'src/tests/jest/userEvent'
-
 import Header from 'src/components/header'
 import { useSession, signOut } from 'next-auth/react'
 import { RecoilRoot } from 'recoil'

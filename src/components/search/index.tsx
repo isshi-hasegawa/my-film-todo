@@ -43,12 +43,12 @@ const Search = () => {
           <VStack {...vStackProps} data-testid="search-results">
             {searchResults?.map((result) => (
               <HStack
+                data-testid="search-result"
                 key={result.id}
                 onClick={() => createTaskMutate(result.id!)}
                 _hover={{ bg: 'gray.300' }}
                 p={5}
                 cursor="pointer"
-                data-testid="search-result"
               >
                 {result.poster_path && (
                   <Image
