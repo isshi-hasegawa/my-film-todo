@@ -75,14 +75,14 @@ const Tasks = () => {
     }
   )
 
-  if (isFetching) return <Spinner size="xl" />
-
   return (
     <>
       <SearchScreenSwitchButton />
 
       {!tasks?.length ? (
         <Text data-testid="message-tasks-zero">まだ作品の登録がありません</Text>
+      ) : isFetching ? (
+        <Spinner size="xl" placeItems="center" />
       ) : (
         <VStack {...vStackProps} data-testid="tasks">
           {tasks?.map((task) => (

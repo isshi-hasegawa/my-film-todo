@@ -45,7 +45,7 @@ const Header = () => {
 
   const queryClient = useQueryClient()
 
-  const { mutate: createTaskListMutate, isLoading } = useMutation(
+  const { mutate: createTaskListMutate } = useMutation(
     () => createTaskList({ title: '新しいリスト' }, token),
     {
       onSuccess: () => {
@@ -79,7 +79,7 @@ const Header = () => {
             </a>
           </Link>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-            {isFetching || isLoading ? (
+            {isFetching ? (
               <Spinner color="white" />
             ) : (
               taskLists?.map((taskList) => (
@@ -112,7 +112,7 @@ const Header = () => {
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
-            {isFetching || isLoading ? (
+            {isFetching ? (
               <Spinner color="white" />
             ) : (
               taskLists?.map((taskList) => (

@@ -26,8 +26,6 @@ const vStackProps = {
   borderRadius: 'lg',
   alignItems: 'stretch',
   divider: <StackDivider />,
-  bgColor: 'gray.100',
-  cursor: 'pointer',
 }
 
 const Search = () => {
@@ -61,40 +59,44 @@ const Search = () => {
       <Text>登録したい作品をクリックしてください</Text>
       <br />
 
-      <Grid py={5}>
-        {isFetching && <Spinner size="xl" placeItems="center" />}
-        {keyword === '' ? null : (
-          <>
-            <VStack {...vStackProps} data-testid="search-results">
-              {searchResults?.map((result) => (
-                <HStack
-                  key={result.id}
-                  onClick={() => createTaskMutate(result.id!)}
-                  _hover={{ bg: 'gray.300' }}
-                  p={5}
-                  data-testid="search-result"
-                >
-                  {result.poster_path && (
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
-                      alt="poster"
-                      width={{ base: '75px', sm: '75px', md: '150px' }}
-                      height={{ base: '95px', sm: '95px', md: '210px' }}
-                    />
-                  )}
-                  <Stack>
-                    <Text>{result.title}</Text>
-                    <Text fontSize="sm" color="gray.600">
-                      {result.release_date?.substring(0, 4)}
-                    </Text>
-                    <WatchProviders id={result.id!} />
-                  </Stack>
-                </HStack>
-              ))}
-            </VStack>
-          </>
-        )}
-      </Grid>
+      {isFetching ? (
+        <Spinner size="xl" placeItems="center" />
+      ) : (
+        <Grid py={5}>
+          {keyword === '' ? null : (
+            <>
+              <VStack {...vStackProps} data-testid="search-results">
+                {searchResults?.map((result) => (
+                  <HStack
+                    key={result.id}
+                    onClick={() => createTaskMutate(result.id!)}
+                    _hover={{ bg: 'gray.300' }}
+                    p={5}
+                    cursor="pointer"
+                    data-testid="search-result"
+                  >
+                    {result.poster_path && (
+                      <Image
+                        src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
+                        alt="poster"
+                        width={{ base: '75px', sm: '75px', md: '150px' }}
+                        height={{ base: '95px', sm: '95px', md: '210px' }}
+                      />
+                    )}
+                    <Stack>
+                      <Text>{result.title}</Text>
+                      <Text fontSize="sm" color="gray.600">
+                        {result.release_date?.substring(0, 4)}
+                      </Text>
+                      <WatchProviders id={result.id!} />
+                    </Stack>
+                  </HStack>
+                ))}
+              </VStack>
+            </>
+          )}
+        </Grid>
+      )}
     </>
   )
 }
