@@ -32,7 +32,7 @@ export const useTasks = () => {
     return sortedTasks
   }, [taskListId, token])
 
-  const createTaskWithMovieInfo = useCallback(
+  const createTaskWithSearchResult = useCallback(
     async (id: number) => {
       const response = await getMovieData(id, 'watch/providers')
       const title = response.title
@@ -84,7 +84,7 @@ export const useTasks = () => {
 
   return {
     fetchAllTasks,
-    createTaskWithMovieInfo,
+    createTaskWithSearchResult,
     completeTask,
     updateTaskDue,
     deleteOneTask,

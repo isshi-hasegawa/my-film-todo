@@ -8,14 +8,10 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { MovieResult } from 'moviedb-promise/dist/request-types'
-import { searchMovie } from 'src/api/tmdbApi'
-import { useQuery, useMutation } from '@tanstack/react-query'
 import { useKeywordState } from 'src/hooks/useKeywordState'
-import { useTasks } from 'src/hooks/useTasks'
-import { useCustomToast } from 'src/hooks/useCustomToast'
 import SearchInput from 'src/components/search/SearchInput'
 import WatchProviders from 'src/components/search/WatchProviders'
+import { useSearchResults } from 'src/hooks/useSearchResults'
 
 const vStackProps = {
   p: '4',
@@ -29,27 +25,8 @@ const vStackProps = {
 }
 
 const Search = () => {
-  const customToast = useCustomToast()
   const { keyword } = useKeywordState()
-  const { createTaskWithMovieInfo } = useTasks()
-
-  const fetchSearchResults = async () => {
-    const response = await searchMovie(keyword)
-    return response.results as MovieResult[]
-  }
-
-  const { data: searchResults, isFetching } = useQuery<MovieResult[]>(
-    ['searchResults', keyword],
-    fetchSearchResults
-  )
-
-  const { mutate: createTaskMutate } = useMutation(
-    (id: number) => createTaskWithMovieInfo(id),
-    {
-      onSuccess: () => customToast('タスクを登録しました！', 'success'),
-      onError: () => customToast('タスクの登録に失敗しました…', 'error'),
-    }
-  )
+  const { searchResults, isFetching, createTaskMutate } = useSearchResults()
 
   return (
     <>
