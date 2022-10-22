@@ -10,7 +10,7 @@
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "test:e2e": "playWright test",
+    "test:e2e": "playwright test",
     "prepare": "simple-git-hooks > /dev/null"
   },
   "simple-git-hooks": {
