@@ -1,12 +1,4 @@
-import {
-  Heading,
-  Image,
-  Text,
-  VStack,
-  Link,
-  UnorderedList,
-  ListItem,
-} from '@chakra-ui/react'
+import { Heading, Image, Text, VStack, Link, Mark } from '@chakra-ui/react'
 import SignIn from 'src/pages/auth/signin'
 
 const About = () => {
@@ -29,10 +21,14 @@ const About = () => {
         に操作を行います
       </Text>
       <br />
-      <VStack bgColor="gray.300" px="50px">
+
+      <VStack bgColor="gray.200" px="50px">
         <br />
-        <Text as="b">どんなサービス？</Text>
+        <Mark bg="black" color="white" px="2" py="1">
+          <Text as="b">どんなサービス？</Text>
+        </Mark>
         <br />
+
         <Text>
           動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツールです
         </Text>
@@ -43,14 +39,11 @@ const About = () => {
         <br />
         <Image src="/demo1.png" alt="demo1" htmlWidth={450} htmlHeight={350} />
         <Text>映画を検索することができます</Text>
-        <Text>各サービスのアイコンは</Text>
-        <UnorderedList>
-          <ListItem>
-            Netflix、Amazon Prime Video、Disney+で見放題配信中
-          </ListItem>
-          <ListItem>Apple TVで購入可能</ListItem>
-        </UnorderedList>
-        <Text>であるということを示しています</Text>
+        <br />
+        <Text>
+          Apple
+          TVのアイコン以外は、表示されている動画配信サービスで見放題配信中であることを示しています
+        </Text>
         <br />
         <Text>観たい映画をクリックすると...</Text>
         <br />
