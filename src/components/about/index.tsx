@@ -12,12 +12,10 @@ import SignIn from 'src/pages/auth/signin'
 const About = () => {
   return (
     <>
-      <VStack>
-        <Heading as="h1">
-          <Image src="/logo.png" alt="logo" htmlWidth={500} htmlHeight={80} />
-        </Heading>
-      </VStack>
-      <br />
+      <Heading as="h1" p="25px">
+        <Image src="/logo.png" alt="logo" htmlWidth={500} htmlHeight={80} />
+      </Heading>
+
       <SignIn />
       <Text fontSize="sm">ご利用にはGoogleアカウントが必要です</Text>
       <Text fontSize="sm">
