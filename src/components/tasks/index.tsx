@@ -7,11 +7,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { Task } from 'src/types/tasks'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
 import { useTasks } from 'src/hooks/useTasks'
-import { useCustomToast } from 'src/hooks/useCustomToast'
 import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
@@ -31,49 +27,13 @@ const vStackProps = {
 }
 
 const Tasks = () => {
-  const { taskListId } = useTaskListIdState()
-  const { fetchAllTasks, completeTask, updateTaskDue, deleteOneTask } =
-    useTasks()
-  const customToast = useCustomToast()
-
-  const { data: tasks, isFetching } = useQuery<Task[]>(
-    ['tasks', taskListId],
-    fetchAllTasks
-  )
-
-  const queryClient = useQueryClient()
-  const { mutate: completeTaskMutate } = useMutation(
-    (taskId: string) => completeTask(taskId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['tasks'])
-        customToast('タスクを完了しました！', 'success')
-      },
-      onError: () => customToast('タスクを完了できませんでした…', 'error'),
-    }
-  )
-  const { mutate: updateTaskDueMutate } = useMutation(
-    ({ taskId, due }: { taskId: string; due?: string }) =>
-      updateTaskDue(taskId, due),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['tasks'])
-        customToast('タスクの期限を更新しました！', 'success')
-      },
-      onError: () =>
-        customToast('タスクの期限を更新できませんでした…', 'error'),
-    }
-  )
-  const { mutate: deleteTaskMutate } = useMutation(
-    (taskId: string) => deleteOneTask(taskId),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['tasks'])
-        customToast('タスクを削除しました！', 'success')
-      },
-      onError: () => customToast('タスクを削除できませんでした…', 'error'),
-    }
-  )
+  const {
+    tasks,
+    isFetching,
+    completeTaskMutate,
+    updateTaskDueMutate,
+    deleteTaskMutate,
+  } = useTasks()
 
   return (
     <>

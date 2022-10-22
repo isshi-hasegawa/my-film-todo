@@ -1,16 +1,17 @@
-import { useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { getTasks, createTask, updateTask, deleteTask } from 'src/api/tasksApi'
 import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
 import { Task } from 'src/types/tasks'
 import { getMovieData } from 'src/api/tmdbApi'
+import { useCustomToast } from './useCustomToast'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export const useTasks = () => {
   const { taskListId } = useTaskListIdState()
   const { data: session } = useSession()
   const token = session?.accessToken as string
 
-  const fetchAllTasks = useCallback(async () => {
+  const fetchAllTasks = async () => {
     let tasks: Task[] = []
     let nextPageToken: string = ''
     do {
@@ -30,63 +31,91 @@ export const useTasks = () => {
       .sort((a, b) => parseInt(a.position) - parseInt(b.position))
 
     return sortedTasks
-  }, [taskListId, token])
+  }
 
-  const createTaskWithSearchResult = useCallback(
-    async (id: number) => {
-      const response = await getMovieData(id, 'watch/providers')
-      const title = response.title
-      let notes: string = ''
-      response['watch/providers']?.results?.JP?.flatrate?.forEach(
-        (provider) => {
-          switch (provider.provider_name) {
-            case 'Netflix':
-              notes = notes.concat('Netflix', ' ')
-              break
-            case 'Amazon Prime Video':
-              notes = notes.concat('Amazon Prime Video', ' ')
-              break
-            case 'Disney Plus':
-              notes = notes.concat('Disney+', ' ')
-              break
-            default:
-              break
-          }
-        }
-      )
-      notes = notes.concat(`${response.runtime}分`)
+  const createTaskWithSearchResult = async (id: number) => {
+    const response = await getMovieData(id, 'watch/providers')
+    const title = response.title
+    let notes: string = ''
+    response['watch/providers']?.results?.JP?.flatrate?.forEach((provider) => {
+      switch (provider.provider_name) {
+        case 'Netflix':
+          notes = notes.concat('Netflix', ' ')
+          break
+        case 'Amazon Prime Video':
+          notes = notes.concat('Amazon Prime Video', ' ')
+          break
+        case 'Disney Plus':
+          notes = notes.concat('Disney+', ' ')
+          break
+        default:
+          break
+      }
+    })
+    notes = notes.concat(`${response.runtime}分`)
 
-      await createTask({ taskListId, title, notes }, token)
-    },
-    [taskListId, token]
+    await createTask({ taskListId, title, notes }, token)
+  }
+
+  const completeTask = async (taskId: string) => {
+    await updateTask({ taskListId, taskId, status: 'completed' }, token)
+  }
+
+  const updateTaskDue = async (taskId: string, due: string = '') => {
+    await updateTask({ taskListId, taskId, due }, token)
+  }
+
+  const deleteOneTask = async (taskId: string) => {
+    await deleteTask({ taskListId, taskId }, token)
+  }
+
+  const customToast = useCustomToast()
+
+  const { data: tasks, isFetching } = useQuery<Task[]>(
+    ['tasks', taskListId],
+    fetchAllTasks
   )
 
-  const completeTask = useCallback(
-    async (taskId: string) => {
-      await updateTask({ taskListId, taskId, status: 'completed' }, token)
-    },
-    [taskListId, token]
+  const queryClient = useQueryClient()
+  const { mutate: completeTaskMutate } = useMutation(
+    (taskId: string) => completeTask(taskId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        customToast('タスクを完了しました！', 'success')
+      },
+      onError: () => customToast('タスクを完了できませんでした…', 'error'),
+    }
   )
-
-  const updateTaskDue = useCallback(
-    async (taskId: string, due: string = '') => {
-      await updateTask({ taskListId, taskId, due }, token)
-    },
-    [taskListId, token]
+  const { mutate: updateTaskDueMutate } = useMutation(
+    ({ taskId, due }: { taskId: string; due?: string }) =>
+      updateTaskDue(taskId, due),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        customToast('タスクの期限を更新しました！', 'success')
+      },
+      onError: () =>
+        customToast('タスクの期限を更新できませんでした…', 'error'),
+    }
   )
-
-  const deleteOneTask = useCallback(
-    async (taskId: string) => {
-      await deleteTask({ taskListId, taskId }, token)
-    },
-    [taskListId, token]
+  const { mutate: deleteTaskMutate } = useMutation(
+    (taskId: string) => deleteOneTask(taskId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks'])
+        customToast('タスクを削除しました！', 'success')
+      },
+      onError: () => customToast('タスクを削除できませんでした…', 'error'),
+    }
   )
 
   return {
-    fetchAllTasks,
+    tasks,
+    isFetching,
     createTaskWithSearchResult,
-    completeTask,
-    updateTaskDue,
-    deleteOneTask,
+    completeTaskMutate,
+    updateTaskDueMutate,
+    deleteTaskMutate,
   }
 }
