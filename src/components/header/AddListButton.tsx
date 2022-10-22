@@ -1,19 +1,22 @@
 import { AddIcon } from '@chakra-ui/icons'
 import { Button, Center, Text } from '@chakra-ui/react'
+import { useTaskLists } from 'src/hooks/useTaskLists'
 
-const AddListButton = ({ onClick }: { onClick: () => void }) => {
+const AddListButton = () => {
+  const { createTaskListMutate } = useTaskLists()
+
   return (
     <Button
+      data-testid="add-list-button"
       size="sm"
       leftIcon={<AddIcon />}
       aria-label="Add List Button"
-      onClick={() => onClick()}
-      colorScheme="blackAlpha"
+      onClick={() => createTaskListMutate()}
+      colorScheme="black"
       _hover={{
         textDecoration: 'none',
         bg: 'gray.500',
       }}
-      data-testid="add-list-button"
     >
       <Center>
         <Text>新しいリストを追加する</Text>

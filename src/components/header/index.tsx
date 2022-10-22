@@ -25,14 +25,21 @@ const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
 
-  const { taskLists, isFetching, createTaskListMutate } = useTaskLists()
+  const { taskLists, isFetching } = useTaskLists()
 
   return (
     <Box bgColor="black" px={4} position="fixed" w="100%" zIndex={1}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <IconButton
+          data-testid="hamburger-icon-button"
           size={'md'}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          icon={
+            isOpen ? (
+              <CloseIcon />
+            ) : (
+              <HamburgerIcon data-testid="hamburger-icon" />
+            )
+          }
           aria-label={'Open Menu'}
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
@@ -60,7 +67,7 @@ const Header = () => {
                 </TaskListLink>
               ))
             )}
-            <AddListButton onClick={createTaskListMutate} />
+            <AddListButton />
           </HStack>
         </HStack>
 
@@ -77,7 +84,9 @@ const Header = () => {
             </MenuButton>
 
             <MenuList>
-              <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
+              <MenuItem data-testid="signout-button" onClick={() => signOut()}>
+                ログアウト
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -95,7 +104,7 @@ const Header = () => {
                 </TaskListLink>
               ))
             )}
-            <AddListButton onClick={createTaskListMutate} />
+            <AddListButton />
           </Stack>
         </Box>
       ) : null}
