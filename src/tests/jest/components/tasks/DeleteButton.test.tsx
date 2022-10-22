@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { setup } from 'src/tests/jest/userEvent'
 import DeleteButton from 'src/components/tasks/DeleteButton'
 
 describe('DeleteButton', () => {
-  it('DeleteButton', () => {
+  it('DeleteButton', async () => {
     const onClick = jest.fn()
-    render(<DeleteButton taskId="abcdefg" onClick={onClick} />)
-    fireEvent.click(screen.getByRole('button'))
+    const { user } = setup(<DeleteButton taskId="abcdefg" onClick={onClick} />)
+    await user.click(screen.getByRole('button'))
     expect(onClick).toHaveBeenCalled()
   })
 })

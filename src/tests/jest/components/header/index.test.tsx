@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
+import { setup } from 'src/tests/jest/userEvent'
+
 import Header from 'src/components/header'
-import userEvent from '@testing-library/user-event'
 import { useSession, signOut } from 'next-auth/react'
 import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -13,7 +14,7 @@ const queryClient = new QueryClient()
 
 describe('Header', () => {
   const renderHeader = () => {
-    render(
+    const { user } = setup(
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <Header />
@@ -25,7 +26,7 @@ describe('Header', () => {
     const hamburgerIconButton = screen.getByTestId('hamburger-icon-button')
     const signOutButton = screen.getByTestId('signout-button')
 
-    return { hamburgerIcon, hamburgerIconButton, signOutButton }
+    return { user, hamburgerIcon, hamburgerIconButton, signOutButton }
   }
 
   it('ログアウト', async () => {
@@ -34,10 +35,10 @@ describe('Header', () => {
       data: null,
     })
 
-    const { signOutButton } = renderHeader()
+    const { user, signOutButton } = renderHeader()
 
     expect(signOutButton).toBeInTheDocument()
-    await userEvent.click(signOutButton)
+    await user.click(signOutButton)
     expect(signOut).toHaveBeenCalledTimes(1)
   })
 
@@ -47,11 +48,11 @@ describe('Header', () => {
       data: null,
     })
 
-    const { hamburgerIcon, hamburgerIconButton } = renderHeader()
+    const { user, hamburgerIcon, hamburgerIconButton } = renderHeader()
 
     expect(hamburgerIcon).toBeInTheDocument()
     expect(hamburgerIconButton).toBeInTheDocument()
-    await userEvent.click(hamburgerIconButton)
+    await user.click(hamburgerIconButton)
     expect(hamburgerIcon).not.toBeInTheDocument()
   })
 })

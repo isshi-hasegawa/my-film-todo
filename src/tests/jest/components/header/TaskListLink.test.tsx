@@ -1,9 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { RecoilRoot } from 'recoil'
 import TaskListLink from 'src/components/header/TaskListLink'
 
 describe('TaskListLink', () => {
-  it('TaskListLink', () => {
+  it('TaskListLink', async () => {
     render(
       <RecoilRoot>
         <TaskListLink id={'abcdefg'}>マイタスク</TaskListLink>
@@ -15,7 +16,7 @@ describe('TaskListLink', () => {
     expect(screen.getByTestId('task-list-link')).toHaveStyle({
       backgroundColor: '',
     })
-    fireEvent.click(screen.getByTestId('task-list-link'))
+    await userEvent.click(screen.getByTestId('task-list-link'))
     expect(screen.getByTestId('task-list-link')).toHaveStyle({
       backgroundColor: 'whiteAlpha.600',
     })
