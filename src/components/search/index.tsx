@@ -10,9 +10,9 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { MovieResult } from 'moviedb-promise/dist/request-types'
-import { useState } from 'react'
 import { searchMovie } from 'src/api/tmdbApi'
 import { useQuery, useMutation } from '@tanstack/react-query'
+import { useKeywordState } from 'src/hooks/useKeywordState'
 import { useTasks } from 'src/hooks/useTasks'
 import SearchInput from 'src/components/search/SearchInput'
 import WatchProviders from 'src/components/search/WatchProviders'
@@ -31,9 +31,8 @@ const vStackProps = {
 }
 
 const Search = () => {
-  const [keyword, setKeyword] = useState<string>('')
-  useKe
   const toast = useToast()
+  const { keyword } = useKeywordState()
   const { createTaskWithMovieInfo } = useTasks()
 
   const fetchSearchResults = async () => {
@@ -68,7 +67,7 @@ const Search = () => {
 
   return (
     <>
-      <SearchInput onChange={setKeyword} />
+      <SearchInput />
 
       <br />
       <Text>登録したい作品をクリックしてください</Text>
