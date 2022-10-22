@@ -17,44 +17,15 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { signOut, useSession } from 'next-auth/react'
-import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
-import { useCustomToast } from 'src/hooks/useCustomToast'
-import { TaskList } from 'src/types/taskLists'
 import AddListButton from 'src/components/header/AddListButton'
 import TaskListLink from 'src/components/header/TaskListLink'
+import { useTaskLists } from 'src/hooks/useTaskLists'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
-  const token = session?.accessToken as string
-  const { setTaskListId } = useTaskListIdState()
-  const customToast = useCustomToast()
 
-  const fetchTaskLists = async () => {
-    const response = await getTaskLists(undefined, token)
-    setTaskListId(response[0].id)
-    return response
-  }
-
-  const { data: taskLists, isFetching } = useQuery<TaskList[]>(
-    ['taskLists'],
-    fetchTaskLists
-  )
-
-  const queryClient = useQueryClient()
-
-  const { mutate: createTaskListMutate } = useMutation(
-    () => createTaskList({ title: '新しいリスト' }, token),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['taskLists'])
-        customToast('新しいリストを登録しました！', 'success')
-      },
-      onError: () => customToast('新しいリストの登録に失敗しました…', 'error'),
-    }
-  )
+  const { taskLists, isFetching, createTaskListMutate } = useTaskLists()
 
   return (
     <Box bgColor="black" px={4} position="fixed" w="100%" zIndex={1}>
@@ -78,6 +49,7 @@ const Header = () => {
               />
             </a>
           </Link>
+
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             {isFetching ? (
               <Spinner color="white" />
@@ -91,6 +63,7 @@ const Header = () => {
             <AddListButton onClick={createTaskListMutate} />
           </HStack>
         </HStack>
+
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
@@ -102,6 +75,7 @@ const Header = () => {
             >
               <Avatar size={'sm'} src={session?.user?.image ?? undefined} />
             </MenuButton>
+
             <MenuList>
               <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
             </MenuList>
