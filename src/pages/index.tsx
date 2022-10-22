@@ -8,7 +8,7 @@ import Tasks from 'src/components/tasks'
 import Search from 'src/components/search'
 import About from 'src/components/about'
 import Footer from 'src/components/footer'
-import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
+import { useIsShowSearchState } from 'src/hooks/useIsShowSearchState'
 
 const Home: NextPage = () => {
   const { data: session } = useSession()

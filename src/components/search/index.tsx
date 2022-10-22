@@ -32,6 +32,7 @@ const vStackProps = {
 
 const Search = () => {
   const [keyword, setKeyword] = useState<string>('')
+  useKe
   const toast = useToast()
   const { createTaskWithMovieInfo } = useTasks()
 

@@ -1,6 +1,6 @@
 import { AddIcon } from '@chakra-ui/icons'
 import { Button } from '@chakra-ui/react'
-import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
+import { useIsShowSearchState } from 'src/hooks/useIsShowSearchState'
 
 const SearchScreenSwitchButton = () => {
   const { setIsShowSearch } = useIsShowSearchState()
