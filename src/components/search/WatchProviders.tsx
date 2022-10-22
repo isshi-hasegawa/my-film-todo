@@ -7,6 +7,7 @@ const WatchProviders = ({ id }: { id: number }) => {
   const [watchProviders, setWatchProviders] = useState<WatchProvider[]>([])
   const [isPurchasableInAppleItunes, setIsPurchasableInAppleItunes] =
     useState<boolean>(false)
+
   useEffect(() => {
     ;(async () => {
       const response = await getWatchProviders(id)
@@ -26,9 +27,10 @@ const WatchProviders = ({ id }: { id: number }) => {
       if (appleItunes) setIsPurchasableInAppleItunes(true)
     })()
   }, [id])
+
   return (
-    <HStack boxSizing="border-box">
-      {watchProviders.map((provider) => (
+    <HStack>
+      {watchProviders?.map((provider) => (
         <Image
           key={provider.provider_id}
           src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}

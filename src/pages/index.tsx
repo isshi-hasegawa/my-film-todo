@@ -11,22 +11,15 @@ import Footer from 'src/components/footer'
 import { useIsShowSearchState } from 'src/hooks/isShowSearchState'
 
 const Home: NextPage = () => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   useEffect(() => {
     if (session?.error === 'RefreshAccessTokenError') {
-      signIn() // Force sign in to hopefully resolve error
+      signIn()
     }
   }, [session])
 
   const { isShowSearch } = useIsShowSearchState()
-
-  if (status === 'loading')
-    return (
-      <Grid h="100vh" placeItems="center" px="5rem">
-        <Spinner size="xl" />
-      </Grid>
-    )
 
   return (
     <>
