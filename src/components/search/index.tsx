@@ -6,7 +6,6 @@ import {
   Stack,
   StackDivider,
   Text,
-  useToast,
   VStack,
 } from '@chakra-ui/react'
 import { MovieResult } from 'moviedb-promise/dist/request-types'
@@ -14,6 +13,7 @@ import { searchMovie } from 'src/api/tmdbApi'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useKeywordState } from 'src/hooks/useKeywordState'
 import { useTasks } from 'src/hooks/useTasks'
+import { useCustomToast } from 'src/hooks/useCustomToast'
 import SearchInput from 'src/components/search/SearchInput'
 import WatchProviders from 'src/components/search/WatchProviders'
 
@@ -31,7 +31,7 @@ const vStackProps = {
 }
 
 const Search = () => {
-  const toast = useToast()
+  const customToast = useCustomToast()
   const { keyword } = useKeywordState()
   const { createTaskWithMovieInfo } = useTasks()
 
@@ -48,20 +48,8 @@ const Search = () => {
   const { mutate: createTaskMutate } = useMutation(
     (id: number) => createTaskWithMovieInfo(id),
     {
-      onSuccess: () =>
-        toast({
-          title: 'タスクを登録しました！',
-          status: 'success',
-          duration: 3000,
-          position: 'bottom-left',
-        }),
-      onError: () =>
-        toast({
-          title: 'タスクの登録に失敗しました…',
-          status: 'error',
-          duration: 3000,
-          position: 'bottom-left',
-        }),
+      onSuccess: () => customToast('タスクを登録しました！', 'success'),
+      onError: () => customToast('タスクの登録に失敗しました…', 'error'),
     }
   )
 

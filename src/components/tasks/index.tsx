@@ -6,12 +6,12 @@ import {
   StackDivider,
   Text,
   VStack,
-  useToast,
 } from '@chakra-ui/react'
 import { Task } from 'src/types/tasks'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
 import { useTasks } from 'src/hooks/useTasks'
+import { useCustomToast } from 'src/hooks/useCustomToast'
 import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
@@ -34,7 +34,7 @@ const Tasks = () => {
   const { taskListId } = useTaskListIdState()
   const { fetchAllTasks, completeTask, updateTaskDue, deleteOneTask } =
     useTasks()
-  const toast = useToast()
+  const customToast = useCustomToast()
 
   const { data: tasks, isFetching } = useQuery<Task[]>(
     ['tasks', taskListId],
@@ -47,13 +47,9 @@ const Tasks = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['tasks'])
-        toast({
-          title: 'タスクを完了しました！',
-          status: 'success',
-          duration: 3000,
-          position: 'bottom-left',
-        })
+        customToast('タスクを完了しました！', 'success')
       },
+      onError: () => customToast('タスクを完了できませんでした…', 'error'),
     }
   )
   const { mutate: updateTaskDueMutate } = useMutation(
@@ -62,13 +58,10 @@ const Tasks = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['tasks'])
-        toast({
-          title: 'タスクの期限を更新しました！',
-          status: 'success',
-          duration: 3000,
-          position: 'bottom-left',
-        })
+        customToast('タスクの期限を更新しました！', 'success')
       },
+      onError: () =>
+        customToast('タスクの期限を更新できませんでした…', 'error'),
     }
   )
   const { mutate: deleteTaskMutate } = useMutation(
@@ -76,13 +69,9 @@ const Tasks = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['tasks'])
-        toast({
-          title: 'タスクを削除しました！',
-          status: 'success',
-          duration: 3000,
-          position: 'bottom-left',
-        })
+        customToast('タスクを削除しました！', 'success')
       },
+      onError: () => customToast('タスクを削除できませんでした…', 'error'),
     }
   )
 

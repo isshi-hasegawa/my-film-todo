@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {
   Box,
   Flex,
@@ -12,7 +13,6 @@ import {
   useDisclosure,
   Stack,
   Spinner,
-  useToast,
   Image,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
@@ -20,17 +20,17 @@ import { signOut, useSession } from 'next-auth/react'
 import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
+import { useCustomToast } from 'src/hooks/useCustomToast'
 import { TaskList } from 'src/types/taskLists'
 import AddListButton from 'src/components/header/AddListButton'
 import TaskListLink from 'src/components/header/TaskListLink'
-import Link from 'next/link'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
   const token = session?.accessToken as string
   const { setTaskListId } = useTaskListIdState()
-  const toast = useToast()
+  const customToast = useCustomToast()
 
   const fetchTaskLists = async () => {
     const response = await getTaskLists(undefined, token)
@@ -50,13 +50,9 @@ const Header = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['taskLists'])
-        toast({
-          title: '新しいリストを登録しました！',
-          status: 'success',
-          duration: 3000,
-          position: 'bottom-left',
-        })
+        customToast('新しいリストを登録しました！', 'success')
       },
+      onError: () => customToast('新しいリストの登録に失敗しました…', 'error'),
     }
   )
 
