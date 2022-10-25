@@ -1,37 +1,14 @@
 import { useSession } from 'next-auth/react'
-import { getTasks, createTask, updateTask, deleteTask } from 'src/api/tasksApi'
+import { createTask, updateTask, deleteTask } from 'src/api/tasksApi'
 import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
-import { Task } from 'src/types/tasks'
 import { getMovieData } from 'src/api/tmdbApi'
 import { useCustomToast } from './useCustomToast'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useTasks = () => {
   const { taskListId } = useTaskListIdState()
   const { data: session } = useSession()
   const token = session?.accessToken as string
-
-  const fetchAllTasks = async () => {
-    let tasks: Task[] = []
-    let nextPageToken: string = ''
-    do {
-      const response = await getTasks({ taskListId, nextPageToken }, token)
-      tasks = [...tasks, ...response.items]
-      if (response.nextPageToken?.length) {
-        nextPageToken = response.nextPageToken
-      } else {
-        nextPageToken = ''
-      }
-    } while (nextPageToken.length)
-
-    const sortedTasks = tasks
-      .filter(
-        (task) => task.status === 'needsAction' && task.parent === undefined
-      )
-      .sort((a, b) => parseInt(a.position) - parseInt(b.position))
-
-    return sortedTasks
-  }
 
   const createTaskWithSearchResult = async (id: number) => {
     const response = await getMovieData(id, 'watch/providers')
@@ -71,11 +48,6 @@ export const useTasks = () => {
 
   const customToast = useCustomToast()
 
-  const { data: tasks, isFetching } = useQuery<Task[]>(
-    ['tasks', taskListId],
-    fetchAllTasks
-  )
-
   const queryClient = useQueryClient()
   const { mutate: completeTaskMutate } = useMutation(
     (taskId: string) => completeTask(taskId),
@@ -111,8 +83,6 @@ export const useTasks = () => {
   )
 
   return {
-    tasks,
-    isFetching,
     createTaskWithSearchResult,
     completeTaskMutate,
     updateTaskDueMutate,

@@ -7,6 +7,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { useFetchTasks } from 'src/hooks/useFetchTasks'
 import { useTasks } from 'src/hooks/useTasks'
 import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
@@ -27,13 +28,9 @@ const vStackProps = {
 }
 
 const Tasks = () => {
-  const {
-    tasks,
-    isFetching,
-    completeTaskMutate,
-    updateTaskDueMutate,
-    deleteTaskMutate,
-  } = useTasks()
+  const { data: tasks, isFetching } = useFetchTasks()
+  const { completeTaskMutate, updateTaskDueMutate, deleteTaskMutate } =
+    useTasks()
 
   return (
     <>
