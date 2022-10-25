@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   Box,
   Container,
@@ -6,6 +5,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import SocialButton from 'src/components/footer/SocialButton'
 

@@ -1,15 +1,22 @@
-import { screen } from '@testing-library/react'
-import { setup } from 'src/tests/jest/userEvent'
-import Header from 'src/components/header'
-import { useSession, signOut } from 'next-auth/react'
-import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { screen } from '@testing-library/react'
+import { signOut, useSession } from 'next-auth/react'
+import { RecoilRoot } from 'recoil'
+import Header from 'src/components/header'
+import { setup } from 'src/tests/jest/userEvent'
 
 jest.mock('next-auth/react')
 const mockUseSession = useSession as jest.Mock
 ;(signOut as jest.Mock).mockImplementation(() => jest.fn())
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+})
 
 describe('Header', () => {
   const renderHeader = () => {

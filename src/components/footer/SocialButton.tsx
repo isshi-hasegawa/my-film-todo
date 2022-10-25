@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
 import { chakra, useColorModeValue, VisuallyHidden } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
 const SocialButton = ({
   children,

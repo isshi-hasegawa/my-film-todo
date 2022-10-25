@@ -1,5 +1,5 @@
-import { api } from 'src/utils/api'
 import type { Task, TasksResponse } from 'src/types/tasks'
+import { api } from 'src/utils/api'
 
 export type GetTasksParams = {
   taskListId: string

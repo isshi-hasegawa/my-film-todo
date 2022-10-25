@@ -8,9 +8,9 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useKeywordState } from 'src/hooks/useKeywordState'
 import SearchInput from 'src/components/search/SearchInput'
 import WatchProviders from 'src/components/search/WatchProviders'
+import { useKeywordState } from 'src/hooks/useKeywordState'
 import { useSearchResults } from 'src/hooks/useSearchResults'
 
 const vStackProps = {

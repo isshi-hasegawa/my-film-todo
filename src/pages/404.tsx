@@ -1,6 +1,6 @@
+import { Grid, Text, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Grid, Text, VStack } from '@chakra-ui/react'
 
 export default function Custom404() {
   return (

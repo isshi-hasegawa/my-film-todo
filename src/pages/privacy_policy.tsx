@@ -1,15 +1,15 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
 import {
   Box,
-  Text,
-  OrderedList,
-  ListItem,
   Heading,
   Image,
+  ListItem,
+  OrderedList,
+  Text,
 } from '@chakra-ui/react'
-import Footer from 'src/components/footer'
+import type { NextPage } from 'next'
+import Head from 'next/head'
 import Link from 'next/link'
+import Footer from 'src/components/footer'
 
 const PrivacyPolicy: NextPage = () => {
   return (

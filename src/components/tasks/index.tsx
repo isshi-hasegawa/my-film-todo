@@ -10,13 +10,13 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useFetchTasks } from 'src/hooks/tasks/useFetchTasks'
-import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
-import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
-import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
-import DeleteDueButton from 'src/components/tasks/DeleteDueButton'
+import CompleteButton from 'src/components/tasks/CompleteButton'
 import DeleteButton from 'src/components/tasks/DeleteButton'
+import DeleteDueButton from 'src/components/tasks/DeleteDueButton'
+import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
+import UpdateDueButton from 'src/components/tasks/UpdateDueButton'
+import { useFetchTasks } from 'src/hooks/tasks/useFetchTasks'
 
 const vStackProps = {
   p: '4',

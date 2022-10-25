@@ -1,21 +1,21 @@
-import Link from 'next/link'
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
-  Box,
-  Flex,
   Avatar,
+  Box,
+  Button,
+  Flex,
   HStack,
   IconButton,
-  Button,
+  Image,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  useDisclosure,
-  Stack,
+  MenuList,
   Spinner,
-  Image,
+  Stack,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import AddListButton from 'src/components/header/AddListButton'
 import TaskListLink from 'src/components/header/TaskListLink'

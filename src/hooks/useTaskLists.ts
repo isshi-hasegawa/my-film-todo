@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { createTaskList, getTaskLists } from 'src/api/taskListsApi'
-import { TaskList } from 'src/types/taskLists'
 import { useCustomToast } from 'src/hooks/useCustomToast'
 import { useTaskListIdState } from 'src/hooks/useTaskListIdState'
+import { TaskList } from 'src/types/taskLists'
 
 export const useTaskLists = () => {
   const { data: session } = useSession()

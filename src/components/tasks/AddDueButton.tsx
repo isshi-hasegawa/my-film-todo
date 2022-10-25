@@ -1,9 +1,10 @@
+import 'react-datepicker/dist/react-datepicker.css'
+
 import { CalendarIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
-import DatePicker from 'react-datepicker'
-import ja from 'date-fns/locale/ja'
-import 'react-datepicker/dist/react-datepicker.css'
 import { format } from 'date-fns'
+import ja from 'date-fns/locale/ja'
+import DatePicker from 'react-datepicker'
 import { useUpdateTaskDue } from 'src/hooks/tasks/useUpdateTaskDue'
 
 const AddDueButton = ({ taskId }: { taskId: string }) => {

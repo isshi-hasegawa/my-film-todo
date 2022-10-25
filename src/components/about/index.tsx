@@ -1,4 +1,4 @@
-import { Heading, Image, Text, VStack, Link, Mark } from '@chakra-ui/react'
+import { Heading, Image, Link, Mark, Text, VStack } from '@chakra-ui/react'
 import SignIn from 'src/pages/auth/signin'
 
 const About = () => {
