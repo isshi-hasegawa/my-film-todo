@@ -1,14 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCustomToast } from 'src/hooks/useCustomToast'
 import { useKeywordState } from 'src/hooks/useKeywordState'
-import { useTasks } from 'src/hooks/useTasks'
+import { useCreateTask } from 'src/hooks/useCreateTask'
 import { searchMovie } from 'src/api/tmdbApi'
 import { MovieResult } from 'moviedb-promise'
 
 export const useSearchResults = () => {
   const customToast = useCustomToast()
   const { keyword } = useKeywordState()
-  const { createTaskWithSearchResult } = useTasks()
+  const { createTaskWithSearchResult } = useCreateTask()
 
   const fetchSearchResults = async () => {
     const response = await searchMovie(keyword)
