@@ -1,4 +1,7 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
   HStack,
   Spacer,
   Spinner,
@@ -27,7 +30,7 @@ const vStackProps = {
 }
 
 const Tasks = () => {
-  const { data: tasks, isFetching } = useFetchTasks()
+  const { data: tasks, isError, isFetching } = useFetchTasks()
 
   return (
     <>
@@ -35,6 +38,11 @@ const Tasks = () => {
 
       {!tasks?.length ? (
         <Text data-testid="message-tasks-zero">まだ作品の登録がありません</Text>
+      ) : isError ? (
+        <Alert status="error" placeItems="center">
+          <AlertIcon />
+          <AlertDescription>データの取得に失敗しました…</AlertDescription>
+        </Alert>
       ) : isFetching ? (
         <Spinner size="xl" placeItems="center" />
       ) : (
