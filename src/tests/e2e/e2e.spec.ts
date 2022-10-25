@@ -5,8 +5,6 @@ test.describe('ログイン後', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:3000')
-    // await page.waitForTimeout(5000)
-    // await page.screenshot({ path: 'screenshot.png', fullPage: true })
   })
 
   test('リストの登録', async ({ page }) => {
