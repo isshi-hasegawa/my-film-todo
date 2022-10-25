@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useFetchTasks } from 'src/hooks/useFetchTasks'
+import { useFetchTasks } from 'src/hooks/tasks/useFetchTasks'
 import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'

@@ -1,6 +1,6 @@
 import { CloseIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
-import { useUpdateTaskDue } from 'src/hooks/useUpdateTaskDue'
+import { useUpdateTaskDue } from 'src/hooks/tasks/useUpdateTaskDue'
 
 const DeleteDueButton = ({ taskId }: { taskId: string }) => {
   const { mutate: updateTask } = useUpdateTaskDue()

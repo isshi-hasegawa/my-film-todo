@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { getTasks } from 'src/api/tasksApi'
 import { Task } from 'src/types/tasks'
-import { useTaskListIdState } from './useTaskListIdState'
+import { useTaskListIdState } from '../useTaskListIdState'
 
 export const useFetchTasks = () => {
   const { data: session } = useSession()

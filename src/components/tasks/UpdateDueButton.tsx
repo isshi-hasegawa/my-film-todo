@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
 import { parse, format } from 'date-fns'
-import { useUpdateTaskDue } from 'src/hooks/useUpdateTaskDue'
+import { useUpdateTaskDue } from 'src/hooks/tasks/useUpdateTaskDue'
 
 const UpdateDueButton = ({ taskId, due }: { taskId: string; due: string }) => {
   const { mutate: updateTask } = useUpdateTaskDue()

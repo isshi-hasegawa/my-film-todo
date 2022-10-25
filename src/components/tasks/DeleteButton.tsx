@@ -1,6 +1,6 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
-import { useDeleteTask } from 'src/hooks/useDeleteTask'
+import { useDeleteTask } from 'src/hooks/tasks/useDeleteTask'
 
 const DeleteButton = ({ taskId }: { taskId: string }) => {
   const { mutate: deleteTask } = useDeleteTask()

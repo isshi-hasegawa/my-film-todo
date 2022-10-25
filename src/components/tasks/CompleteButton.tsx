@@ -1,6 +1,6 @@
 import { IconButton } from '@chakra-ui/react'
 import { FiCircle } from 'react-icons/fi'
-import { useCompleteTask } from 'src/hooks/useCompleteTask'
+import { useCompleteTask } from 'src/hooks/tasks/useCompleteTask'
 
 const CompleteButton = ({ taskId }: { taskId: string }) => {
   const { mutate: completeTask } = useCompleteTask()
