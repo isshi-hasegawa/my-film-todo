@@ -8,7 +8,6 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useFetchTasks } from 'src/hooks/useFetchTasks'
-import { useTasks } from 'src/hooks/useTasks'
 import SearchScreenSwitchButton from 'src/components/tasks/SearchScreenSwitchButton'
 import CompleteButton from 'src/components/tasks/CompleteButton'
 import AddDueButton from 'src/components/tasks/AddDueButton'
@@ -29,8 +28,6 @@ const vStackProps = {
 
 const Tasks = () => {
   const { data: tasks, isFetching } = useFetchTasks()
-  const { completeTaskMutate, updateTaskDueMutate, deleteTaskMutate } =
-    useTasks()
 
   return (
     <>
@@ -44,7 +41,7 @@ const Tasks = () => {
         <VStack {...vStackProps} data-testid="tasks">
           {tasks?.map((task) => (
             <HStack key={task.id}>
-              <CompleteButton taskId={task.id} onClick={completeTaskMutate} />
+              <CompleteButton taskId={task.id} />
               <Stack>
                 <Text data-testid="task-title">{task.title}</Text>
                 <Text fontSize="sm" color="gray.600" data-testid="task-notes">
@@ -52,21 +49,11 @@ const Tasks = () => {
                 </Text>
                 <HStack display={{ md: 'none' }}>
                   {!task.due ? (
-                    <AddDueButton
-                      taskId={task.id}
-                      onChange={updateTaskDueMutate}
-                    />
+                    <AddDueButton taskId={task.id} />
                   ) : (
                     <>
-                      <UpdateDueButton
-                        taskId={task.id}
-                        due={task.due}
-                        onChange={updateTaskDueMutate}
-                      />
-                      <DeleteDueButton
-                        taskId={task.id}
-                        onClick={updateTaskDueMutate}
-                      />
+                      <UpdateDueButton taskId={task.id} due={task.due} />
+                      <DeleteDueButton taskId={task.id} />
                     </>
                   )}
                   <Spacer />
@@ -75,25 +62,15 @@ const Tasks = () => {
               <Spacer />
               <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
                 {!task.due ? (
-                  <AddDueButton
-                    taskId={task.id}
-                    onChange={updateTaskDueMutate}
-                  />
+                  <AddDueButton taskId={task.id} />
                 ) : (
                   <>
-                    <UpdateDueButton
-                      taskId={task.id}
-                      due={task.due}
-                      onChange={updateTaskDueMutate}
-                    />
-                    <DeleteDueButton
-                      taskId={task.id}
-                      onClick={updateTaskDueMutate}
-                    />
+                    <UpdateDueButton taskId={task.id} due={task.due} />
+                    <DeleteDueButton taskId={task.id} />
                   </>
                 )}
               </HStack>
-              <DeleteButton taskId={task.id} onClick={deleteTaskMutate} />
+              <DeleteButton taskId={task.id} />
             </HStack>
           ))}
         </VStack>

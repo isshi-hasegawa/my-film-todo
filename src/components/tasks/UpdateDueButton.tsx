@@ -4,16 +4,11 @@ import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
 import { parse, format } from 'date-fns'
+import { useUpdateTaskDue } from 'src/hooks/useUpdateTaskDue'
 
-const UpdateDueButton = ({
-  taskId,
-  due,
-  onChange,
-}: {
-  taskId: string
-  due: string
-  onChange: ({ taskId, due }: { taskId: string; due?: string }) => void
-}) => {
+const UpdateDueButton = ({ taskId, due }: { taskId: string; due: string }) => {
+  const { mutate: updateTask } = useUpdateTaskDue()
+
   const today = new Date()
   const dueDate: Date = parse(due.substring(0, 10), 'yyyy-MM-dd', new Date())
   const daysAfter: number = Math.ceil(
@@ -25,7 +20,7 @@ const UpdateDueButton = ({
       selected={dueDate}
       locale={ja}
       onChange={(date: Date) =>
-        onChange({
+        updateTask({
           taskId,
           due: `${format(date, 'yyyy-MM-dd')}T00:00:00.000Z`,
         })

@@ -4,20 +4,17 @@ import DatePicker from 'react-datepicker'
 import ja from 'date-fns/locale/ja'
 import 'react-datepicker/dist/react-datepicker.css'
 import { format } from 'date-fns'
+import { useUpdateTaskDue } from 'src/hooks/useUpdateTaskDue'
 
-const AddDueButton = ({
-  taskId,
-  onChange,
-}: {
-  taskId: string
-  onChange: ({ taskId, due }: { taskId: string; due?: string }) => void
-}) => {
+const AddDueButton = ({ taskId }: { taskId: string }) => {
+  const { mutate: updateTask } = useUpdateTaskDue()
+
   return (
     <DatePicker
       data-testid="date-picker"
       locale={ja}
       onChange={(date: Date) =>
-        onChange({
+        updateTask({
           taskId,
           due: `${format(date, 'yyyy-MM-dd')}T00:00:00+00:00`,
         })
