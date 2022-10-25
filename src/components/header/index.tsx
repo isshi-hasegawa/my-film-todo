@@ -19,13 +19,12 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import AddListButton from 'src/components/header/AddListButton'
 import TaskListLink from 'src/components/header/TaskListLink'
-import { useTaskLists } from 'src/hooks/useTaskLists'
+import { useFetchTaskLists } from 'src/hooks/tasklists/useFetchTaskLists'
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
-
-  const { taskLists, isFetching } = useTaskLists()
+  const { data: taskLists, isFetching } = useFetchTaskLists()
 
   return (
     <Box bgColor="black" px={4} position="fixed" w="100%" zIndex={1}>
