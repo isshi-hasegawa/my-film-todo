@@ -10,7 +10,7 @@ export const useFetchTasks = () => {
   const token = session?.accessToken as string
   const { taskListId } = useTaskListIdState()
 
-  const fetchAllTasks = async () => {
+  const fetchTasks = async () => {
     let tasks: Task[] = []
     let nextPageToken: string = ''
     do {
@@ -32,5 +32,5 @@ export const useFetchTasks = () => {
     return sortedTasks
   }
 
-  return useQuery<Task[], Error>(['tasks', taskListId], fetchAllTasks)
+  return useQuery<Task[], Error>(['tasks', taskListId], fetchTasks)
 }
