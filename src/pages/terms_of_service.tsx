@@ -20,9 +20,7 @@ const TermsOfService: NextPage = () => {
       </Head>
       <Box placeItems="center" px="5rem" py="72px">
         <Link href="/">
-          <a>
-            <Image src="/logo.png" alt="logo" htmlWidth={250} htmlHeight={40} />
-          </a>
+          <Image src="/logo.png" alt="logo" htmlWidth={250} htmlHeight={40} />
         </Link>
         <br />
         <Heading as="h1">利用規約</Heading>

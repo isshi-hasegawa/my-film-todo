@@ -46,14 +46,7 @@ const Header = () => {
         />
         <HStack spacing={8} alignItems="center">
           <Link href="/">
-            <a>
-              <Image
-                src="/logo.png"
-                alt="logo"
-                htmlWidth={250}
-                htmlHeight={40}
-              />
-            </a>
+            <Image src="/logo.png" alt="logo" htmlWidth={250} htmlHeight={40} />
           </Link>
 
           <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
