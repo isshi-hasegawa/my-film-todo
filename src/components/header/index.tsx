@@ -28,10 +28,10 @@ const Header = () => {
 
   return (
     <Box bgColor="black" px={4} position="fixed" w="100%" zIndex={1}>
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+      <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
           data-testid="hamburger-icon-button"
-          size={'md'}
+          size="md"
           icon={
             isOpen ? (
               <CloseIcon />
@@ -39,12 +39,12 @@ const Header = () => {
               <HamburgerIcon data-testid="hamburger-icon" />
             )
           }
-          aria-label={'Open Menu'}
+          aria-label="Open Menu"
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
           colorScheme="blackAlpha"
         />
-        <HStack spacing={8} alignItems={'center'}>
+        <HStack spacing={8} alignItems="center">
           <Link href="/">
             <a>
               <Image
@@ -56,7 +56,7 @@ const Header = () => {
             </a>
           </Link>
 
-          <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+          <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
             {isFetching ? (
               <Spinner color="white" />
             ) : (
@@ -70,16 +70,16 @@ const Header = () => {
           </HStack>
         </HStack>
 
-        <Flex alignItems={'center'}>
+        <Flex alignItems="center">
           <Menu>
             <MenuButton
               as={Button}
-              rounded={'full'}
-              variant={'link'}
-              cursor={'pointer'}
+              rounded="full"
+              variant="link"
+              cursor="pointer"
               minW={0}
             >
-              <Avatar size={'sm'} src={session?.user?.image ?? undefined} />
+              <Avatar size="sm" src={session?.user?.image ?? undefined} />
             </MenuButton>
 
             <MenuList>
@@ -93,7 +93,7 @@ const Header = () => {
 
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }}>
-          <Stack as={'nav'} spacing={4}>
+          <Stack as="nav" spacing={4}>
             {isFetching ? (
               <Spinner color="white" />
             ) : (
