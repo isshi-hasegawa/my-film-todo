@@ -8,6 +8,7 @@ const SignIn = () => {
       variant={'outline'}
       leftIcon={<FcGoogle />}
       onClick={() => signIn('google')}
+      m={5}
       data-testid="login-button"
     >
       <Center>

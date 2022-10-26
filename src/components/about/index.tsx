@@ -5,10 +5,20 @@ const About = () => {
   return (
     <>
       <Heading as="h1" p="25px">
-        <Image src="/logo.png" alt="logo" htmlWidth={500} htmlHeight={80} />
+        <Image
+          src="/logo.png"
+          alt="俺の映画リスト"
+          htmlWidth={500}
+          htmlHeight={80}
+        />
       </Heading>
 
+      <Text>
+        動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツール
+      </Text>
+
       <SignIn />
+
       <Text fontSize="sm">ご利用にはGoogleアカウントが必要です</Text>
       <Text fontSize="sm">
         このサービスは、あなたのGoogleアカウントに紐づく
@@ -20,45 +30,36 @@ const About = () => {
         </Link>
         に操作を行います
       </Text>
-      <br />
 
-      <VStack bgColor="gray.200" px="50px">
-        <br />
+      <VStack bgColor="gray.200" p={10} m={10}>
         <Mark bg="black" color="white" px="2" py="1">
           <Text as="b">どんなサービス？</Text>
         </Mark>
-        <br />
 
-        <Text>
-          動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツールです
-        </Text>
-        <br />
         <Text>
           動画配信サービスをまたいで「次にどの映画を観るか」を管理しましょう
         </Text>
-        <br />
+
         <Image src="/demo1.png" alt="demo1" htmlWidth={450} htmlHeight={350} />
         <Text>映画を検索することができます</Text>
-        <br />
+
         <Text>
           Apple
           TVのアイコン以外は、表示されている動画配信サービスで見放題配信中であることを示しています
         </Text>
-        <br />
+
         <Text>観たい映画をクリックすると...</Text>
-        <br />
+
         <Image src="/demo2.png" alt="demo2" htmlWidth={450} htmlHeight={350} />
         <Text>映画をタスクとして登録することができます</Text>
         <Text>
           登録されたタスクの詳細には、見放題中の動画配信サービスの名前と上映時間が保存されます
         </Text>
-        <br />
+
         <Image src="/demo3.png" alt="demo3" htmlWidth={450} htmlHeight={350} />
         <Text>タスクには期限を設定することができます</Text>
         <Text>タスクの完了やタスク自体の削除も行うことができます</Text>
-        <br />
       </VStack>
-      <br />
     </>
   )
 }
