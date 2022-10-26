@@ -10,8 +10,9 @@ import {
 } from '@chakra-ui/react'
 import SearchInput from 'src/components/search/SearchInput'
 import WatchProviders from 'src/components/search/WatchProviders'
+import { useCreateTask } from 'src/hooks/search/useCreateTask'
+import { useFetchSearchResults } from 'src/hooks/search/useFetchSearchResults'
 import { useKeywordState } from 'src/hooks/useKeywordState'
-import { useSearchResults } from 'src/hooks/useSearchResults'
 
 const vStackProps = {
   p: '4',
@@ -26,15 +27,14 @@ const vStackProps = {
 
 const Search = () => {
   const { keyword } = useKeywordState()
-  const { searchResults, isFetching, createTaskMutate } = useSearchResults()
+  const { data: searchResults, isFetching } = useFetchSearchResults()
+  const { mutate: createTask } = useCreateTask()
 
   return (
     <>
       <SearchInput />
 
-      <br />
-      <Text>登録したい作品をクリックしてください</Text>
-      <br />
+      <Text my={5}>登録したい作品をクリックしてください</Text>
 
       {!keyword.length ? null : isFetching ? (
         <Spinner size="xl" placeItems="center" />
@@ -45,7 +45,7 @@ const Search = () => {
               <HStack
                 data-testid="search-result"
                 key={result.id}
-                onClick={() => createTaskMutate(result.id!)}
+                onClick={() => createTask(result.id!)}
                 _hover={{ bg: 'gray.300' }}
                 p={5}
                 cursor="pointer"
