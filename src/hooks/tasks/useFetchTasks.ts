@@ -16,7 +16,7 @@ export const useFetchTasks = () => {
     do {
       const response = await getTasks({ taskListId, nextPageToken }, token)
       tasks = [...tasks, ...response.items]
-      if (response.nextPageToken?.length) {
+      if (response.nextPageToken) {
         nextPageToken = response.nextPageToken
       } else {
         nextPageToken = ''
