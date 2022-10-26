@@ -15,5 +15,5 @@ export const useFetchTaskLists = () => {
     return response
   }
 
-  return useQuery<TaskList[]>(['taskLists'], fetchTaskLists)
+  return useQuery<TaskList[], Error>(['taskLists'], fetchTaskLists)
 }
