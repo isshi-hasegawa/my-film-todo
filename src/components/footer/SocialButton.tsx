@@ -1,4 +1,4 @@
-import { chakra, useColorModeValue, VisuallyHidden } from '@chakra-ui/react'
+import { chakra, VisuallyHidden } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 const SocialButton = ({
@@ -12,19 +12,19 @@ const SocialButton = ({
 }) => {
   return (
     <chakra.button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-      rounded={'full'}
+      bg="blackAlpha.100"
+      rounded="full"
       w={8}
       h={8}
-      cursor={'pointer'}
-      as={'a'}
+      cursor="pointer"
+      as="a"
       href={href}
-      display={'inline-flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      transition={'background 0.3s ease'}
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      transition="background 0.3s ease"
       _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+        bg: 'blackAlpha.200',
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>

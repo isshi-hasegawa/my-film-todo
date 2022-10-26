@@ -1,24 +1,14 @@
-import {
-  Box,
-  Container,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Container, Stack, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import SocialButton from 'src/components/footer/SocialButton'
 
 const Footer = () => {
   return (
-    <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}
-      w="100%"
-    >
+    <Box bg="gray.50" color="gray.700" w="100%">
       <Container
         as={Stack}
-        maxW={'6xl'}
+        maxW="6xl"
         py={4}
         direction={{ base: 'column', md: 'row' }}
         spacing={4}
@@ -31,15 +21,12 @@ const Footer = () => {
         <Link href="/privacy_policy">プライバシーポリシー</Link>
         <Stack direction={'row'} spacing={6}>
           <SocialButton
-            label={'Twitter'}
-            href={'https://twitter.com/isshi_hasegawa'}
+            label="Twitter"
+            href="https://twitter.com/isshi_hasegawa"
           >
             <FaTwitter />
           </SocialButton>
-          <SocialButton
-            label={'GitHub'}
-            href={'https://github.com/isshi-hasegawa'}
-          >
+          <SocialButton label="GitHub" href="https://github.com/isshi-hasegawa">
             <FaGithub />
           </SocialButton>
         </Stack>
