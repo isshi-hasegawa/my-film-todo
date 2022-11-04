@@ -52,7 +52,7 @@
     "@types/jest": "28.1.8",
     "@types/node": "18.11.9",
     "@types/prettier": "2.7.1",
-    "@types/react": "18.0.21",
+    "@types/react": "18.0.25",
     "@types/react-datepicker": "4.4.2",
     "@types/react-dom": "18.0.6",
     "@types/testing-library__jest-dom": "5.14.5",
