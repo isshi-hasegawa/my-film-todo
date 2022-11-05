@@ -1,5 +1,6 @@
 import { DeleteIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/react'
+import React from 'react'
 import { useDeleteTask } from 'src/hooks/tasks/useDeleteTask'
 
 const DeleteButton = ({ taskId }: { taskId: string }) => {
@@ -7,13 +8,14 @@ const DeleteButton = ({ taskId }: { taskId: string }) => {
 
   return (
     <IconButton
-      variant="outline"
-      colorScheme="gray"
       icon={<DeleteIcon />}
+      variant="outline"
       aria-label="Delete Button"
       onClick={() => {
         deleteTask(taskId)
       }}
+      border="none"
+      borderRadius={50}
       data-testid="delete-button"
     />
   )

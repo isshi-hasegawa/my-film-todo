@@ -29,9 +29,10 @@ const UpdateDueButton = ({ taskId, due }: { taskId: string; due: string }) => {
       monthsShown={2}
       customInput={
         <Button
-          variant="outline"
-          colorScheme="blue"
           leftIcon={<CalendarIcon />}
+          variant="outline"
+          colorScheme="black"
+          _hover={{ bgColor: 'whiteAlpha.700' }}
         >
           <div data-testid="days-after"></div>
           {daysAfter < 0 && <Text color="red.400">期限切れ</Text>}

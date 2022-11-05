@@ -28,6 +28,12 @@ export default class Document extends NextDocument {
             href="/favicons/safari-pinned-tab.svg"
             color="#5bbad5"
           />
+
+          <link
+            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+            rel="stylesheet"
+          />
+
           <meta name="msapplication-TileColor" content="#b91d47" />
           <meta name="theme-color" content="#ffffff" />
 

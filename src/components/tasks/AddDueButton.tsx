@@ -23,11 +23,11 @@ const AddDueButton = ({ taskId }: { taskId: string }) => {
       monthsShown={2}
       customInput={
         <IconButton
-          data-testid="add-due-button"
-          variant="outline"
-          colorScheme="blue"
           icon={<CalendarIcon />}
+          variant="outline"
+          colorScheme="black"
           aria-label="Add Due Button"
+          data-testid="add-due-button"
         />
       }
     />

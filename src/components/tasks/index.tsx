@@ -2,6 +2,7 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Box,
   HStack,
   Spacer,
   Spinner,
@@ -20,12 +21,11 @@ import { useFetchTasks } from 'src/hooks/tasks/useFetchTasks'
 
 const vStackProps = {
   p: '4',
-  w: '100%',
   maxW: { base: '100vw', sm: '80vw', lg: '50vw', xl: '40vw' },
-  borderColor: 'gray.100',
-  borderWidth: '2px',
   borderRadius: 'lg',
   alignItems: 'stretch',
+  bgColor: 'whiteAlpha.700',
+  borderColor: 'black',
   divider: <StackDivider />,
 }
 
@@ -55,7 +55,8 @@ const Tasks = () => {
                 <Text fontSize="sm" color="gray.600" data-testid="task-notes">
                   {task.notes}
                 </Text>
-                <HStack display={{ md: 'none' }}>
+
+                <Box display={{ md: 'none' }}>
                   {!task.due ? (
                     <AddDueButton taskId={task.id} />
                   ) : (
@@ -64,20 +65,22 @@ const Tasks = () => {
                       <DeleteDueButton taskId={task.id} />
                     </>
                   )}
-                  <Spacer />
-                </HStack>
+                </Box>
               </Stack>
+
               <Spacer />
+
               <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
                 {!task.due ? (
                   <AddDueButton taskId={task.id} />
                 ) : (
-                  <>
+                  <VStack>
                     <UpdateDueButton taskId={task.id} due={task.due} />
                     <DeleteDueButton taskId={task.id} />
-                  </>
+                  </VStack>
                 )}
               </HStack>
+
               <DeleteButton taskId={task.id} />
             </HStack>
           ))}

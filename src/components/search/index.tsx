@@ -4,7 +4,6 @@ import {
   Image,
   Spinner,
   Stack,
-  StackDivider,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -16,13 +15,10 @@ import { useKeywordState } from 'src/hooks/useKeywordState'
 
 const vStackProps = {
   p: '4',
-  w: '100%',
   maxW: { base: '90vw', sm: '80vw', lg: '50vw', xl: '40vw' },
-  borderColor: 'gray.200',
-  borderWidth: '2px',
   borderRadius: 'lg',
   alignItems: 'stretch',
-  divider: <StackDivider />,
+  bgColor: 'whiteAlpha.700',
 }
 
 const Search = () => {
@@ -34,19 +30,20 @@ const Search = () => {
     <>
       <SearchInput />
 
-      <Text my={5}>登録したい作品をクリックしてください</Text>
-
       {!keyword.length ? null : isFetching ? (
         <Spinner size="xl" placeItems="center" />
       ) : (
         <Grid py={5}>
+          <Text my={5} textAlign="center" color="whiteAlpha.700">
+            登録したい作品をクリックしてください
+          </Text>
           <VStack {...vStackProps} data-testid="search-results">
             {searchResults?.map((result) => (
               <HStack
                 data-testid="search-result"
                 key={result.id}
                 onClick={() => createTask(result.id!)}
-                _hover={{ bg: 'gray.300' }}
+                _hover={{ bg: 'whiteAlpha.700' }}
                 p={5}
                 cursor="pointer"
               >

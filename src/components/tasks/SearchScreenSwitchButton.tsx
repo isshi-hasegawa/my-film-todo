@@ -10,6 +10,7 @@ const SearchScreenSwitchButton = () => {
       my={4}
       onClick={() => setIsShowSearch(true)}
       leftIcon={<AddIcon />}
+      bgColor="whiteAlpha.700"
       data-testid="create-task-button"
     >
       このリストに作品を登録する

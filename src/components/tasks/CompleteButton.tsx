@@ -7,12 +7,14 @@ const CompleteButton = ({ taskId }: { taskId: string }) => {
 
   return (
     <IconButton
-      bgColor="white"
       icon={<FiCircle />}
       aria-label="Check Task Button"
       onClick={() => {
         completeTask(taskId)
       }}
+      variant="outline"
+      border="none"
+      borderRadius={50}
       data-testid="complete-button"
     />
   )

@@ -1,40 +1,48 @@
-import { Heading, Image, Link, Mark, Text, VStack } from '@chakra-ui/react'
+import { Box, Image, Link, Text, VStack } from '@chakra-ui/react'
 import SignIn from 'src/pages/auth/signin'
 
 const About = () => {
   return (
     <>
-      <Heading as="h1" p="25px">
-        <Image
-          src="/logo.png"
-          alt="俺の映画リスト"
-          htmlWidth={500}
-          htmlHeight={80}
-        />
-      </Heading>
-
-      <Text>
-        動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツール
-      </Text>
-
-      <SignIn />
-
-      <Text fontSize="sm">ご利用にはGoogleアカウントが必要です</Text>
-      <Text fontSize="sm">
-        このサービスは、あなたのGoogleアカウントに紐づく
-        <Link
-          color="teal.500"
-          href="https://support.google.com/tasks/answer/7675772?co=GENIE.Platform%3DDesktop&hl=ja"
+      <Box bgColor="blackAlpha.700" p={30} textAlign="center">
+        <Text
+          as="h1"
+          fontFamily="Dela Gothic One"
+          color="white"
+          fontSize={{ base: '5xl', sm: '5xl', md: '6xl' }}
+          pb={5}
         >
-          Google Todoリスト
-        </Link>
-        に操作を行います
-      </Text>
+          俺の映画リスト
+        </Text>
 
-      <VStack bgColor="gray.200" p={10} m={10}>
-        <Mark bg="black" color="white" px="2" py="1">
-          <Text as="b">どんなサービス？</Text>
-        </Mark>
+        <Text color="white">
+          動画配信サービスで大量に映画鑑賞する人のためのタスク管理ツール。
+        </Text>
+
+        <Text color="white">
+          動画配信サービスを横断して「次にどの映画を観るか」を管理。
+        </Text>
+
+        <Box textAlign="center">
+          <SignIn />
+          <Text color="lightgray" fontSize="sm">
+            ご利用にはGoogleアカウントが必要です
+          </Text>
+          <Text color="lightgray" fontSize="sm">
+            本サービスはユーザーのGoogleアカウントに紐づく
+            <Link
+              color="white"
+              href="https://support.google.com/tasks/answer/7675772?co=GENIE.Platform%3DDesktop&hl=ja"
+            >
+              Google Todoリスト
+            </Link>
+            に操作を行います
+          </Text>
+        </Box>
+      </Box>
+
+      <VStack textAlign="center">
+        <Text as="b">どんなサービス？</Text>
 
         <Text>
           動画配信サービスをまたいで「次にどの映画を観るか」を管理しましょう
