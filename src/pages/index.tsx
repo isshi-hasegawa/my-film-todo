@@ -13,6 +13,12 @@ import { useIsShowSearchState } from 'src/hooks/useIsShowSearchState'
 const Home: NextPage = () => {
   const { data: session } = useSession()
 
+  useEffect(() => {
+    if (session?.error === 'RefreshAccessTokenError') {
+      signIn() // Force sign in to hopefully resolve error
+    }
+  }, [session])
+
   const { isShowSearch } = useIsShowSearchState()
 
   return (

@@ -41,13 +41,7 @@ const About = () => {
         </Box>
       </Box>
 
-      <VStack textAlign="center">
-        <Text as="b">どんなサービス？</Text>
-
-        <Text>
-          動画配信サービスをまたいで「次にどの映画を観るか」を管理しましょう
-        </Text>
-
+      <VStack textAlign="center" py={30}>
         <Image src="/demo1.png" alt="demo1" htmlWidth={450} htmlHeight={350} />
         <Text>映画を検索することができます</Text>
 
