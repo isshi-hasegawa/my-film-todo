@@ -1,8 +1,22 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { RecoilRoot } from 'recoil'
+
+export const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        backgroundColor: 'gray.300',
+        color: 'white',
+      },
+      html: {
+        height: '100%',
+      },
+    },
+  },
+})
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const queryClient = new QueryClient()
@@ -11,7 +25,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
-          <ChakraProvider>
+          <ChakraProvider theme={theme}>
             <Component {...pageProps} />
           </ChakraProvider>
         </RecoilRoot>
