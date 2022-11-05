@@ -5,7 +5,7 @@ import SocialButton from 'src/components/footer/SocialButton'
 
 const Footer = () => {
   return (
-    <Box color="gray.900" w="100%">
+    <Box w="100%">
       <Container
         as={Stack}
         maxW="6xl"

@@ -5,11 +5,12 @@ import { FcGoogle } from 'react-icons/fc'
 const SignIn = () => {
   return (
     <Button
-      variant={'outline'}
+      data-testid="login-button"
+      bgColor="white"
+      variant="outline"
       leftIcon={<FcGoogle />}
       onClick={() => signIn('google')}
       m={5}
-      data-testid="login-button"
     >
       <Center>
         <Text>Googleでログインする</Text>
