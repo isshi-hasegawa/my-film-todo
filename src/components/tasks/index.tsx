@@ -50,6 +50,7 @@ const Tasks = () => {
           {tasks?.map((task) => (
             <HStack key={task.id}>
               <CompleteButton taskId={task.id} />
+
               <Stack>
                 <Text data-testid="task-title">{task.title}</Text>
                 <Text fontSize="sm" color="gray.600" data-testid="task-notes">
@@ -70,7 +71,7 @@ const Tasks = () => {
 
               <Spacer />
 
-              <HStack display={{ base: 'none', sm: 'none', md: 'flex' }}>
+              <Box display={{ base: 'none', sm: 'none', md: 'flex' }}>
                 {!task.due ? (
                   <AddDueButton taskId={task.id} />
                 ) : (
@@ -79,7 +80,7 @@ const Tasks = () => {
                     <DeleteDueButton taskId={task.id} />
                   </VStack>
                 )}
-              </HStack>
+              </Box>
 
               <DeleteButton taskId={task.id} />
             </HStack>
