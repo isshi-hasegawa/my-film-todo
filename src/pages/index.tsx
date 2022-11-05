@@ -13,12 +13,6 @@ import { useIsShowSearchState } from 'src/hooks/useIsShowSearchState'
 const Home: NextPage = () => {
   const { data: session } = useSession()
 
-  useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
-      signIn()
-    }
-  }, [session])
-
   const { isShowSearch } = useIsShowSearchState()
 
   return (
@@ -29,7 +23,7 @@ const Home: NextPage = () => {
       </Head>
 
       {!session ? (
-        <Flex direction="column" minH="100vh" placeItems="center">
+        <Flex direction="column" minH="100vh">
           <About />
           <Footer />
         </Flex>
