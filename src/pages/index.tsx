@@ -30,7 +30,7 @@ const Home: NextPage = () => {
       ) : (
         <Flex direction="column" minH="100vh">
           <Header />
-          <Grid placeItems="center" px="1rem" py="72px" flex={1}>
+          <Grid placeItems="center" py="72px" flex={1}>
             {!isShowSearch ? <Tasks /> : <Search />}
           </Grid>
           <Footer />

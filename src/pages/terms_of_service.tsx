@@ -1,15 +1,8 @@
-import {
-  Box,
-  Heading,
-  Image,
-  ListItem,
-  OrderedList,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Heading, ListItem, OrderedList, Text } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import Footer from 'src/components/footer'
+import UnauthenticatedHeader from 'src/components/header/UnauthenticatedHeader'
 
 const TermsOfService: NextPage = () => {
   return (
@@ -18,11 +11,10 @@ const TermsOfService: NextPage = () => {
         <title>俺の映画リスト | 利用規約</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Box placeItems="center" px="5rem" py="72px">
-        <Link href="/">
-          <Image src="/logo.png" alt="logo" htmlWidth={250} htmlHeight={40} />
-        </Link>
-        <br />
+
+      <UnauthenticatedHeader />
+
+      <Box p="72px" maxW="70%">
         <Heading as="h1">利用規約</Heading>
         <br />
         <Text>
