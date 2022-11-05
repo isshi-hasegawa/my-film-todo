@@ -36,7 +36,7 @@ const WatchProviders = ({ id }: { id: number }) => {
           src={`https://image.tmdb.org/t/p/original/${provider.logo_path}`}
           alt="logo"
           borderRadius={50}
-          boxSize={{ base: '20px', sm: '25px', md: '50px' }}
+          boxSize={{ base: '40px', sm: '40px', md: '60px' }}
         />
       ))}
       {isPurchasableInAppleItunes && (
@@ -44,7 +44,7 @@ const WatchProviders = ({ id }: { id: number }) => {
           src={`https://image.tmdb.org/t/p/original/peURlLlr8jggOwK53fJ5wdQl05y.jpg`}
           alt="logo"
           borderRadius={50}
-          boxSize={{ base: '20px', sm: '25px', md: '50px' }}
+          boxSize={{ base: '40px', sm: '40px', md: '60px' }}
         />
       )}
     </HStack>

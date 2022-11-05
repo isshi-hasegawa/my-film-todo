@@ -51,8 +51,8 @@ const Search = () => {
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
                     alt="poster"
-                    width={{ base: '75px', sm: '75px', md: '150px' }}
-                    height={{ base: '95px', sm: '95px', md: '210px' }}
+                    width={{ base: '120px', sm: '120px', md: '150px' }}
+                    height={{ base: '168px', sm: '168px', md: '210px' }}
                   />
                 )}
                 <Stack>
