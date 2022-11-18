@@ -75,10 +75,10 @@ const Tasks = () => {
                 {!task.due ? (
                   <AddDueButton taskId={task.id} />
                 ) : (
-                  <VStack>
+                  <Stack>
                     <UpdateDueButton taskId={task.id} due={task.due} />
                     <DeleteDueButton taskId={task.id} />
-                  </VStack>
+                  </Stack>
                 )}
               </Box>
 
