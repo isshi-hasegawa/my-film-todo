@@ -33,7 +33,7 @@
     "@tanstack/react-query": "4.16.1",
     "axios": "0.27.2",
     "date-fns": "2.29.3",
-    "framer-motion": "7.6.7",
+    "framer-motion": "7.6.12",
     "moviedb-promise": "3.2.0",
     "next": "12.3.4",
     "next-auth": "4.12.2",
