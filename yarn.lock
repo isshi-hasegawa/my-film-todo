@@ -1741,17 +1741,17 @@
   dependencies:
     tslib "^2.4.0"
 
-"@tanstack/query-core@4.15.1":
-  version "4.15.1"
-  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.15.1.tgz"
-  integrity sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==
+"@tanstack/query-core@4.20.4":
+  version "4.20.4"
+  resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-4.20.4.tgz"
+  integrity sha512-lhLtGVNJDsJ/DyZXrLzekDEywQqRVykgBqTmkv0La32a/RleILXy6JMLBb7UmS3QCatg/F/0N9/5b0i5j6IKcA==
 
-"@tanstack/react-query@4.17.1":
-  version "4.17.1"
-  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.17.1.tgz"
-  integrity sha512-0AAC1DerbNmmmR4EB6fkILhgTVao7nRPp8jDNHUq1m6AHaDdNV9VKy+h9fsTnBbiHBbcr3erfF//KEO3y3HojA==
+"@tanstack/react-query@4.20.4":
+  version "4.20.4"
+  resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.20.4.tgz"
+  integrity sha512-SJRxx13k/csb9lXAJfycgVA1N/yU/h3bvRNWP0+aHMfMjmbyX82FdoAcckDBbOdEyAupvb0byelNHNeypCFSyA==
   dependencies:
-    "@tanstack/query-core" "4.15.1"
+    "@tanstack/query-core" "4.20.4"
     use-sync-external-store "^1.2.0"
 
 "@testing-library/dom@^8.5.0":
