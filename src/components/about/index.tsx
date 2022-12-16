@@ -1,5 +1,5 @@
 import { Box, Image, Link, Text, VStack } from '@chakra-ui/react'
-import SignIn from 'src/pages/auth/signin'
+import SignIn from 'src/components/about/SignIn'
 
 const About = () => {
   return (

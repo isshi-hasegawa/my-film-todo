@@ -60,9 +60,6 @@ export default NextAuth({
       },
     }),
   ],
-  pages: {
-    signIn: '/',
-  },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user, account }) {
