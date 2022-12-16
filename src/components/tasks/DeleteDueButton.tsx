@@ -7,7 +7,7 @@ const DeleteDueButton = ({ taskId }: { taskId: string }) => {
   return (
     <Button
       aria-label="Delete Due Button"
-      onClick={() => updateTask({ taskId })}
+      onClick={() => updateTask({ taskId, due: '' })}
       variant="outline"
       border="none"
       _hover={{ bgColor: 'whiteAlpha.700' }}
