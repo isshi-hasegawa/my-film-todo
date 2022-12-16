@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (session?.error === 'RefreshAccessTokenError') {
-      signIn() // Force sign in to hopefully resolve error
+      signIn('google')
     }
   }, [session])
 
