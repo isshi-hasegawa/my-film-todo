@@ -50,7 +50,7 @@
     "@testing-library/user-event": "14.4.3",
     "@types/eslint": "8.4.10",
     "@types/jest": "28.1.8",
-    "@types/node": "18.11.16",
+    "@types/node": "18.11.17",
     "@types/prettier": "2.7.1",
     "@types/react": "18.0.26",
     "@types/react-datepicker": "4.8.0",
