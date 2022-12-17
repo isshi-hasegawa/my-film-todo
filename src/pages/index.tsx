@@ -14,7 +14,8 @@ const Home: NextPage = () => {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
+    if (Date.now() > session?.accessTokenExpires!) {
+      console.log('Access token expired.')
       signIn('google')
     }
   }, [session])

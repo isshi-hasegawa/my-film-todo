@@ -62,6 +62,8 @@ export default NextAuth({
   ],
   pages: {
     signIn: '/',
+    signOut: '/',
+    error: '/',
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -87,6 +89,7 @@ export default NextAuth({
     async session({ session, token }) {
       session.user = token.user as User
       session.accessToken = token.accessToken
+      session.accessTokenExpires = token.accessTokenExpires
       session.error = token.error
 
       return session
