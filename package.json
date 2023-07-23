@@ -51,7 +51,7 @@
     "@types/eslint": "8.21.1",
     "@types/jest": "28.1.8",
     "@types/node": "18.14.6",
-    "@types/prettier": "2.7.2",
+    "@types/prettier": "2.7.3",
     "@types/react": "18.0.28",
     "@types/react-datepicker": "4.8.0",
     "@types/react-dom": "18.0.11",
@@ -65,7 +65,7 @@
     "jest-environment-jsdom": "29.4.3",
     "lint-staged": "13.1.2",
     "msw": "1.1.0",
-    "prettier": "2.8.4",
+    "prettier": "2.8.8",
     "simple-git-hooks": "2.8.1",
     "typescript": "4.9.5"
   }
