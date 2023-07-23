@@ -41,7 +41,7 @@
     "react-datepicker": "4.8.0",
     "react-dom": "18.2.0",
     "react-icons": "4.6.0",
-    "recoil": "0.7.5"
+    "recoil": "0.7.7"
   },
   "devDependencies": {
     "@playwright/test": "1.31.2",
