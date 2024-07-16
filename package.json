@@ -35,7 +35,7 @@
     "date-fns": "2.29.3",
     "framer-motion": "7.6.12",
     "moviedb-promise": "3.4.1",
-    "next": "12.3.4",
+    "next": "13.5.0",
     "next-auth": "^4.22.3",
     "react": "18.2.0",
     "react-datepicker": "4.8.0",
