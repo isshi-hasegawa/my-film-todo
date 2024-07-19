@@ -1875,10 +1875,10 @@
   dependencies:
     "@types/ms" "*"
 
-"@types/eslint@8.21.1":
-  version "8.21.1"
-  resolved "https://registry.npmjs.org/@types/eslint/-/eslint-8.21.1.tgz"
-  integrity sha512-rc9K8ZpVjNcLs8Fp0dkozd5Pt2Apk1glO4Vgz8ix1u6yFByxfqo5Yavpy65o+93TAe24jr7v+eSBtFLvOQtCRQ==
+"@types/eslint@8.56.10":
+  version "8.56.10"
+  resolved "https://registry.npmjs.org/@types/eslint/-/eslint-8.56.10.tgz"
+  integrity sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==
   dependencies:
     "@types/estree" "*"
     "@types/json-schema" "*"
