@@ -48,7 +48,7 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
-    "@types/eslint": "8.56.10",
+    "@types/eslint": "8.56.11",
     "@types/jest": "28.1.8",
     "@types/node": "18.19.41",
     "@types/prettier": "2.7.3",
